@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f43fef61dd619ff43a815cc63db916bc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29003
+  packageName: Simple Buildings - Cartoon City
+  packageVersion: 1.0.3
+  assetPath: Assets/SimpleBuildings/Scenes/DemoSceneSettings.lighting
+  uploadId: 738501
