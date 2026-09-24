@@ -4,8 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public InputActionReference moveAction;
-    public float speed;
+    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float acceleration;
     
     private Vector3 _forward;
     private Vector3 _right;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var speed = Mathf.Clamp(_rb.linearVelocity.magnitude + acceleration * Time.fixedDeltaTime, 0,  maxSpeed);
         _rb.linearVelocity = (_forward * _input.y + _right * _input.x).normalized * speed;
     }
 }
