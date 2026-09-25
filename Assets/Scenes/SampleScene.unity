@@ -440,18 +440,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c5557f129333a80964e0c3fe791eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  isHardLookAtPlayer: 1
-  isHardLookOnlyX: 1
-  isCameraSizeChange: 0
+  isHardLookAtPlayer: 0
+  isHardLookOnlyX: 0
+  isCameraSizeChange: 1
   target: {fileID: 2041081231}
   player: {fileID: 1816133204}
   moveLerpSpeed: 2
   moveSnapDistance: 0.001
   minSize: 5
-  maxSize: 7
+  maxSize: 6
   exponent: 2
   sizeLerpSpeed: 3
-  sizeSnapDistance: 0.2
+  sizeSnapDistance: 0.001
 --- !u!1001 &342793429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1999,9 +1999,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa939d463530ca5e086b04ea61a1c2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  isUsingAcceleration: 1
+  hasToAccelInEveryDirection: 1
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   maxSpeed: 8
-  acceleration: 8
+  acceleration: 32
+  deceleration: 64
 --- !u!54 &1816133206
 Rigidbody:
   m_ObjectHideFlags: 0
