@@ -440,10 +440,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c5557f129333a80964e0c3fe791eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  isHardLookAtPlayer: 1
+  isHardLookOnlyX: 1
+  isCameraSizeChange: 0
   target: {fileID: 2041081231}
   player: {fileID: 1816133204}
-  moveLerpSpeed: 5
-  moveSnapDistance: 0.2
+  moveLerpSpeed: 2
+  moveSnapDistance: 0.001
   minSize: 5
   maxSize: 7
   exponent: 2
@@ -708,7 +711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &425418773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -802,6 +805,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &520507589
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5058067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.1088512
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
+      propertyPath: m_Name
+      value: LargeChunk
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a9badcb00f58e559b46a133dc244d5e, type: 3}
 --- !u!1001 &676377932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1925,7 +2001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   maxSpeed: 8
-  acceleration: 4
+  acceleration: 8
 --- !u!54 &1816133206
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2073,3 +2149,4 @@ SceneRoots:
   - {fileID: 1675674972}
   - {fileID: 1275722086}
   - {fileID: 56052983}
+  - {fileID: 520507589}
