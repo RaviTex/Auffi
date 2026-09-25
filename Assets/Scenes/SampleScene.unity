@@ -442,6 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   isHardLookAtPlayer: 0
   isHardLookOnlyX: 0
+  isTiltingXWithVelocity: 1
   isCameraSizeChange: 1
   target: {fileID: 2041081231}
   player: {fileID: 1816133204}
@@ -452,6 +453,8 @@ MonoBehaviour:
   exponent: 2
   sizeLerpSpeed: 3
   sizeSnapDistance: 0.001
+  minXRotation: 20
+  maxXRotation: 70
 --- !u!1001 &342793429
 PrefabInstance:
   m_ObjectHideFlags: 0
