@@ -461,6 +461,7 @@ MonoBehaviour:
   maxPeak: 20
   rotationStrength: 60
   pushBackStrength: 5
+  isPeakInputInverted: 1
 --- !u!1001 &342793429
 PrefabInstance:
   m_ObjectHideFlags: 0
