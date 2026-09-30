@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasToAccelInEveryDirection)
             {
-                var speed = Mathf.Clamp(_rb.linearVelocity.magnitude + acceleration * Time.fixedDeltaTime, 0, maxSpeed);
+                float speed = Mathf.Clamp(_rb.linearVelocity.magnitude + acceleration * Time.fixedDeltaTime, 0, maxSpeed);
                 _rb.linearVelocity = (_forward * _input.y + _right * _input.x).normalized * speed;
             }
             else

@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,17 +8,28 @@ public class CameraController : MonoBehaviour
     [SerializeField] [Tooltip("Exclusive with Hard Look Options")] private bool isTiltingXWithVelocity;
     [SerializeField] private bool isCameraSizeChange;
 
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform cameraPositionTarget;
+    [SerializeField] private Transform cameraRotationPivot;
     [SerializeField] private Transform player;
+    [Header("Camera move with player")]
     [SerializeField] private float moveLerpSpeed;
     [SerializeField] private float moveSnapDistance;
+    [Header("Camera size lerp with move speed")]
     [SerializeField] private float minSize;
     [SerializeField] private float maxSize;
     [SerializeField] private float exponent = 2f;
     [SerializeField] private float sizeLerpSpeed;
     [SerializeField] private float sizeSnapDistance;
+    [Header("Camera rotate into up down player velocity")]
     [SerializeField] private float minXRotation;
     [SerializeField] private float maxXRotation;
+    [Header("Camera peak with look input")]
+    [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private float minPeak;
+    [SerializeField] private float maxPeak;
+    [SerializeField] private float rotationStrength;
+    [SerializeField] private float pushBackStrength;
+    [SerializeField] private bool isPeakInputInverted;
 
     
     private PlayerController _playerController;
@@ -28,6 +37,9 @@ public class CameraController : MonoBehaviour
     private Camera _camera;
 
     private float _desiredSize;
+
+    private Vector2 _lookInput;
+    private float _smoothVelocity;
 
     private void Start()
     {
@@ -54,10 +66,10 @@ public class CameraController : MonoBehaviour
             transform.rotation = Quaternion.Euler(desiredXRotation, -45, 0);
         }
 
-        var distance = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(transform.position, cameraPositionTarget.position);
         transform.position = distance > moveSnapDistance
-            ? Vector3.Lerp(transform.position, target.position, Time.deltaTime * moveLerpSpeed)
-            : target.position;
+            ? Vector3.Lerp(transform.position, cameraPositionTarget.position, Time.deltaTime * moveLerpSpeed)
+            : cameraPositionTarget.position;
         
         if (isCameraSizeChange)
         {
@@ -65,8 +77,26 @@ public class CameraController : MonoBehaviour
             float curvedT = Mathf.Pow(t, exponent);
             _desiredSize = Mathf.Lerp(minSize, maxSize, curvedT);
             
-            var sizeDiff = Mathf.Abs(_desiredSize - _camera.orthographicSize);
+            float sizeDiff = Mathf.Abs(_desiredSize - _camera.orthographicSize);
             _camera.orthographicSize = sizeDiff > sizeSnapDistance ? Mathf.Lerp(_camera.orthographicSize, _desiredSize, Time.deltaTime * sizeLerpSpeed) : _desiredSize;
         }
+        
+        cameraRotationPivot.position = player.position;
+        _lookInput = lookAction.action.ReadValue<Vector2>();
+
+        float currentAngle = Mathf.DeltaAngle(0f, cameraRotationPivot.eulerAngles.y);
+        float newX = Mathf.Clamp(currentAngle + (isPeakInputInverted ? -_lookInput.x : _lookInput.x) * rotationStrength * Time.deltaTime,
+                minPeak, maxPeak);
+        
+        if (_lookInput.x == 0)
+        {
+            newX = Mathf.SmoothDamp(newX, 0, ref _smoothVelocity, 1f / pushBackStrength);
+        }
+        else
+        {
+            _smoothVelocity = 0;
+        }
+
+        cameraRotationPivot.rotation = Quaternion.Euler(0, newX, 0);
     }
 }
