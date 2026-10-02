@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    [HideInInspector] public bool isCursorVisible;
+    
     [Header("Options")] [SerializeField] private bool isHardLookAtPlayer;
     [SerializeField] private bool isHardLookOnlyX;
     [SerializeField] [Tooltip("Exclusive with Hard Look Options")] private bool isTiltingXWithVelocity;
@@ -46,6 +48,10 @@ public class CameraController : MonoBehaviour
         _playerController = player.GetComponent<PlayerController>();
         _camera = GetComponent<Camera>();
         _playerRb = player.GetComponent<Rigidbody>();
+        
+        if(!isCursorVisible)
+            Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = isCursorVisible;
     }
 
     private void Update()
