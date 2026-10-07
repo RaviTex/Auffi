@@ -45,6 +45,7 @@ public class CameraController : MonoBehaviour
 
     private Vector3 _cameraOffset;
     private Quaternion _cameraBaseRotation;
+    private Vector3 _pivotPosition;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class CameraController : MonoBehaviour
         _cameraOffset = Quaternion.Inverse(cameraRotationPivot.rotation) *
                         (cameraPositionTarget.position - cameraRotationPivot.position);
         _cameraBaseRotation = Quaternion.Inverse(cameraRotationPivot.rotation) * transform.rotation;
+        _pivotPosition = cameraRotationPivot.position;
     }
 
     private void Start()
@@ -70,13 +72,16 @@ public class CameraController : MonoBehaviour
     {
         UpdatePeak();
 
-        // The pivot sits on the player and yaws with the peak input, so the rig orbits the player.
-        cameraPositionTarget.position = cameraRotationPivot.position + cameraRotationPivot.rotation * _cameraOffset;
+        // Only the player-follow translation is lerped. The peak rotation is applied on top
+        // directly, so it is not damped twice (once by the peak angle, once by the position).
+        float distance = Vector3.Distance(_pivotPosition, player.position);
+        _pivotPosition = distance > moveSnapDistance
+            ? Vector3.Lerp(_pivotPosition, player.position, Time.deltaTime * moveLerpSpeed)
+            : player.position;
 
-        float distance = Vector3.Distance(transform.position, cameraPositionTarget.position);
-        transform.position = distance > moveSnapDistance
-            ? Vector3.Lerp(transform.position, cameraPositionTarget.position, Time.deltaTime * moveLerpSpeed)
-            : cameraPositionTarget.position;
+        cameraRotationPivot.position = _pivotPosition;
+        cameraPositionTarget.position = _pivotPosition + cameraRotationPivot.rotation * _cameraOffset;
+        transform.position = cameraPositionTarget.position;
 
         UpdateRotation();
 
@@ -93,7 +98,6 @@ public class CameraController : MonoBehaviour
 
     private void UpdatePeak()
     {
-        cameraRotationPivot.position = player.position;
         _peakInput = peakAction != null ? peakAction.action.ReadValue<float>() : 0f;
 
         float currentAngle = Mathf.DeltaAngle(0f, cameraRotationPivot.eulerAngles.y);
