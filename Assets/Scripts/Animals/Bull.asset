@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279d5d44b07abedd184b057962ace38b, type: 3}
+  m_Name: Bull
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalDefinition
+  animalId: bull
+  displayName: Bull
+  photo: {fileID: -6276390541757865910, guid: 83b0d4acb928cfb4b95467bf714adb56, type: 3}
