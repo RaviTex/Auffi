@@ -4,13 +4,28 @@
 		<WorkUnit Name="Default Work Unit" ID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" PersistMode="Standalone">
 			<ChildrenList>
 				<Folder Name="Player_Audio" ID="{1918B729-DC93-478C-9246-E679FEAB8164}" ShortID="300407050">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ChildrenList>
-						<Event Name="Camera_Shutter" ID="{100B7577-B595-49A6-AC21-58C0D239E9B4}">
+						<Event Name="Play_CameraShutter" ID="{100B7577-B595-49A6-AC21-58C0D239E9B4}">
 							<ChildrenList>
 								<Action Name="" ID="{DBF68C4F-CAA6-475C-B7B7-F2B2D1657929}" ShortID="778330130">
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Shutter" ID="{19F8F45D-CBFA-4ED5-A69B-167FE517A4F8}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_PhotoIndicator" ID="{37D3EE3F-785D-4ECA-AA02-4E96A925DE2D}">
+							<ChildrenList>
+								<Action Name="" ID="{A40B3C41-69C5-44E8-94CB-07BA7F38A893}" ShortID="553620485">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Picture_Indicator" ID="{48A22EAA-ABC3-4E43-BA3D-39B40FD8031E}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

@@ -4,6 +4,10 @@
 		<WorkUnit Name="Default Work Unit" ID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}" PersistMode="Standalone">
 			<ChildrenList>
 				<Folder Name="TakePhoto" ID="{7FC6E74E-E99A-46B4-A0A0-51E2E5C24019}" ShortID="402057003">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="13"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ChildrenList>
 						<RandomSequenceContainer Name="Shutter" ID="{19F8F45D-CBFA-4ED5-A69B-167FE517A4F8}" ShortID="634038835">
 							<PropertyList>
@@ -242,6 +246,28 @@
 								</ObjectList>
 							</ObjectLists>
 						</RandomSequenceContainer>
+						<Sound Name="Picture_Indicator" ID="{48A22EAA-ABC3-4E43-BA3D-39B40FD8031E}" ShortID="67987939">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Games, Video, Notifications 19 SND83187 S00 - Pitch 131_0" ID="{8256B31B-DA37-44AE-9899-56078EB4F54F}">
+									<Language>SFX</Language>
+									<AudioFile>Games, Video, Notifications 19 SND83187 S00 - Pitch 131_0.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="659180512"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Games, Video, Notifications 19 SND83187 S00 - Pitch 131_0" ID="{8256B31B-DA37-44AE-9899-56078EB4F54F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
