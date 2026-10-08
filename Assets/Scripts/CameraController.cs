@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
     [Header("Camera rotate into up down player velocity")]
     [SerializeField] private float minXRotation;
     [SerializeField] private float maxXRotation;
-    [Header("Camera peak with look input")]
-    [SerializeField] private InputActionReference lookAction;
+    [Header("Camera peak input")]
+    [SerializeField] private InputActionReference peakAction;
     [SerializeField] private float minPeak;
     [SerializeField] private float maxPeak;
     [SerializeField] private float rotationStrength;
@@ -40,8 +40,22 @@ public class CameraController : MonoBehaviour
 
     private float _desiredSize;
 
-    private Vector2 _lookInput;
+    private float _peakInput;
     private float _smoothVelocity;
+
+    private Vector3 _cameraOffset;
+    private Quaternion _cameraBaseRotation;
+    private Vector3 _pivotPosition;
+
+    private void Awake()
+    {
+        // Captured relative to the pivot so the rig orbits correctly even when the
+        // camera or its target are not parented to the pivot.
+        _cameraOffset = Quaternion.Inverse(cameraRotationPivot.rotation) *
+                        (cameraPositionTarget.position - cameraRotationPivot.position);
+        _cameraBaseRotation = Quaternion.Inverse(cameraRotationPivot.rotation) * transform.rotation;
+        _pivotPosition = cameraRotationPivot.position;
+    }
 
     private void Start()
     {
@@ -56,27 +70,21 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (isHardLookAtPlayer)
-        {
-            transform.LookAt(player);
-            if (isHardLookOnlyX)
-            {
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, -45, 0);
-            }
-        }
-        if (isTiltingXWithVelocity)
-        {
-            float signedSpeed = Vector3.Dot(_playerRb.linearVelocity, (transform.forward + -transform.right).normalized);
-            float t = Mathf.InverseLerp(8f, -8f, signedSpeed);
-            float desiredXRotation = Mathf.Lerp(minXRotation, maxXRotation, t);
-            transform.rotation = Quaternion.Euler(desiredXRotation, -45, 0);
-        }
+        UpdatePeak();
 
-        float distance = Vector3.Distance(transform.position, cameraPositionTarget.position);
-        transform.position = distance > moveSnapDistance
-            ? Vector3.Lerp(transform.position, cameraPositionTarget.position, Time.deltaTime * moveLerpSpeed)
-            : cameraPositionTarget.position;
-        
+        // Only the player-follow translation is lerped. The peak rotation is applied on top
+        // directly, so it is not damped twice (once by the peak angle, once by the position).
+        float distance = Vector3.Distance(_pivotPosition, player.position);
+        _pivotPosition = distance > moveSnapDistance
+            ? Vector3.Lerp(_pivotPosition, player.position, Time.deltaTime * moveLerpSpeed)
+            : player.position;
+
+        cameraRotationPivot.position = _pivotPosition;
+        cameraPositionTarget.position = _pivotPosition + cameraRotationPivot.rotation * _cameraOffset;
+        transform.position = cameraPositionTarget.position;
+
+        UpdateRotation();
+
         if (isCameraSizeChange)
         {
             float t = Mathf.InverseLerp(0f, 8f, _playerRb.linearVelocity.magnitude);
@@ -86,23 +94,48 @@ public class CameraController : MonoBehaviour
             float sizeDiff = Mathf.Abs(_desiredSize - _camera.orthographicSize);
             _camera.orthographicSize = sizeDiff > sizeSnapDistance ? Mathf.Lerp(_camera.orthographicSize, _desiredSize, Time.deltaTime * sizeLerpSpeed) : _desiredSize;
         }
-        
-        cameraRotationPivot.position = player.position;
-        _lookInput = lookAction.action.ReadValue<Vector2>();
+    }
+
+    private void UpdatePeak()
+    {
+        _peakInput = peakAction != null ? peakAction.action.ReadValue<float>() : 0f;
 
         float currentAngle = Mathf.DeltaAngle(0f, cameraRotationPivot.eulerAngles.y);
-        float newX = Mathf.Clamp(currentAngle + (isPeakInputInverted ? -_lookInput.x : _lookInput.x) * rotationStrength * Time.deltaTime,
-                minPeak, maxPeak);
-        
-        if (_lookInput.x == 0)
+        float peakAngle = Mathf.Clamp(
+            currentAngle + (isPeakInputInverted ? -_peakInput : _peakInput) * rotationStrength * Time.deltaTime,
+            minPeak, maxPeak);
+
+        if (_peakInput == 0)
         {
-            newX = Mathf.SmoothDamp(newX, 0, ref _smoothVelocity, 1f / pushBackStrength);
+            peakAngle = Mathf.SmoothDamp(peakAngle, 0, ref _smoothVelocity, 1f / pushBackStrength);
         }
         else
         {
             _smoothVelocity = 0;
         }
 
-        cameraRotationPivot.rotation = Quaternion.Euler(0, newX, 0);
+        cameraRotationPivot.rotation = Quaternion.Euler(0, peakAngle, 0);
+    }
+
+    private void UpdateRotation()
+    {
+        if (isHardLookAtPlayer)
+        {
+            transform.LookAt(player);
+            if (isHardLookOnlyX)
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, -45, 0);
+            return;
+        }
+
+        if (isTiltingXWithVelocity)
+        {
+            float signedSpeed = Vector3.Dot(_playerRb.linearVelocity, (transform.forward + -transform.right).normalized);
+            float t = Mathf.InverseLerp(8f, -8f, signedSpeed);
+            float desiredXRotation = Mathf.Lerp(minXRotation, maxXRotation, t);
+            transform.rotation = Quaternion.Euler(desiredXRotation, -45 + cameraRotationPivot.eulerAngles.y, 0);
+            return;
+        }
+
+        transform.rotation = cameraRotationPivot.rotation * _cameraBaseRotation;
     }
 }

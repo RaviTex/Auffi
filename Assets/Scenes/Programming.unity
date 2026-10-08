@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 91822425}
   - component: {fileID: 91822424}
   - component: {fileID: 91822423}
+  - component: {fileID: 91822427}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -408,6 +409,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &91822427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91822422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144a4c88afd572797b6c1989ac60a25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalBook
+  panel: {fileID: 0}
+  entries:
+  - definition: {fileID: 11400000, guid: 93dae43ca14714ed8bfb26f2c7bb42b5, type: 2}
+    image: {fileID: 1007878065}
+  - definition: {fileID: 11400000, guid: c1750150fa7f2a57083293ac97fa280a, type: 2}
+    image: {fileID: 314359499}
+  - definition: {fileID: 11400000, guid: 6e2164621ab7ab2fe9453b272b65f9aa, type: 2}
+    image: {fileID: 1079727025}
+  - definition: {fileID: 11400000, guid: 4982a91761e5c1c3e84534568f495c95, type: 2}
+    image: {fileID: 323995933}
 --- !u!1001 &118042880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1278,7 +1301,6 @@ GameObject:
   - component: {fileID: 642651562}
   - component: {fileID: 642651564}
   - component: {fileID: 642651563}
-  - component: {fileID: 642651565}
   m_Layer: 5
   m_Name: Book
   m_TagString: Untagged
@@ -1347,27 +1369,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642651561}
   m_CullTransparentMesh: 1
---- !u!114 &642651565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642651561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144a4c88afd572797b6c1989ac60a25d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalBook
-  entries:
-  - definition: {fileID: 11400000, guid: 93dae43ca14714ed8bfb26f2c7bb42b5, type: 2}
-    image: {fileID: 1007878065}
-  - definition: {fileID: 11400000, guid: c1750150fa7f2a57083293ac97fa280a, type: 2}
-    image: {fileID: 314359499}
-  - definition: {fileID: 11400000, guid: 6e2164621ab7ab2fe9453b272b65f9aa, type: 2}
-    image: {fileID: 1079727025}
-  - definition: {fileID: 11400000, guid: 4982a91761e5c1c3e84534568f495c95, type: 2}
-    image: {fileID: 323995933}
 --- !u!1001 &676377932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3327,7 +3328,7 @@ PrefabInstance:
     - target: {fileID: 5406369608141442038, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
       propertyPath: book
       value: 
-      objectReference: {fileID: 642651565}
+      objectReference: {fileID: 91822427}
     - target: {fileID: 5406369608141442038, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
       propertyPath: canTakePhotoFeedbackTxt
       value: 
