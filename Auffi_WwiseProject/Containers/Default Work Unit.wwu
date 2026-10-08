@@ -7,6 +7,9 @@
 					<ChildrenList>
 						<RandomSequenceContainer Name="Shutter" ID="{19F8F45D-CBFA-4ED5-A69B-167FE517A4F8}" ShortID="634038835">
 							<PropertyList>
+								<Property Name="PlayMechanismSpecialTransitionsType" Type="int16" Value="1"/>
+								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="0.1"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 							</PropertyList>
 							<ReferenceList>
@@ -17,6 +20,227 @@
 									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
 								</Reference>
 							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Camera_Shutter" ID="{1943DBEB-5225-4CDC-BAAD-FFA16017F3D1}" ShortID="193038977">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Camera_Shutter" ID="{2509C5E1-85FA-4675-987B-A5889301243B}">
+											<Language>SFX</Language>
+											<AudioFile>Camera_Shutter.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="726661494"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Camera_Shutter" ID="{2509C5E1-85FA-4675-987B-A5889301243B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Camera_Click" ID="{77E3D84A-675E-4E76-86A5-9E4F35C510D8}" ShortID="348820370">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Camera_Click" ID="{B62BBFC4-3A86-4C1E-A378-B305791CA27D}">
+											<Language>SFX</Language>
+											<AudioFile>Camera_Click.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="579751899"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Camera_Click" ID="{B62BBFC4-3A86-4C1E-A378-B305791CA27D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<RandomSequenceContainer Name="Printing" ID="{BD694E90-488A-4FD9-A22F-861B4D945661}" ShortID="529235117">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Camera_Printing1" ID="{0646DC23-5AC1-41D5-BF2F-8EEE68E92E6A}" ShortID="326754554">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Camera_Printing1" ID="{C982CA8D-D0D1-4694-9C3B-0648CD9CB680}">
+													<Language>SFX</Language>
+													<AudioFile>Camera_Printing1.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="904471419"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Camera_Printing1" ID="{C982CA8D-D0D1-4694-9C3B-0648CD9CB680}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Camera_Printing2" ID="{5E72A9AF-7272-41D8-ABC4-A448FED50211}" ShortID="115937400">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Camera_Printing2" ID="{D8690101-2B4E-4AA2-8715-FEC618F7B1AC}">
+													<Language>SFX</Language>
+													<AudioFile>Camera_Printing2.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="542290487"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Camera_Printing2" ID="{D8690101-2B4E-4AA2-8715-FEC618F7B1AC}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Camera_Printing3" ID="{BCB321B2-ECB9-4C1E-B72F-920C1F2DB646}" ShortID="576267459">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Camera_Printing3" ID="{C94922DA-3113-4B5E-A907-7B94338D4233}">
+													<Language>SFX</Language>
+													<AudioFile>Camera_Printing3.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="812924666"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Camera_Printing3" ID="{C94922DA-3113-4B5E-A907-7B94338D4233}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</RandomSequenceContainer>
+								<Sound Name="Camera_Sparkle" ID="{61954BA2-FA80-4426-A644-BAA811C92360}" ShortID="904261723">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Camera_Sparkle" ID="{ED4FF5F4-0ADB-4341-8678-0D4903E42E3D}">
+											<Language>SFX</Language>
+											<AudioFile>Camera_Sparkle.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="808035373"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Camera_Sparkle" ID="{ED4FF5F4-0ADB-4341-8678-0D4903E42E3D}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00" ID="{E8DC822B-C717-4C83-8196-35AD9D33E0D4}" ShortID="879298733">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00" ID="{D45607FC-A279-4A35-AD14-51660B9C9940}">
+											<Language>SFX</Language>
+											<AudioFile>Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="376936524"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00" ID="{D45607FC-A279-4A35-AD14-51660B9C9940}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Break" ID="{DC3F7B66-B62F-4109-8D5B-DC8C21D444FF}" ShortID="302767557">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<SourcePlugin Name="Silence" ID="{20005BFE-A99F-456D-ACB2-006B0DA6ACF8}" ShortID="910203671" PluginName="Wwise Silence" CompanyID="0" PluginID="101">
+											<PropertyList>
+												<Property Name="Length" Type="Real32" Value="0.7"/>
+											</PropertyList>
+											<Language>SFX</Language>
+										</SourcePlugin>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Silence" ID="{20005BFE-A99F-456D-ACB2-006B0DA6ACF8}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Playlist">
+									<PluginInnerObject Name="" ID="{90BA0634-5B50-4FD2-A097-46D582B3D285}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+										<ReferenceList>
+											<Reference Name="PlaylistObject">
+												<ObjectRef Name="Camera_Shutter" ID="{1943DBEB-5225-4CDC-BAAD-FFA16017F3D1}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+											</Reference>
+										</ReferenceList>
+									</PluginInnerObject>
+									<PluginInnerObject Name="" ID="{51BF1A9F-913C-4446-91B5-115BFBBF8D3B}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+										<ReferenceList>
+											<Reference Name="PlaylistObject">
+												<ObjectRef Name="Printing" ID="{BD694E90-488A-4FD9-A22F-861B4D945661}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+											</Reference>
+										</ReferenceList>
+									</PluginInnerObject>
+									<PluginInnerObject Name="" ID="{B6EEB073-0F39-4529-B70F-D367BB0C07F2}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+										<ReferenceList>
+											<Reference Name="PlaylistObject">
+												<ObjectRef Name="Break" ID="{DC3F7B66-B62F-4109-8D5B-DC8C21D444FF}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+											</Reference>
+										</ReferenceList>
+									</PluginInnerObject>
+									<PluginInnerObject Name="" ID="{D5E92E7E-C023-4C79-8FE0-BB8A6C06F927}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+										<ReferenceList>
+											<Reference Name="PlaylistObject">
+												<ObjectRef Name="Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00" ID="{E8DC822B-C717-4C83-8196-35AD9D33E0D4}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+											</Reference>
+										</ReferenceList>
+									</PluginInnerObject>
+								</ObjectList>
+							</ObjectLists>
 						</RandomSequenceContainer>
 					</ChildrenList>
 				</Folder>

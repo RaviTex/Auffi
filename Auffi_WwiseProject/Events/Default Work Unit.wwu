@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" SchemaVersion="133">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Player_Audio" ID="{1918B729-DC93-478C-9246-E679FEAB8164}" ShortID="300407050">
+					<ChildrenList>
+						<Event Name="Camera_Shutter" ID="{100B7577-B595-49A6-AC21-58C0D239E9B4}">
+							<ChildrenList>
+								<Action Name="" ID="{DBF68C4F-CAA6-475C-B7B7-F2B2D1657929}" ShortID="778330130">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Shutter" ID="{19F8F45D-CBFA-4ED5-A69B-167FE517A4F8}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
