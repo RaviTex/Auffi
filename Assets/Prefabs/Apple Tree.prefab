@@ -661,8 +661,9 @@ GameObject:
   - component: {fileID: 2652854532377864561}
   - component: {fileID: 2030240902617005094}
   - component: {fileID: 6507594365406522062}
+  - component: {fileID: 539472304863565387}
   m_Layer: 0
-  m_Name: Apple_Tree
+  m_Name: Apple Tree
   m_TagString: Apple Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,8 +734,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9323037, y: 4.552622, z: 1.9323037}
-  m_Center: {x: 0, y: 2.433576, z: 0}
+  m_Size: {x: 4.118431, y: 4.552622, z: 3.713687}
+  m_Center: {x: 0, y: 2.4335763, z: -0.06449183}
+--- !u!114 &539472304863565387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066467585741926077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716fbdd4c39f32a339e25823d9c340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AppleTree
+  focusPoint: {fileID: 0}
 --- !u!1 &7268436875441741508
 GameObject:
   m_ObjectHideFlags: 0

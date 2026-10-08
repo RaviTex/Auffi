@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
-    [Tooltip("How quickly the player turns towards its travel direction or photo target.")]
+    [Tooltip("How quickly the player turns towards its travel direction or focus target.")]
     [SerializeField] private float rotationLerpSpeed = 8f;
 
     [Header("Taking Photos")] 
@@ -35,24 +35,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool ignorePlayer = true;
     [SerializeField] private bool debugVisibility;
 
-    [Header("Player State")]
-    [Tooltip("The cube child whose material shows the player's current state.")]
-    [SerializeField] private Renderer stateRenderer;
-    [Tooltip("Material for when an animal can be photographed.")]
-    [SerializeField] private Material cameraOutMaterial;
-    [Tooltip("Material for when the player carries apples.")]
-    [SerializeField] private Material applesMaterial;
-    [Tooltip("Material for the default state.")]
-    [SerializeField] private Material idleMaterial;
-    [SerializeField] private bool hasApples;
+    [Header("Inventory Slot")]
+    [Tooltip("Shown when the player holds nothing and no camera is out.")]
+    [SerializeField] private GameObject emptySlotVisual;
+    [Tooltip("Shown when an animal can be photographed.")]
+    [SerializeField] private GameObject cameraSlotVisual;
+    [Tooltip("Shown while the player carries an empty bucket.")]
+    [SerializeField] private GameObject bucketSlotVisual;
+    [Tooltip("Shown while the player carries a bucket filled with apples.")]
+    [SerializeField] private GameObject applesSlotVisual;
 
     private const int MaxAnimalsDetected = 16;
 
-    public bool HasApples
-    {
-        get => hasApples;
-        set => hasApples = value;
-    }
+    public ItemType CurrentItem => _currentItem;
+    public bool HasApples => _currentItem == ItemType.Apples;
 
     private Vector3 _forward;
     private Vector3 _right;
@@ -65,6 +61,11 @@ public class PlayerController : MonoBehaviour
     private LayerMask _animalMask;
     private bool _canTakePhoto;
     private Collider _photoTarget;
+
+    private ItemType _currentItem = ItemType.None;
+    private ItemType _itemPreview = ItemType.None;
+    private readonly List<Interactable> _interactables = new List<Interactable>();
+    private Interactable _focusedInteractable;
 
     private Camera _visibilityCamera;
     private RenderTexture _visibilityTexture;
@@ -93,9 +94,6 @@ public class PlayerController : MonoBehaviour
         // The movement axes are cached so turning the player does not feed back into movement.
         _forward = (transform.forward + -transform.right).normalized;
         _right = (transform.forward + transform.right).normalized;
-
-        if (stateRenderer == null && transform.childCount > 0)
-            stateRenderer = transform.GetChild(0).GetComponent<Renderer>();
     }
 
     private void Start()
@@ -109,6 +107,8 @@ public class PlayerController : MonoBehaviour
 
         if (book != null)
             book.Close();
+
+        UpdateSlotVisual();
     }
 
     private void OnDestroy()
@@ -123,16 +123,24 @@ public class PlayerController : MonoBehaviour
     {
         _input = moveAction.action.ReadValue<Vector2>();
 
-        // Direct key binding for the prototype; swap for an InputActionReference if it needs remapping.
-        if (book != null && Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
+        UpdateFocusedInteractable();
+
+        // Direct key bindings for the prototype; swap for InputActionReferences if they need remapping.
+        if (Keyboard.current == null)
+            return;
+
+        if (book != null && Keyboard.current.fKey.wasPressedThisFrame)
             book.Toggle();
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+            TryInteract();
     }
 
     private void LateUpdate()
     {
         CanTakePhoto();
         UpdateFacing();
-        UpdateStateMaterial();
+        UpdateSlotVisual();
 
         if (_canTakePhoto)
         {
@@ -182,13 +190,126 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RegisterInteractable(Interactable interactable)
+    {
+        if (!_interactables.Contains(interactable))
+            _interactables.Add(interactable);
+    }
+
+    public void UnregisterInteractable(Interactable interactable)
+    {
+        _interactables.Remove(interactable);
+
+        if (_focusedInteractable == interactable)
+            SetFocusedInteractable(null);
+    }
+
+    public void SetItem(ItemType item)
+    {
+        _currentItem = item;
+    }
+
+    public void SetItemPreview(ItemType item)
+    {
+        _itemPreview = item;
+    }
+
+    private void UpdateFocusedInteractable()
+    {
+        Interactable nearest = null;
+        float nearestDistance = float.MaxValue;
+
+        for (int i = _interactables.Count - 1; i >= 0; i--)
+        {
+            Interactable interactable = _interactables[i];
+            if (interactable == null)
+            {
+                _interactables.RemoveAt(i);
+                continue;
+            }
+
+            if (!interactable.isActiveAndEnabled)
+                continue;
+
+            float distance = (interactable.FocusPosition - transform.position).sqrMagnitude;
+            if (distance < nearestDistance)
+            {
+                nearest = interactable;
+                nearestDistance = distance;
+            }
+        }
+
+        SetFocusedInteractable(nearest);
+    }
+
+    private void SetFocusedInteractable(Interactable interactable)
+    {
+        if (_focusedInteractable == interactable)
+            return;
+
+        if (_focusedInteractable != null)
+            _focusedInteractable.OnUnfocus(this);
+
+        _focusedInteractable = interactable;
+
+        if (_focusedInteractable != null)
+            _focusedInteractable.OnFocus(this);
+    }
+
+    private void TryInteract()
+    {
+        if (_focusedInteractable != null)
+            _focusedInteractable.Interact(this);
+    }
+
+    private void UpdateFacing()
+    {
+        Vector3 direction;
+
+        if (_focusedInteractable != null)
+            direction = _focusedInteractable.FocusPosition - transform.position;
+        else if (_canTakePhoto && _photoTarget != null)
+            direction = _photoTarget.bounds.center - transform.position;
+        else
+            direction = _rb.linearVelocity;
+
+        direction.y = 0f;
+        if (direction.sqrMagnitude < 0.0001f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+        _rb.rotation = Quaternion.Slerp(_rb.rotation, targetRotation, rotationLerpSpeed * Time.deltaTime);
+    }
+
+    private void UpdateSlotVisual()
+    {
+        ItemType state = _currentItem != ItemType.None
+            ? _currentItem
+            : _itemPreview != ItemType.None
+                ? _itemPreview
+                : _canTakePhoto
+                    ? ItemType.Camera
+                    : ItemType.None;
+
+        SetSlotVisual(emptySlotVisual, state == ItemType.None);
+        SetSlotVisual(cameraSlotVisual, state == ItemType.Camera);
+        SetSlotVisual(bucketSlotVisual, state == ItemType.Bucket);
+        SetSlotVisual(applesSlotVisual, state == ItemType.Apples);
+    }
+
+    private static void SetSlotVisual(GameObject visual, bool active)
+    {
+        if (visual != null && visual.activeSelf != active)
+            visual.SetActive(active);
+    }
+
     private void CanTakePhoto()
     {
         int numOfColliders = Physics.OverlapSphereNonAlloc(transform.position, detectionDistance, _animalsInRange,
             _animalMask);
         GatherCandidates(numOfColliders);
 
-        bool isVisible = _visibilityCamera != null && _photoTarget != null;
+        bool isVisible = _currentItem == ItemType.None && _visibilityCamera != null && _photoTarget != null;
 
         if (isVisible)
             _lastVisibleTime = Time.time;
@@ -232,38 +353,6 @@ public class PlayerController : MonoBehaviour
         float distanceA = (a.bounds.center - transform.position).sqrMagnitude;
         float distanceB = (b.bounds.center - transform.position).sqrMagnitude;
         return distanceA.CompareTo(distanceB);
-    }
-
-    private void UpdateFacing()
-    {
-        Vector3 direction;
-
-        if (_canTakePhoto && _photoTarget != null)
-            direction = _photoTarget.bounds.center - transform.position;
-        else
-            direction = _rb.linearVelocity;
-
-        direction.y = 0f;
-        if (direction.sqrMagnitude < 0.0001f)
-            return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-        _rb.rotation = Quaternion.Slerp(_rb.rotation, targetRotation, rotationLerpSpeed * Time.deltaTime);
-    }
-
-    private void UpdateStateMaterial()
-    {
-        if (stateRenderer == null)
-            return;
-
-        Material material = _canTakePhoto
-            ? cameraOutMaterial
-            : hasApples
-                ? applesMaterial
-                : idleMaterial;
-
-        if (material != null)
-            stateRenderer.sharedMaterial = material;
     }
 
     private void TakePhoto()
@@ -385,6 +474,12 @@ public class PlayerController : MonoBehaviour
         while (true)
         {
             yield return waitForEndOfFrame;
+
+            if (_currentItem != ItemType.None)
+            {
+                _photoTarget = null;
+                continue;
+            }
 
             if (Time.unscaledTime < _nextVisibilityCheck)
                 continue;
@@ -530,9 +625,11 @@ public class PlayerController : MonoBehaviour
     {
         string message = _visibilityCamera == null
             ? "Animal visibility rendering is unavailable"
-            : numOfColliders == 0
-                ? $"No Animal colliders within detectionDistance ({detectionDistance})"
-                : $"{numOfColliders} animal(s) in range but none produced visible pixels";
+            : _currentItem != ItemType.None
+                ? $"Holding {_currentItem}: camera stays away"
+                : numOfColliders == 0
+                    ? $"No Animal colliders within detectionDistance ({detectionDistance})"
+                    : $"{numOfColliders} animal(s) in range but none produced visible pixels";
 
         if (message == _lastDebugMessage)
             return;
