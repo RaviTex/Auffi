@@ -479,6 +479,14 @@ MonoBehaviour:
   acceleration: 32
   deceleration: 64
   rotationLerpSpeed: 8
+  gravity: 20
+  maxFallSpeed: 30
+  groundStickSpeed: 2
+  groundCheckDistance: 0.2
+  slopeLimit: 50
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
   detectionDistance: 4
   canTakePhotoFeedbackTxt: {fileID: 0}
   book: {fileID: 0}

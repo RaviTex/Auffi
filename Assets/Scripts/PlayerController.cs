@@ -19,6 +19,16 @@ public class PlayerController : MonoBehaviour
     [Tooltip("How quickly the player turns towards its travel direction or focus target.")]
     [SerializeField] private float rotationLerpSpeed = 8f;
 
+    [Header("Gravity")]
+    [SerializeField] private float gravity = 20f;
+    [SerializeField] private float maxFallSpeed = 30f;
+    [Tooltip("Small downward push that keeps the player glued to the ground.")]
+    [SerializeField] private float groundStickSpeed = 2f;
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [Tooltip("Steepest ground the player can walk on.")]
+    [SerializeField] private float slopeLimit = 50f;
+    [SerializeField] private LayerMask groundMask = ~0;
+
     [Header("Taking Photos")] 
     [SerializeField] private float detectionDistance;
     [SerializeField] private GameObject canTakePhotoFeedbackTxt;
@@ -55,6 +65,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _forward;
     private Vector3 _right;
     private Rigidbody _rb;
+    private CapsuleCollider _capsule;
+    private readonly RaycastHit[] _groundHits = new RaycastHit[4];
 
     private Vector2 _input;
 
@@ -89,6 +101,25 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _rb = GetComponent<Rigidbody>();
+        _capsule = GetComponent<CapsuleCollider>();
+
+        // Without this, the ground stick force creates a normal force every step and
+        // friction cancels the scripted movement before the player can accelerate.
+        _capsule.sharedMaterial = new PhysicsMaterial("PlayerFrictionless")
+        {
+            dynamicFriction = 0f,
+            staticFriction = 0f,
+            bounciness = 0f,
+            frictionCombine = PhysicsMaterialCombine.Minimum,
+            bounceCombine = PhysicsMaterialCombine.Minimum
+        };
+
+        // Gravity is applied manually. Only Y rotation is allowed so MoveRotation can
+        // interpolate smoothly and collisions cannot tip the player over.
+        _rb.useGravity = false;
+        _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         _animalsInRange = new Collider[MaxAnimalsDetected];
         _animalMask = LayerMask.GetMask("Animal");
         _distanceComparison = CompareByDistance;
@@ -100,7 +131,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
         _camera = Camera.main;
 
         CreateVisibilityCamera();
@@ -135,7 +165,6 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         CanTakePhoto();
-        UpdateFacing();
         UpdateSlotVisual();
 
         canTakePhotoFeedbackTxt.SetActive(_canTakePhoto);
@@ -152,37 +181,79 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isUsingAcceleration)
+        Vector3 velocity = GetDesiredHorizontalVelocity();
+
+        if (CheckGrounded(out Vector3 groundNormal))
         {
-            if (!hasToAccelInEveryDirection)
-            {
-                float speed = Mathf.Clamp(_rb.linearVelocity.magnitude + acceleration * Time.fixedDeltaTime, 0,
-                    maxSpeed);
-                _rb.linearVelocity = (_forward * _input.y + _right * _input.x).normalized * speed;
-            }
-            else
-            {
-                var inputDirection = (_forward * _input.y + _right * _input.x).normalized;
-                _rb.linearVelocity += inputDirection * (acceleration * Time.fixedDeltaTime);
-                _rb.linearVelocity = Vector3.ClampMagnitude(_rb.linearVelocity, maxSpeed);
-                if (inputDirection.magnitude < 0.1f)
-                {
-                    _rb.linearVelocity = Vector3.MoveTowards(
-                        _rb.linearVelocity,
-                        Vector3.zero,
-                        deceleration * Time.fixedDeltaTime
-                    );
-                    if (_rb.linearVelocity.magnitude < 0.01f && _rb.linearVelocity != Vector3.zero)
-                    {
-                        _rb.linearVelocity = Vector3.zero;
-                    }
-                }
-            }
+            // Follow the ground plane so small hills can be climbed, then press down
+            // slightly to stay glued and avoid bouncing down slopes.
+            velocity = Vector3.ProjectOnPlane(velocity, groundNormal) - groundNormal * groundStickSpeed;
         }
         else
         {
-            _rb.linearVelocity = (_forward * _input.y + _right * _input.x).normalized * maxSpeed;
+            velocity.y = Mathf.Max(_rb.linearVelocity.y - gravity * Time.fixedDeltaTime, -maxFallSpeed);
         }
+
+        _rb.linearVelocity = velocity;
+        UpdateFacing();
+    }
+
+    private Vector3 GetDesiredHorizontalVelocity()
+    {
+        Vector3 velocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+
+        if (!isUsingAcceleration)
+            return (_forward * _input.y + _right * _input.x).normalized * maxSpeed;
+
+        if (!hasToAccelInEveryDirection)
+        {
+            float speed = Mathf.Clamp(velocity.magnitude + acceleration * Time.fixedDeltaTime, 0f, maxSpeed);
+            return (_forward * _input.y + _right * _input.x).normalized * speed;
+        }
+
+        Vector3 inputDirection = (_forward * _input.y + _right * _input.x).normalized;
+        velocity += inputDirection * (acceleration * Time.fixedDeltaTime);
+        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+
+        if (inputDirection.magnitude < 0.1f)
+        {
+            velocity = Vector3.MoveTowards(velocity, Vector3.zero, deceleration * Time.fixedDeltaTime);
+            if (velocity.magnitude < 0.01f)
+                velocity = Vector3.zero;
+        }
+
+        return velocity;
+    }
+
+    private bool CheckGrounded(out Vector3 groundNormal)
+    {
+        groundNormal = Vector3.up;
+
+        float radius = _capsule.radius * 0.9f;
+        float bottomOffset = Mathf.Max(_capsule.height * 0.5f - _capsule.radius, 0f);
+        Vector3 origin = transform.position + _capsule.center - Vector3.up * bottomOffset + Vector3.up * 0.05f;
+        int count = Physics.SphereCastNonAlloc(origin, radius, Vector3.down, _groundHits,
+            0.05f + groundCheckDistance, groundMask, QueryTriggerInteraction.Ignore);
+
+        bool grounded = false;
+        float nearest = float.MaxValue;
+
+        for (int i = 0; i < count; i++)
+        {
+            RaycastHit hit = _groundHits[i];
+            if (hit.collider.transform.root == transform.root)
+                continue;
+            if (Vector3.Angle(hit.normal, Vector3.up) > slopeLimit)
+                continue;
+            if (hit.distance >= nearest)
+                continue;
+
+            nearest = hit.distance;
+            groundNormal = hit.normal;
+            grounded = true;
+        }
+
+        return grounded;
     }
 
     public void RegisterInteractable(Interactable interactable)
@@ -270,10 +341,13 @@ public class PlayerController : MonoBehaviour
 
         direction.y = 0f;
         if (direction.sqrMagnitude < 0.0001f)
+        {
+            _rb.angularVelocity = Vector3.zero;
             return;
+        }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-        _rb.rotation = Quaternion.Slerp(_rb.rotation, targetRotation, rotationLerpSpeed * Time.deltaTime);
+        _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, targetRotation, rotationLerpSpeed * Time.fixedDeltaTime));
     }
 
     private void UpdateSlotVisual()
