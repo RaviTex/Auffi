@@ -8,6 +8,9 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("General")]
+    [SerializeField] private GameManager gameManager;
+    
     [Header("Options")] [SerializeField] private bool isUsingAcceleration;
     [SerializeField] private bool hasToAccelInEveryDirection;
 
@@ -31,7 +34,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Taking Photos")] 
     [SerializeField] private float detectionDistance;
-    [SerializeField] private GameObject canTakePhotoFeedbackTxt;
     [SerializeField] private AnimalBook book;
 
     [Header("Visibility")]
@@ -167,8 +169,6 @@ public class PlayerController : MonoBehaviour
         CanTakePhoto();
         UpdateSlotVisual();
 
-        canTakePhotoFeedbackTxt.SetActive(_canTakePhoto);
-
         // One context button: photographing wins over picking up.
         if (!interactionAction.action.WasPressedThisFrame())
             return;
@@ -196,6 +196,14 @@ public class PlayerController : MonoBehaviour
 
         _rb.linearVelocity = velocity;
         UpdateFacing();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Game Over"))
+        {
+            gameManager.GameOver();
+        }
     }
 
     private Vector3 GetDesiredHorizontalVelocity()

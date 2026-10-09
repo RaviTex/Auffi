@@ -7,6 +7,7 @@ TagManager:
   - Cow
   - Apple Tree
   - Put Down
+  - Game Over
   layers:
   - Default
   - TransparentFX
