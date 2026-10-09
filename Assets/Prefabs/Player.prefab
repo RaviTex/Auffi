@@ -31,8 +31,7 @@ Transform:
   m_LocalPosition: {x: -0, y: -0.0842, z: 0.826}
   m_LocalScale: {x: 0.25, y: 0.418475, z: 0.25}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 4842652862241056039}
+  m_Children: []
   m_Father: {fileID: 5355483721892240318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2812751270138606162
@@ -254,12 +253,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6675858597067492287}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.643, z: 0}
-  m_LocalScale: {x: 1, y: 0.60805, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.18487942, z: 0.8260002}
+  m_LocalScale: {x: 0.25, y: 0.25445372, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3464079159104306932}
+  m_Father: {fileID: 5355483721892240318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2299817093187360967
 MeshFilter:
@@ -376,6 +375,7 @@ Transform:
   - {fileID: 3553153402153012262}
   - {fileID: 4038745271467327495}
   - {fileID: 3464079159104306932}
+  - {fileID: 4842652862241056039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &186088542902438665
@@ -473,7 +473,7 @@ MonoBehaviour:
   isUsingAcceleration: 1
   hasToAccelInEveryDirection: 1
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  photoAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactionAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   maxSpeed: 8
   acceleration: 32
   deceleration: 64

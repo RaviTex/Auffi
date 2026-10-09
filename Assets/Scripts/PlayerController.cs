@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool hasToAccelInEveryDirection;
 
     [Header("Movement")] [SerializeField] private InputActionReference moveAction;
-    [SerializeField] private InputActionReference photoAction;
+    [SerializeField] private InputActionReference interactionAction;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
@@ -125,15 +125,9 @@ public class PlayerController : MonoBehaviour
 
         UpdateFocusedInteractable();
 
-        // Direct key bindings for the prototype; swap for InputActionReferences if they need remapping.
-        if (Keyboard.current == null)
-            return;
-
-        if (book != null && Keyboard.current.fKey.wasPressedThisFrame)
+        // Direct key binding for the prototype; swap for an InputActionReference if it needs remapping.
+        if (book != null && Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
             book.Toggle();
-
-        if (Keyboard.current.rKey.wasPressedThisFrame)
-            TryInteract();
     }
 
     private void LateUpdate()
@@ -142,17 +136,16 @@ public class PlayerController : MonoBehaviour
         UpdateFacing();
         UpdateSlotVisual();
 
-        if (_canTakePhoto)
-        {
-            canTakePhotoFeedbackTxt.SetActive(true);
+        canTakePhotoFeedbackTxt.SetActive(_canTakePhoto);
 
-            if (photoAction.action.WasPressedThisFrame())
-                TakePhoto();
-        }
-        else
-        {
-            canTakePhotoFeedbackTxt.SetActive(false);
-        }
+        // One context button: photographing wins over picking up.
+        if (!interactionAction.action.WasPressedThisFrame())
+            return;
+
+        if (_canTakePhoto)
+            TakePhoto();
+        else if (_focusedInteractable != null)
+            TryInteract();
     }
 
     private void FixedUpdate()
@@ -266,10 +259,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 direction;
 
-        if (_focusedInteractable != null)
-            direction = _focusedInteractable.FocusPosition - transform.position;
-        else if (_canTakePhoto && _photoTarget != null)
+        if (_canTakePhoto && _photoTarget != null)
             direction = _photoTarget.bounds.center - transform.position;
+        else if (_focusedInteractable != null)
+            direction = _focusedInteractable.FocusPosition - transform.position;
         else
             direction = _rb.linearVelocity;
 
@@ -285,10 +278,10 @@ public class PlayerController : MonoBehaviour
     {
         ItemType state = _currentItem != ItemType.None
             ? _currentItem
-            : _itemPreview != ItemType.None
-                ? _itemPreview
-                : _canTakePhoto
-                    ? ItemType.Camera
+            : _canTakePhoto
+                ? ItemType.Camera
+                : _itemPreview != ItemType.None
+                    ? _itemPreview
                     : ItemType.None;
 
         SetSlotVisual(emptySlotVisual, state == ItemType.None);
