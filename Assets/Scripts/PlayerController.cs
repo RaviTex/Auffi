@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject bucketSlotVisual;
     [Tooltip("Shown while the player carries a bucket filled with apples.")]
     [SerializeField] private GameObject applesSlotVisual;
+    [Tooltip("Shown while the player carries the gate key.")]
+    [SerializeField] private GameObject keySlotVisual;
 
     private const int MaxAnimalsDetected = 16;
 
@@ -288,6 +290,7 @@ public class PlayerController : MonoBehaviour
         SetSlotVisual(cameraSlotVisual, state == ItemType.Camera);
         SetSlotVisual(bucketSlotVisual, state == ItemType.Bucket);
         SetSlotVisual(applesSlotVisual, state == ItemType.Apples);
+        SetSlotVisual(keySlotVisual, state == ItemType.Key);
     }
 
     private static void SetSlotVisual(GameObject visual, bool active)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class AnimalBook : MonoBehaviour
         public Image image;
     }
 
+    public event Action<AnimalDefinition> AnimalUnlocked;
+
     [Tooltip("Panel shown and hidden with the book toggle. Leave empty to use this GameObject.")]
     [SerializeField] private GameObject panel;
     [SerializeField] private List<BookEntry> entries = new List<BookEntry>();
@@ -20,6 +23,12 @@ public class AnimalBook : MonoBehaviour
     private GameObject Panel => panel != null ? panel : gameObject;
 
     public bool IsOpen => Panel.activeSelf;
+
+    public bool IsUnlocked(AnimalDefinition definition)
+    {
+        return definition != null && !string.IsNullOrEmpty(definition.AnimalId) &&
+               _unlocked.Contains(definition.AnimalId);
+    }
 
     private void Awake()
     {
@@ -59,12 +68,16 @@ public class AnimalBook : MonoBehaviour
             if (entry.definition == null || entry.definition.AnimalId != definition.AnimalId || entry.image == null)
                 continue;
 
-            _unlocked.Add(definition.AnimalId);
+            bool firstUnlock = _unlocked.Add(definition.AnimalId);
 
             if (definition.Photo != null)
                 entry.image.sprite = definition.Photo;
 
             entry.image.enabled = true;
+
+            if (firstUnlock)
+                AnimalUnlocked?.Invoke(definition);
+
             return true;
         }
 
