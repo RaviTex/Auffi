@@ -273,6 +273,21 @@
 				<Folder Name="Cow" ID="{A7C35E8D-1390-4B5E-8C0F-8EB3DD586579}" ShortID="818054276">
 					<ChildrenList>
 						<RandomSequenceContainer Name="Moos" ID="{B218AA37-6717-4E5B-844A-F474F6C1191D}" ShortID="733292391">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{65BC4A8A-E5B5-4641-B179-462729FBAB3D}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="275"/>
+													<Property Name="Min" Type="Real64" Value="-225"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
@@ -374,7 +389,7 @@
 						</RandomSequenceContainer>
 						<Folder Name="Bells" ID="{503630FD-265F-4162-9E6A-9448A06A7F7E}" ShortID="836551141">
 							<ChildrenList>
-								<Sound Name="Bells, Animal, Cow Bells SND62918 S01" ID="{DBBB2294-4CBF-478C-9343-EEC61599F645}" ShortID="831340755">
+								<RandomSequenceContainer Name="Cow Bells" ID="{08AC16AC-A7F0-47EE-8A57-0572590CFF70}" ShortID="169193850">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
@@ -384,106 +399,118 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="Bells, Animal, Cow Bells SND62918 S01" ID="{E22883B9-B127-4FC4-B686-CE84E0F88380}">
-											<Language>SFX</Language>
-											<AudioFile>Bells, Animal, Cow Bells SND62918 S01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="481724821"/>
-											</MediaIDList>
-										</AudioFileSource>
+										<Sound Name="Bells, Animal, Cow Bells SND62918 S01" ID="{DBBB2294-4CBF-478C-9343-EEC61599F645}" ShortID="831340755">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Bells, Animal, Cow Bells SND62918 S01" ID="{E22883B9-B127-4FC4-B686-CE84E0F88380}">
+													<Language>SFX</Language>
+													<AudioFile>Bells, Animal, Cow Bells SND62918 S01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="481724821"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Bells, Animal, Cow Bells SND62918 S01" ID="{E22883B9-B127-4FC4-B686-CE84E0F88380}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S01" ID="{4E66CF73-806C-47CC-8EDF-D94816F6C90D}" ShortID="204789640">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S01" ID="{92EFC72A-A322-46D2-AF71-DE36DDAC2038}">
+													<Language>SFX</Language>
+													<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="945579852"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S01" ID="{92EFC72A-A322-46D2-AF71-DE36DDAC2038}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S03" ID="{D5D810BF-42AB-4E9F-A981-9B1B9FAADA5D}" ShortID="41620142">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S03" ID="{85B118F8-EE15-44CE-8905-500CBA85F725}">
+													<Language>SFX</Language>
+													<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="937737313"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S03" ID="{85B118F8-EE15-44CE-8905-500CBA85F725}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S05" ID="{7274C076-3501-46D0-8B86-E2C61E67B944}" ShortID="218670149">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S05" ID="{4FB2D795-D64A-4BF8-AEE7-3E5258172AE1}">
+													<Language>SFX</Language>
+													<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S05.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="612600531"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S05" ID="{4FB2D795-D64A-4BF8-AEE7-3E5258172AE1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S06" ID="{63B733FD-CD99-4522-8518-7D6AE9851277}" ShortID="823423470">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S06" ID="{CF4BB607-CE7D-48E2-861B-2CAC2721CAFE}">
+													<Language>SFX</Language>
+													<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S06.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="229377283"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S06" ID="{CF4BB607-CE7D-48E2-861B-2CAC2721CAFE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Bells, Animal, Cow Bells SND62918 S01" ID="{E22883B9-B127-4FC4-B686-CE84E0F88380}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S01" ID="{4E66CF73-806C-47CC-8EDF-D94816F6C90D}" ShortID="204789640">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S01" ID="{92EFC72A-A322-46D2-AF71-DE36DDAC2038}">
-											<Language>SFX</Language>
-											<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S01.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="945579852"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S01" ID="{92EFC72A-A322-46D2-AF71-DE36DDAC2038}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S03" ID="{D5D810BF-42AB-4E9F-A981-9B1B9FAADA5D}" ShortID="41620142">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S03" ID="{85B118F8-EE15-44CE-8905-500CBA85F725}">
-											<Language>SFX</Language>
-											<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S03.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="937737313"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S03" ID="{85B118F8-EE15-44CE-8905-500CBA85F725}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S05" ID="{7274C076-3501-46D0-8B86-E2C61E67B944}" ShortID="218670149">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S05" ID="{4FB2D795-D64A-4BF8-AEE7-3E5258172AE1}">
-											<Language>SFX</Language>
-											<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S05.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="612600531"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S05" ID="{4FB2D795-D64A-4BF8-AEE7-3E5258172AE1}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
-								<Sound Name="Bells, Animal, Cow Bells, Noisy SND62919 S06" ID="{63B733FD-CD99-4522-8518-7D6AE9851277}" ShortID="823423470">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
-										</Reference>
-									</ReferenceList>
-									<ChildrenList>
-										<AudioFileSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S06" ID="{CF4BB607-CE7D-48E2-861B-2CAC2721CAFE}">
-											<Language>SFX</Language>
-											<AudioFile>Bells, Animal, Cow Bells, Noisy SND62919 S06.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="229377283"/>
-											</MediaIDList>
-										</AudioFileSource>
-									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Bells, Animal, Cow Bells, Noisy SND62919 S06" ID="{CF4BB607-CE7D-48E2-861B-2CAC2721CAFE}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</Folder>
 					</ChildrenList>
@@ -500,37 +527,56 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="Ambience, Grassland, Village, Meadow, Morning, Raven Calls SND44846 S00" ID="{54CE5CD6-02E5-4D6F-B5D2-53BBDDC02051}" ShortID="781960277">
+								<RandomSequenceContainer Name="Meadow_Ambience" ID="{8E3D2258-A44E-4945-96B5-53F759C0C11D}" ShortID="663879264">
 									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+										<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+										<Property Name="RandomOrSequence" Type="int16" Value="0"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="Music" ID="{0F6C6D4B-547C-459C-97F9-A521F95E7BFC}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+											<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="Ambience, Grassland, Village, Meadow, Morning, Raven Calls SND44846 S00" ID="{663BC954-7B6E-4D63-84F5-BB730C49710B}">
-											<PropertyList>
-												<Property Name="FadeInDuration" Type="Real64" Value="2.91502"/>
-												<Property Name="FadeOutDuration" Type="Real64" Value="3.64379"/>
-												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-												<Property Name="TrimEnd" Type="Real64" Value="71.17481"/>
-											</PropertyList>
-											<Language>SFX</Language>
-											<AudioFile>Ambience, Grassland, Village, Meadow, Morning, Raven Calls SND44846 S00.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="703597928"/>
-											</MediaIDList>
-										</AudioFileSource>
+										<Sound Name="Ambience_Meadows" ID="{7562D18E-504C-46DF-A57F-901E90FAA491}" ShortID="509651609">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Ambience_Meadows" ID="{AFFA5F37-DF10-4CD5-98D7-0C88B75DB726}">
+													<Language>SFX</Language>
+													<AudioFile>Ambience_Meadows.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="181833192"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Ambience_Meadows" ID="{AFFA5F37-DF10-4CD5-98D7-0C88B75DB726}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
-									<ActiveSourceList>
-										<ActiveSource Name="Ambience, Grassland, Village, Meadow, Morning, Raven Calls SND44846 S00" ID="{663BC954-7B6E-4D63-84F5-BB730C49710B}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
+									<ObjectLists>
+										<ObjectList Name="Playlist">
+											<PluginInnerObject Name="" ID="{BC40DE93-743A-4029-800D-1D2665754A53}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+												<ReferenceList>
+													<Reference Name="PlaylistObject">
+														<ObjectRef Name="Ambience_Meadows" ID="{7562D18E-504C-46DF-A57F-901E90FAA491}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+													</Reference>
+												</ReferenceList>
+											</PluginInnerObject>
+										</ObjectList>
+									</ObjectLists>
+								</RandomSequenceContainer>
 							</ChildrenList>
 						</PropertyContainer>
 					</ChildrenList>
