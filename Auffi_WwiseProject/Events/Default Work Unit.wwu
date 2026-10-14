@@ -31,6 +31,31 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_WalkingLoop_Meadows" ID="{98B61C48-52FD-4DDA-AE69-3BCAB46ACD69}">
+							<ChildrenList>
+								<Action Name="" ID="{5CB3DC59-3C7D-4500-8F01-9876E9C0B360}" ShortID="674310667">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Grass Loop Short by Yuval Id-189640 S00" ID="{8CBDDBA6-49CA-43BC-B2DA-BB39EA4CCA35}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_WalkingLoop_Meadows" ID="{4063A249-4BA5-4F02-9464-07907EF6660A}">
+							<ChildrenList>
+								<Action Name="" ID="{63F6A83E-A8D5-46F9-8DE1-0F4747C0477F}" ShortID="296598977">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Grass Loop Short by Yuval Id-189640 S00" ID="{8CBDDBA6-49CA-43BC-B2DA-BB39EA4CCA35}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
