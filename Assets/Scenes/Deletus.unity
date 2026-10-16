@@ -5652,6 +5652,7 @@ MonoBehaviour:
   sizeSnapDistance: 0.001
   minXRotation: 20
   maxXRotation: 70
+  baseYaw: -45
   peakAction: {fileID: 4151613260467630799, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   minPeak: -20
   maxPeak: 20
@@ -11554,7 +11555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d048f0295f96fb480546a7a6504d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  player: {fileID: 1816133206}
   gameOverScreen: {fileID: 995600537}
   bookUI: {fileID: 642651561}
 --- !u!1 &641510023

@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
     [Header("Camera rotate into up down player velocity")]
     [SerializeField] private float minXRotation;
     [SerializeField] private float maxXRotation;
+    [Tooltip("Yaw used by the hard look and velocity tilt modes.")]
+    [SerializeField] private float baseYaw = -45f;
     [Header("Camera peak input")]
     [SerializeField] private InputActionReference peakAction;
     [SerializeField] private float minPeak;
@@ -34,7 +36,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] private bool isPeakInputInverted;
 
     
-    private PlayerController _playerController;
     private Rigidbody _playerRb;
     private Camera _camera;
 
@@ -59,7 +60,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        _playerController = player.GetComponent<PlayerController>();
         _camera = GetComponent<Camera>();
         _playerRb = player.GetComponent<Rigidbody>();
         
@@ -123,7 +123,7 @@ public class CameraController : MonoBehaviour
         {
             transform.LookAt(player);
             if (isHardLookOnlyX)
-                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, -45, 0);
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, baseYaw, 0);
             return;
         }
 
@@ -132,7 +132,7 @@ public class CameraController : MonoBehaviour
             float signedSpeed = Vector3.Dot(_playerRb.linearVelocity, (transform.forward + -transform.right).normalized);
             float t = Mathf.InverseLerp(8f, -8f, signedSpeed);
             float desiredXRotation = Mathf.Lerp(minXRotation, maxXRotation, t);
-            transform.rotation = Quaternion.Euler(desiredXRotation, -45 + cameraRotationPivot.eulerAngles.y, 0);
+            transform.rotation = Quaternion.Euler(desiredXRotation, baseYaw + cameraRotationPivot.eulerAngles.y, 0);
             return;
         }
 

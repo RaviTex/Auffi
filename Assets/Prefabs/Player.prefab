@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3464079159104306932}
   - component: {fileID: 2812751270138606162}
   - component: {fileID: 980440512969158506}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bucket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7558321172222911463}
   - component: {fileID: 4516664895354418964}
   - component: {fileID: 996376117400332938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4842652862241056039}
   - component: {fileID: 2299817093187360967}
   - component: {fileID: 8135446374764166009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 4097408316322597462}
   - component: {fileID: 6400000000000000001}
   - component: {fileID: 6400000000000000002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,10 +406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   gameManager: {fileID: 0}
-  isUsingAcceleration: 1
-  hasToAccelInEveryDirection: 1
+  book: {fileID: 0}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  interactionAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactionAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  movementMode: 2
   maxSpeed: 8
   acceleration: 32
   deceleration: 64
@@ -422,7 +422,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
-  book: {fileID: 0}
 --- !u!54 &4097408316322597462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -450,6 +449,41 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6400000000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875525566347678290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38197e1e3824182b291ba510676da4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalVisibilitySampler
+  detectionDistance: 4
+  checkInterval: 0.1
+  graceTime: 0.15
+  textureHeight: 90
+  ignorePlayer: 1
+  debugVisibility: 0
+--- !u!114 &6400000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875525566347678290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ab612a6feb4d5289d5e87f83dae625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  emptySlotVisual: {fileID: 8525064639187512078}
+  cameraSlotVisual: {fileID: 7669714577183550064}
+  bucketSlotVisual: {fileID: 1432022477358603877}
+  applesSlotVisual: {fileID: 6675858597067492287}
+  keySlotVisual: {fileID: 8997853045638024322}
 --- !u!1 &7669714577183550064
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,7 +495,7 @@ GameObject:
   - component: {fileID: 4038745271467327495}
   - component: {fileID: 8387726868541960051}
   - component: {fileID: 4947928741220580115}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +586,7 @@ GameObject:
   - component: {fileID: 3071278534575151830}
   - component: {fileID: 7597926670852907802}
   - component: {fileID: 7319520440881888129}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +676,7 @@ GameObject:
   - component: {fileID: 3553153402153012262}
   - component: {fileID: 1253229012696862620}
   - component: {fileID: 7437618864888489487}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +764,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6966093560273220743}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,38 +787,3 @@ Transform:
   - {fileID: 3071278534575151830}
   m_Father: {fileID: 5355483721892240318}
   m_LocalEulerAnglesHint: {x: -58.202, y: -56.093, z: 159.044}
---- !u!114 &6400000000000000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6875525566347678290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38197e1e3824182b291ba510676da4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalVisibilitySampler
-  detectionDistance: 4
-  checkInterval: 0.1
-  graceTime: 0.15
-  textureHeight: 20
-  ignorePlayer: 1
-  debugVisibility: 0
---- !u!114 &6400000000000000002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6875525566347678290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ab612a6feb4d5289d5e87f83dae625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  emptySlotVisual: {fileID: 8525064639187512078}
-  cameraSlotVisual: {fileID: 7669714577183550064}
-  bucketSlotVisual: {fileID: 1432022477358603877}
-  applesSlotVisual: {fileID: 6675858597067492287}
-  keySlotVisual: {fileID: 8997853045638024322}

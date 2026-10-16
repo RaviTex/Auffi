@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -21,24 +22,28 @@ public class AnimalVisibilitySampler : MonoBehaviour
     [Header("Rendering")]
     [Tooltip("Height in pixels of the internal visibility render. Width follows the game's aspect ratio.")]
     [SerializeField] private int textureHeight = 90;
-    [Tooltip("Hides the player's own body during the check, so the player never blocks the view of an animal.")]
+    [Tooltip("Excludes the player's layer from the visibility render, so the player never blocks the view of an animal.")]
     [SerializeField] private bool ignorePlayer = true;
     [SerializeField] private bool debugVisibility;
 
     private const int MaxAnimalsDetected = 16;
     private const int UiLayer = 5;
+    private const int PlayerLayer = 8;
 
     private Camera _camera;
     private Camera _visibilityCamera;
     private RenderTexture _visibilityTexture;
-    private Texture2D _readback;
     private Material _keyMaterial;
     private Coroutine _checkLoop;
     private LayerMask _animalMask;
-    private Comparison<Candidate> _nearestFirst;
+    private Comparison<Candidate> _bestFirst;
     private float _nextCheckTime;
     private float _lastSeenTime = float.NegativeInfinity;
     private string _lastDebugMessage;
+
+    private bool _readbackPending;
+    private Animal _pendingAnimal;
+    private Vector3 _pendingCenter;
 
     private readonly Collider[] _animalsInRange = new Collider[MaxAnimalsDetected];
     private readonly List<Candidate> _candidates = new List<Candidate>();
@@ -46,8 +51,6 @@ public class AnimalVisibilitySampler : MonoBehaviour
     private readonly List<Renderer> _targetRenderers = new List<Renderer>();
     private readonly List<Renderer> _keyedRenderers = new List<Renderer>();
     private readonly List<Material[]> _originalMaterials = new List<Material[]>();
-    private readonly List<Renderer> _playerRenderers = new List<Renderer>();
-    private readonly List<Renderer> _hiddenPlayerRenderers = new List<Renderer>();
 
     // Set while the player holds an item, when sampling would be pointless.
     public bool Paused { get; set; }
@@ -67,7 +70,7 @@ public class AnimalVisibilitySampler : MonoBehaviour
     {
         _camera = Camera.main;
         _animalMask = LayerMask.GetMask("Animal");
-        _nearestFirst = CompareByDistance;
+        _bestFirst = CompareByPreference;
 
         if (CreateVisibilityCamera())
             _checkLoop = StartCoroutine(CheckForVisibleAnimals());
@@ -99,45 +102,46 @@ public class AnimalVisibilitySampler : MonoBehaviour
                 continue;
             }
 
-            if (Time.unscaledTime < _nextCheckTime)
+            if (Time.unscaledTime < _nextCheckTime || _readbackPending)
                 continue;
 
             _nextCheckTime = Time.unscaledTime + checkInterval;
 
             try
             {
-                Animal animal = FindVisibleAnimal(out Vector3 center);
-                SetVisibleAnimal(animal, center);
+                if (RenderAnimalForCheck(out _pendingAnimal, out _pendingCenter))
+                {
+                    _readbackPending = true;
+                    AsyncGPUReadback.Request(_visibilityTexture, 0, OnReadbackComplete);
+                }
+                else
+                {
+                    SetVisibleAnimal(null, default);
 
-                if (debugVisibility && animal == null)
-                    LogVisibilityDebug();
+                    if (debugVisibility)
+                        LogVisibilityDebug();
+                }
             }
             catch (Exception exception)
             {
                 Debug.LogException(exception);
                 Debug.LogError("[AnimalVisibilitySampler] Visibility rendering failed. Animal visibility is disabled.");
                 SetVisibleAnimal(null, default);
-                DisposeResources();
+                StopLoopAndDispose();
                 yield break;
             }
         }
     }
 
-    private void SetVisibleAnimal(Animal animal, Vector3 center)
+    // Renders the animal that best matches the current view, with every renderer keyed, so no
+    // part of it can occlude another and hide the whole animal.
+    private bool RenderAnimalForCheck(out Animal animal, out Vector3 center)
     {
-        VisibleAnimal = animal;
-        VisibleAnimalCenter = center;
-
-        if (animal != null)
-            _lastSeenTime = Time.time;
-    }
-
-    private Animal FindVisibleAnimal(out Vector3 center)
-    {
+        animal = null;
         center = default;
 
         if (_visibilityCamera == null)
-            return null;
+            return false;
 
         int count = Physics.OverlapSphereNonAlloc(transform.position, detectionDistance, _animalsInRange,
             _animalMask);
@@ -153,18 +157,29 @@ public class AnimalVisibilitySampler : MonoBehaviour
             if (!IsInsideFrustum(out Bounds bounds))
                 continue;
 
-            if (IsRenderedVisible())
+            // The key materials only live for this synchronous render request.
+            try
             {
-                center = bounds.center;
-                return candidate.Animal;
+                if (!ApplyKeyMaterials())
+                    continue;
+
+                SubmitRender();
             }
+            finally
+            {
+                RestoreKeyMaterials();
+            }
+
+            animal = candidate.Animal;
+            center = bounds.center;
+            return true;
         }
 
-        return null;
+        return false;
     }
 
-    // One entry per animal, nearest first. The overlap order is unspecified and an animal has
-    // several colliders, so keeping the nearest makes the result stable between checks.
+    // One entry per animal, the one closest to the center of the view first. The overlap order
+    // is unspecified and an animal has several colliders, so this keeps the result stable.
     private void GatherCandidates(int count)
     {
         _candidates.Clear();
@@ -179,16 +194,22 @@ public class AnimalVisibilitySampler : MonoBehaviour
             if (animal == null)
                 continue;
 
-            float distance = (collider.bounds.center - transform.position).sqrMagnitude;
-            int index = IndexOf(animal);
+            Vector3 center = collider.bounds.center;
+            var candidate = new Candidate
+            {
+                Animal = animal,
+                SqrDistance = (center - transform.position).sqrMagnitude,
+                ViewAngle = Vector3.Angle(_camera.transform.forward, center - _camera.transform.position)
+            };
 
+            int index = IndexOf(animal);
             if (index < 0)
-                _candidates.Add(new Candidate { Animal = animal, SqrDistance = distance });
-            else if (distance < _candidates[index].SqrDistance)
-                _candidates[index] = new Candidate { Animal = animal, SqrDistance = distance };
+                _candidates.Add(candidate);
+            else if (candidate.SqrDistance < _candidates[index].SqrDistance)
+                _candidates[index] = candidate;
         }
 
-        _candidates.Sort(_nearestFirst);
+        _candidates.Sort(_bestFirst);
     }
 
     private int IndexOf(Animal animal)
@@ -202,9 +223,10 @@ public class AnimalVisibilitySampler : MonoBehaviour
         return -1;
     }
 
-    private static int CompareByDistance(Candidate a, Candidate b)
+    private static int CompareByPreference(Candidate a, Candidate b)
     {
-        return a.SqrDistance.CompareTo(b.SqrDistance);
+        int byAngle = a.ViewAngle.CompareTo(b.ViewAngle);
+        return byAngle != 0 ? byAngle : a.SqrDistance.CompareTo(b.SqrDistance);
     }
 
     private bool IsInsideFrustum(out Bounds bounds)
@@ -231,32 +253,6 @@ public class AnimalVisibilitySampler : MonoBehaviour
         return hasBounds && GeometryUtility.TestPlanesAABB(_frustumPlanes, bounds);
     }
 
-    private bool IsRenderedVisible()
-    {
-        _visibilityCamera.aspect = _camera.aspect;
-        _visibilityCamera.orthographic = _camera.orthographic;
-        _visibilityCamera.orthographicSize = _camera.orthographicSize;
-        _visibilityCamera.fieldOfView = _camera.fieldOfView;
-
-        // The key materials and the hidden player only live for this synchronous render request.
-        try
-        {
-            if (!ApplyKeyMaterials())
-                return false;
-
-            RenderTarget();
-        }
-        finally
-        {
-            RestoreKeyMaterials();
-            RestorePlayer();
-        }
-
-        return ContainsKeyPixel();
-    }
-
-    // Draws every renderer of the animal with the key material, so no part of it can
-    // occlude another part and hide the whole animal.
     private bool ApplyKeyMaterials()
     {
         _keyedRenderers.Clear();
@@ -291,40 +287,40 @@ public class AnimalVisibilitySampler : MonoBehaviour
             _keyedRenderers[i].sharedMaterials = _originalMaterials[i];
     }
 
-    private void RenderTarget()
+    private void SubmitRender()
     {
-        if (ignorePlayer)
-        {
-            foreach (Renderer renderer in _playerRenderers)
-            {
-                if (renderer == null || !renderer.enabled)
-                    continue;
-
-                _hiddenPlayerRenderers.Add(renderer);
-                renderer.enabled = false;
-            }
-        }
+        _visibilityCamera.aspect = _camera.aspect;
+        _visibilityCamera.orthographic = _camera.orthographic;
+        _visibilityCamera.orthographicSize = _camera.orthographicSize;
+        _visibilityCamera.fieldOfView = _camera.fieldOfView;
 
         RenderPipeline.SubmitRenderRequest(_visibilityCamera,
             new UniversalRenderPipeline.SingleCameraRequest { destination = _visibilityTexture });
     }
 
-    private void RestorePlayer()
+    private void OnReadbackComplete(AsyncGPUReadbackRequest request)
     {
-        foreach (Renderer renderer in _hiddenPlayerRenderers)
-            renderer.enabled = true;
+        _readbackPending = false;
 
-        _hiddenPlayerRenderers.Clear();
+        if (_visibilityTexture == null)
+            return;
+
+        if (request.hasError)
+        {
+            Debug.LogError("[AnimalVisibilitySampler] GPU readback failed. Animal visibility is disabled.");
+            SetVisibleAnimal(null, default);
+            StopLoopAndDispose();
+            return;
+        }
+
+        if (!Paused && ContainsKeyPixel(request.GetData<Color32>()))
+            SetVisibleAnimal(_pendingAnimal, _pendingCenter);
+        else
+            SetVisibleAnimal(null, default);
     }
 
-    private bool ContainsKeyPixel()
+    private static bool ContainsKeyPixel(NativeArray<Color32> pixels)
     {
-        RenderTexture.active = _visibilityTexture;
-        _readback.ReadPixels(
-            new Rect(0, 0, _visibilityTexture.width, _visibilityTexture.height), 0, 0, false);
-        RenderTexture.active = null;
-
-        var pixels = _readback.GetRawTextureData<Color32>();
         for (int i = 0; i < pixels.Length; i++)
         {
             Color32 pixel = pixels[i];
@@ -333,6 +329,15 @@ public class AnimalVisibilitySampler : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void SetVisibleAnimal(Animal animal, Vector3 center)
+    {
+        VisibleAnimal = animal;
+        VisibleAnimalCenter = center;
+
+        if (animal != null)
+            _lastSeenTime = Time.time;
     }
 
     private bool CreateVisibilityCamera()
@@ -362,8 +367,6 @@ public class AnimalVisibilitySampler : MonoBehaviour
         };
         _visibilityTexture.Create();
 
-        _readback = new Texture2D(width, height, TextureFormat.RGBA32, false);
-
         _keyMaterial = new Material(keyShader)
         {
             name = "AnimalVisibilityKey",
@@ -385,8 +388,9 @@ public class AnimalVisibilitySampler : MonoBehaviour
         _visibilityCamera.targetTexture = _visibilityTexture;
         _visibilityCamera.clearFlags = CameraClearFlags.SolidColor;
         _visibilityCamera.backgroundColor = Color.black;
-        // Skip the UI layer so HUD elements never occlude an animal.
-        _visibilityCamera.cullingMask = ~(1 << UiLayer);
+        // Skip the UI layer, and the player's own layer so the player never blocks an animal.
+        int excludedLayers = (1 << UiLayer) | (ignorePlayer ? 1 << PlayerLayer : 0);
+        _visibilityCamera.cullingMask = ~excludedLayers;
         _visibilityCamera.allowHDR = false;
         _visibilityCamera.allowMSAA = false;
         _visibilityCamera.useOcclusionCulling = false;
@@ -405,9 +409,18 @@ public class AnimalVisibilitySampler : MonoBehaviour
             return false;
         }
 
-        _playerRenderers.Clear();
-        _playerRenderers.AddRange(transform.root.GetComponentsInChildren<Renderer>());
         return true;
+    }
+
+    private void StopLoopAndDispose()
+    {
+        DisposeResources();
+
+        if (_checkLoop != null)
+        {
+            StopCoroutine(_checkLoop);
+            _checkLoop = null;
+        }
     }
 
     private void DisposeResources()
@@ -423,12 +436,6 @@ public class AnimalVisibilitySampler : MonoBehaviour
             _visibilityTexture.Release();
             Destroy(_visibilityTexture);
             _visibilityTexture = null;
-        }
-
-        if (_readback != null)
-        {
-            Destroy(_readback);
-            _readback = null;
         }
 
         if (_keyMaterial != null)
@@ -459,5 +466,6 @@ public class AnimalVisibilitySampler : MonoBehaviour
     {
         public Animal Animal;
         public float SqrDistance;
+        public float ViewAngle;
     }
 }

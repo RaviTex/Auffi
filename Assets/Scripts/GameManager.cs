@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerController player;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject bookUI;
 
@@ -18,8 +17,11 @@ public class GameManager : MonoBehaviour
         bookUI.SetActive(false);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
-        print("Game Over");
-        yield return new WaitForSeconds(3);
+
+        // Realtime: scaled time is frozen above.
+        yield return new WaitForSecondsRealtime(3);
+
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 }

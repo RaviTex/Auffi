@@ -65,15 +65,18 @@ public class AnimalBook : MonoBehaviour
 
         foreach (BookEntry entry in entries)
         {
-            if (entry.definition == null || entry.definition.AnimalId != definition.AnimalId || entry.image == null)
+            if (entry.definition == null || entry.definition.AnimalId != definition.AnimalId)
                 continue;
 
             bool firstUnlock = _unlocked.Add(definition.AnimalId);
 
-            if (definition.Photo != null)
-                entry.image.sprite = definition.Photo;
+            if (entry.image != null)
+            {
+                if (definition.Photo != null)
+                    entry.image.sprite = definition.Photo;
 
-            entry.image.enabled = true;
+                entry.image.enabled = true;
+            }
 
             if (firstUnlock)
                 AnimalUnlocked?.Invoke(definition);
