@@ -4,6 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private enum MovementMode
+    {
+        Instant,
+        RampUp,
+        Accelerate
+    }
+
     [Header("General")]
     [SerializeField] private GameManager gameManager;
     [SerializeField] private AnimalBook book;
@@ -13,8 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference interactionAction;
 
     [Header("Movement")]
-    [SerializeField] private bool isUsingAcceleration;
-    [SerializeField] private bool hasToAccelInEveryDirection;
+    [Tooltip("Instant: move at max speed right away. RampUp: speed builds up while a direction is held. " +
+             "Accelerate: velocity accelerates and decelerates smoothly.")]
+    [SerializeField] private MovementMode movementMode = MovementMode.Accelerate;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
@@ -31,12 +39,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slopeLimit = 50f;
     [SerializeField] private LayerMask groundMask = ~0;
 
+    private const int MaxInteractablesDetected = 8;
+
     private Rigidbody _rb;
     private CapsuleCollider _capsule;
     private AnimalVisibilitySampler _visibility;
     private PlayerInventory _inventory;
 
-    private readonly List<Interactable> _interactables = new List<Interactable>();
+    private readonly Collider[] _interactableHits = new Collider[MaxInteractablesDetected];
+    private readonly List<Interactable> _nearbyInteractables = new List<Interactable>();
     private readonly RaycastHit[] _groundHits = new RaycastHit[4];
 
     private Interactable _focusedInteractable;
@@ -140,17 +151,17 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetDesiredHorizontalVelocity()
     {
         Vector3 velocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
+        Vector3 inputDirection = (_forward * _input.y + _right * _input.x).normalized;
 
-        if (!isUsingAcceleration)
-            return (_forward * _input.y + _right * _input.x).normalized * maxSpeed;
+        if (movementMode == MovementMode.Instant)
+            return inputDirection * maxSpeed;
 
-        if (!hasToAccelInEveryDirection)
+        if (movementMode == MovementMode.RampUp)
         {
             float speed = Mathf.Clamp(velocity.magnitude + acceleration * Time.fixedDeltaTime, 0f, maxSpeed);
-            return (_forward * _input.y + _right * _input.x).normalized * speed;
+            return inputDirection * speed;
         }
 
-        Vector3 inputDirection = (_forward * _input.y + _right * _input.x).normalized;
         velocity += inputDirection * (acceleration * Time.fixedDeltaTime);
         velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
@@ -218,57 +229,50 @@ public class PlayerController : MonoBehaviour
         _rb.MoveRotation(Quaternion.Slerp(_rb.rotation, targetRotation, rotationLerpSpeed * Time.fixedDeltaTime));
     }
 
-    public void RegisterInteractable(Interactable interactable)
-    {
-        if (!_interactables.Contains(interactable))
-            _interactables.Add(interactable);
-    }
-
-    public void UnregisterInteractable(Interactable interactable)
-    {
-        _interactables.Remove(interactable);
-
-        if (_focusedInteractable == interactable)
-            SetFocusedInteractable(null);
-    }
-
-    public void SetItem(ItemType item)
-    {
-        _inventory.SetItem(item);
-        _visibility.Paused = item != ItemType.None;
-    }
-
-    public void SetItemPreview(ItemType item)
-    {
-        _inventory.SetItemPreview(item);
-    }
-
     private void UpdateFocusedInteractable()
     {
+        int count = OverlapPlayerCapsule(_interactableHits);
+        _nearbyInteractables.Clear();
+
+        for (int i = 0; i < count; i++)
+        {
+            Collider hit = _interactableHits[i];
+            if (hit == null || !hit.isTrigger)
+                continue;
+
+            Interactable interactable = hit.GetComponentInParent<Interactable>();
+            if (interactable == null || !interactable.isActiveAndEnabled ||
+                _nearbyInteractables.Contains(interactable))
+                continue;
+
+            _nearbyInteractables.Add(interactable);
+        }
+
         Interactable nearest = null;
         float nearestDistance = float.MaxValue;
 
-        for (int i = _interactables.Count - 1; i >= 0; i--)
+        foreach (Interactable interactable in _nearbyInteractables)
         {
-            Interactable interactable = _interactables[i];
-            if (interactable == null)
-            {
-                _interactables.RemoveAt(i);
-                continue;
-            }
-
-            if (!interactable.isActiveAndEnabled)
-                continue;
-
             float distance = (interactable.FocusPosition - transform.position).sqrMagnitude;
-            if (distance < nearestDistance)
-            {
-                nearest = interactable;
-                nearestDistance = distance;
-            }
+            if (distance >= nearestDistance)
+                continue;
+
+            nearest = interactable;
+            nearestDistance = distance;
         }
 
         SetFocusedInteractable(nearest);
+    }
+
+    private int OverlapPlayerCapsule(Collider[] results)
+    {
+        Vector3 center = transform.position + _capsule.center;
+        float halfHeight = Mathf.Max(_capsule.height * 0.5f - _capsule.radius, 0f);
+        Vector3 top = center + Vector3.up * halfHeight;
+        Vector3 bottom = center - Vector3.up * halfHeight;
+
+        return Physics.OverlapCapsuleNonAlloc(top, bottom, _capsule.radius, results, ~0,
+            QueryTriggerInteraction.Collide);
     }
 
     private void SetFocusedInteractable(Interactable interactable)
@@ -283,6 +287,17 @@ public class PlayerController : MonoBehaviour
 
         if (_focusedInteractable != null)
             _focusedInteractable.OnFocus(this);
+    }
+
+    public void SetItem(ItemType item)
+    {
+        _inventory.SetItem(item);
+        _visibility.Paused = item != ItemType.None;
+    }
+
+    public void SetItemPreview(ItemType item)
+    {
+        _inventory.SetItemPreview(item);
     }
 
     private void TakePhoto(Animal animal)
