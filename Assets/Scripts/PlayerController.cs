@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider _capsule;
     private AnimalVisibilitySampler _visibility;
     private PlayerInventory _inventory;
+    private InteractableOutline _outline;
 
     private readonly Collider[] _interactableHits = new Collider[MaxInteractablesDetected];
     private readonly List<Interactable> _nearbyInteractables = new List<Interactable>();
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         _capsule = GetComponent<CapsuleCollider>();
         _visibility = GetComponent<AnimalVisibilitySampler>();
         _inventory = GetComponent<PlayerInventory>();
+        _outline = GetComponent<InteractableOutline>();
 
         ConfigurePhysics();
 
@@ -287,6 +289,9 @@ public class PlayerController : MonoBehaviour
 
         if (_focusedInteractable != null)
             _focusedInteractable.OnFocus(this);
+
+        if (_outline != null)
+            _outline.SetTarget(interactable);
     }
 
     public void SetItem(ItemType item)
