@@ -5,7 +5,9 @@
 			<ChildrenList>
 				<SoundBank Name="Auffi_MainSoundbank" ID="{F8CE760F-79D5-4B65-85AE-800D278E54CB}">
 					<ObjectInclusionList>
+						<ObjectRef Name="Atmosphere_Audio" ID="{76F796A8-7D37-43B2-A602-A7649DB0D6C0}" WorkUnitID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Player_Audio" ID="{1918B729-DC93-478C-9246-E679FEAB8164}" WorkUnitID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="SFX_Audio" ID="{64FAF3AB-4F60-4D2F-8A40-B5D9CCCC5865}" WorkUnitID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

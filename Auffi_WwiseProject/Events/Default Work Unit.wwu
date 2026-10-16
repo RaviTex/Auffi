@@ -5,7 +5,7 @@
 			<ChildrenList>
 				<Folder Name="Player_Audio" ID="{1918B729-DC93-478C-9246-E679FEAB8164}" ShortID="300407050">
 					<PropertyList>
-						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="Color" Type="int16" Value="3"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 					</PropertyList>
 					<ChildrenList>
@@ -51,6 +51,44 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Grass Loop Short by Yuval Id-189640 S00" ID="{8CBDDBA6-49CA-43BC-B2DA-BB39EA4CCA35}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Atmosphere_Audio" ID="{76F796A8-7D37-43B2-A602-A7649DB0D6C0}" ShortID="700932037">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="Play_MeadowsAtmos" ID="{61045C9F-75D3-43B7-8D0D-3C1616CD9EC0}">
+							<ChildrenList>
+								<Action Name="" ID="{A7B03908-4B65-4F3D-A362-0A4BEE0D3240}" ShortID="1027995947">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Meadow_Ambience" ID="{8E3D2258-A44E-4945-96B5-53F759C0C11D}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="SFX_Audio" ID="{64FAF3AB-4F60-4D2F-8A40-B5D9CCCC5865}" ShortID="1067143780">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="2"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="Play_CowMoo" ID="{5E2F8302-DE45-432F-B455-74FCE749CDE8}">
+							<ChildrenList>
+								<Action Name="" ID="{B5735E60-0630-4421-8EBD-B93680E151EC}" ShortID="535308928">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Moos" ID="{B218AA37-6717-4E5B-844A-F474F6C1191D}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
