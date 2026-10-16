@@ -350,6 +350,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 74.926
       objectReference: {fileID: 0}
+    - target: {fileID: 1837517870636305763, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3028526487445659698, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28.5
@@ -458,6 +462,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 86.956
       objectReference: {fileID: 0}
+    - target: {fileID: 5880748644668301304, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_Name
+      value: Apples
+      objectReference: {fileID: 0}
     - target: {fileID: 5922326404326974973, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       propertyPath: destination
       value: 
@@ -482,6 +490,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.03582
       objectReference: {fileID: 0}
+    - target: {fileID: 8556775933750605710, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556775933750605710, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8820910892228132913, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       propertyPath: m_Name
       value: Area1_0.12
@@ -493,6 +509,7 @@ PrefabInstance:
     - {fileID: 5769067101216460374, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
     - {fileID: 9208011907205948599, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
     - {fileID: 6706544004434588561, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+    - {fileID: 1382764464405141319, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4511507868932912239, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       insertIndex: -1
