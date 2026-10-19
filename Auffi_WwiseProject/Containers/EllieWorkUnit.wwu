@@ -3,11 +3,7 @@
 	<Containers>
 		<WorkUnit Name="EllieWorkUnit" ID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}" PersistMode="Standalone">
 			<ChildrenList>
-				<Sound Name="Wind_BackgroundNoise" ID="{988036FD-B722-4F60-9529-9CCCFC4168B4}" ShortID="522059196">
-					<PropertyList>
-						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-						<Property Name="LoopCount" Type="int32" Value="7"/>
-					</PropertyList>
+				<BlendContainer Name="Wind" ID="{A76CCC3A-0901-44FA-9B84-E65E35799F37}" ShortID="559725065">
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
@@ -17,223 +13,153 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<SourcePlugin Name="Soundseed Air Wind" ID="{574F3EA7-8500-40DB-A147-BFB0516CFD4D}" ShortID="220860882" PluginName="SoundSeed Air Wind" CompanyID="0" PluginID="119">
+						<Sound Name="WindLight" ID="{967C364F-1E50-488F-A366-218A73F51E58}" ShortID="398663067">
 							<PropertyList>
-								<Property Name="AverageVelocity" Type="Real32">
-									<ValueList>
-										<Value>-1460</Value>
-									</ValueList>
-								</Property>
-								<Property Name="AverageVelocityAutomate" Type="bool">
-									<ValueList>
-										<Value>True</Value>
-									</ValueList>
-								</Property>
-								<Property Name="DirectionAutomate" Type="bool">
-									<ValueList>
-										<Value>True</Value>
-									</ValueList>
-								</Property>
-								<Property Name="Duration" Type="Real64">
-									<ValueList>
-										<Value>12.9</Value>
-									</ValueList>
-								</Property>
-								<Property Name="FrequencyScale" Type="Real32">
-									<ValueList>
-										<Value>-0.37</Value>
-									</ValueList>
-								</Property>
-								<Property Name="FrequencyScaleAutomate" Type="bool">
-									<ValueList>
-										<Value>True</Value>
-									</ValueList>
-								</Property>
-								<Property Name="FrequencyScaleRandom" Type="Real32">
-									<ValueList>
-										<Value>0.81</Value>
-									</ValueList>
-								</Property>
-								<Property Name="GainOffset" Type="Real32">
-									<ValueList>
-										<Value>5.9</Value>
-									</ValueList>
-								</Property>
-								<Property Name="Gustiness" Type="Real32">
-									<ValueList>
-										<Value>0.59</Value>
-									</ValueList>
-								</Property>
-								<Property Name="GustinessAutomate" Type="bool">
-									<ValueList>
-										<Value>True</Value>
-									</ValueList>
-								</Property>
-								<Property Name="QFactorScale" Type="Real32">
-									<ValueList>
-										<Value>1.17</Value>
-									</ValueList>
-								</Property>
-								<Property Name="Variability" Type="Real32">
-									<ValueList>
-										<Value>0</Value>
-									</ValueList>
-								</Property>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
 							</PropertyList>
-							<Language>SFX</Language>
-							<PluginData><CurveList Version="1">
-		<CurveInfo Name="AverageVelocity">
-			<Curve Name="" ID="{1E1D6935-C9FE-4DDB-95EF-2671194A9BC9}">
-				<PropertyList>
-					<Property Name="Flags" Type="int32" Value="1"/>
-				</PropertyList>
-				<PointList>
-					<Point>
-						<XPos>0</XPos>
-						<YPos>0</YPos>
-						<Flags>5</Flags>
-					</Point>
-					<Point>
-						<XPos>1.65754</XPos>
-						<YPos>497.04142</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>4.05977</XPos>
-						<YPos>-298.22485</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>10.42569</XPos>
-						<YPos>440.23669</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>12.9</XPos>
-						<YPos>0</YPos>
-						<Flags>37</Flags>
-					</Point>
-				</PointList>
-			</Curve>
-		</CurveInfo>
-		<CurveInfo Name="Direction">
-			<Curve Name="" ID="{85DADA2F-0866-4DE6-8E39-8C3EBC5D0E69}">
-				<PropertyList>
-					<Property Name="Flags" Type="int32" Value="1"/>
-				</PropertyList>
-				<PointList>
-					<Point>
-						<XPos>0</XPos>
-						<YPos>-38.34319</YPos>
-						<Flags>5</Flags>
-					</Point>
-					<Point>
-						<XPos>8.35406</XPos>
-						<YPos>37.27811</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>12.9</XPos>
-						<YPos>-144.85207</YPos>
-						<Flags>37</Flags>
-					</Point>
-				</PointList>
-			</Curve>
-		</CurveInfo>
-		<CurveInfo Name="FrequencyScale">
-			<Curve Name="" ID="{2F660781-3B15-446F-8DB9-AE1A66B73484}">
-				<PropertyList>
-					<Property Name="Flags" Type="int32" Value="1"/>
-				</PropertyList>
-				<PointList>
-					<Point>
-						<XPos>0</XPos>
-						<YPos>-0.82841</YPos>
-						<Flags>5</Flags>
-					</Point>
-					<Point>
-						<XPos>3.69239</XPos>
-						<YPos>-1.44379</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>5.67881</XPos>
-						<YPos>0.87574</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>10.86685</XPos>
-						<YPos>-1.25444</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>12.9</XPos>
-						<YPos>-0.28402</YPos>
-						<Flags>37</Flags>
-					</Point>
-				</PointList>
-			</Curve>
-		</CurveInfo>
-		<CurveInfo Name="GainOffset">
-			<Curve Name="" ID="{B7D884BA-4688-45B5-B571-5C44FDF71155}">
-				<PropertyList>
-					<Property Name="Flags" Type="int32" Value="1"/>
-				</PropertyList>
-				<PointList>
-					<Point>
-						<XPos>0</XPos>
-						<YPos>0</YPos>
-						<Flags>5</Flags>
-					</Point>
-					<Point>
-						<XPos>12.9</XPos>
-						<YPos>0</YPos>
-						<Flags>37</Flags>
-					</Point>
-				</PointList>
-			</Curve>
-		</CurveInfo>
-		<CurveInfo Name="Gustiness">
-			<Curve Name="" ID="{9FAEB9E5-19CC-49B8-AE41-CBA60B727395}">
-				<PropertyList>
-					<Property Name="Flags" Type="int32" Value="1"/>
-				</PropertyList>
-				<PointList>
-					<Point>
-						<XPos>0</XPos>
-						<YPos>0</YPos>
-						<Flags>5</Flags>
-					</Point>
-					<Point>
-						<XPos>3.50543</XPos>
-						<YPos>0.19231</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>9.95543</XPos>
-						<YPos>-0.09172</YPos>
-						<Flags>0</Flags>
-					</Point>
-					<Point>
-						<XPos>12.9</XPos>
-						<YPos>0</YPos>
-						<Flags>37</Flags>
-					</Point>
-				</PointList>
-			</Curve>
-		</CurveInfo>
-	</CurveList></PluginData>
-							<PluginInnerObjectList>
-								<List Name="Deflectors">
-									<PluginInnerObject Name="" ID="{E13D1EAB-69EA-4835-9E4F-E520B83324CE}" PluginName="Deflector" CompanyID="0" PluginID="121"/>
-								</List>
-							</PluginInnerObjectList>
-						</SourcePlugin>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SourcePlugin Name="Synth One" ID="{25B3142B-985C-42BE-B416-8C952F07BBE2}" ShortID="340333484" PluginName="Wwise Synth One" CompanyID="0" PluginID="148">
+									<PropertyList>
+										<Property Name="BaseFrequency" Type="Real32" Value="67"/>
+										<Property Name="NoiseLevel" Type="Real32" Value="-8"/>
+										<Property Name="Osc1Level" Type="Real32" Value="-96"/>
+										<Property Name="Osc1Pwm" Type="Real32" Value="0"/>
+										<Property Name="Osc2Level" Type="Real32" Value="-96"/>
+										<Property Name="OutputLevel" Type="Real32" Value="-3"/>
+									</PropertyList>
+									<Language>SFX</Language>
+								</SourcePlugin>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<RTPC Name="" ID="{AB4C083B-D4B2-4B35-A016-93349CFEEA23}" ShortID="844881191">
+										<PropertyList>
+											<Property Name="PropertyName" Type="string" Value="Lowpass"/>
+										</PropertyList>
+										<ReferenceList>
+											<Reference Name="ControlInput">
+												<Custom>
+													<ModulatorLfo Name="Modulator LFO (Custom)" ID="{B0BA2C34-4735-42C0-8F98-64F883804CB5}" ShortID="240425623">
+														<PropertyList>
+															<Property Name="LfoFrequency" Type="Real64" Value="0.3"/>
+															<Property Name="LfoSmoothing" Type="Real64" Value="66"/>
+															<Property Name="LfoWaveform" Type="int32" Value="5"/>
+														</PropertyList>
+													</ModulatorLfo>
+												</Custom>
+											</Reference>
+											<Reference Name="Curve">
+												<Custom>
+													<Curve Name="" ID="{E8230A45-1E14-4148-BF21-517BF21209EC}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>78</YPos>
+																<Flags>21</Flags>
+															</Point>
+															<Point>
+																<XPos>1</XPos>
+																<YPos>92</YPos>
+																<Flags>53</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</RTPC>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="Synth One" ID="{25B3142B-985C-42BE-B416-8C952F07BBE2}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="WindLight_01" ID="{63EBF002-FE67-479A-AE04-270C35F43F75}" ShortID="787345604">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SourcePlugin Name="Synth One" ID="{AAC7B7C1-9090-4B8F-ACED-3E332959ED67}" ShortID="280492216" PluginName="Wwise Synth One" CompanyID="0" PluginID="148">
+									<PropertyList>
+										<Property Name="BaseFrequency" Type="Real32" Value="28"/>
+										<Property Name="NoiseLevel" Type="Real32" Value="-37"/>
+										<Property Name="NoiseShape" Type="int32" Value="1"/>
+										<Property Name="Osc1Level" Type="Real32" Value="-96"/>
+										<Property Name="Osc1Pwm" Type="Real32" Value="0"/>
+										<Property Name="Osc2Level" Type="Real32" Value="-96"/>
+										<Property Name="OutputLevel" Type="Real32" Value="-9"/>
+									</PropertyList>
+									<Language>SFX</Language>
+								</SourcePlugin>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="RTPC">
+									<RTPC Name="" ID="{F74CCC6A-F238-4F53-A3BA-A44D3B8D9B23}" ShortID="405406903">
+										<PropertyList>
+											<Property Name="PropertyName" Type="string" Value="Lowpass"/>
+										</PropertyList>
+										<ReferenceList>
+											<Reference Name="ControlInput">
+												<Custom>
+													<ModulatorLfo Name="Modulator LFO (Custom)" ID="{3CFC7741-FBD5-4DAB-A0FE-9B8A8F5952DF}" ShortID="197031948">
+														<PropertyList>
+															<Property Name="LfoFrequency" Type="Real64" Value="0.42"/>
+															<Property Name="LfoSmoothing" Type="Real64" Value="78"/>
+															<Property Name="LfoWaveform" Type="int32" Value="5"/>
+														</PropertyList>
+													</ModulatorLfo>
+												</Custom>
+											</Reference>
+											<Reference Name="Curve">
+												<Custom>
+													<Curve Name="" ID="{59B42958-F50D-458D-A1E8-EBEF9C927A30}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="65537"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>63</YPos>
+																<Flags>21</Flags>
+															</Point>
+															<Point>
+																<XPos>1</XPos>
+																<YPos>63</YPos>
+																<Flags>53</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</RTPC>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="Synth One" ID="{AAC7B7C1-9090-4B8F-ACED-3E332959ED67}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="Soundseed Air Wind" ID="{574F3EA7-8500-40DB-A147-BFB0516CFD4D}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
+				</BlendContainer>
 			</ChildrenList>
 		</WorkUnit>
 	</Containers>
