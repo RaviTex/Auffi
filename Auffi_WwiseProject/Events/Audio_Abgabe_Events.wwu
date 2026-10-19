@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" SchemaVersion="133">
+	<Events>
+		<WorkUnit Name="Audio_Abgabe_Events" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Pickup" ID="{ADDD1C9F-57FA-48EC-A72F-F75E83614142}">
+					<ChildrenList>
+						<Action Name="" ID="{431C7991-8F53-486D-9B47-6CBD6AD822CD}" ShortID="704641282">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PickUp_Item" ID="{6231871A-1974-4B9C-AB54-4A0B6D835CF1}" WorkUnitID="{64937AD9-8438-4B57-AC94-2E1ED9E22A2B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_GateOpen" ID="{F64A33ED-372B-4B9A-B59D-77221F271654}">
+					<ChildrenList>
+						<Action Name="" ID="{88BD524E-4869-4B6D-AF9E-7F3463863E4E}" ShortID="408294333">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Gate" ID="{4911A1E3-54DC-4D0E-A65F-3C96FDAA4501}" WorkUnitID="{04248790-BDFA-45CF-B6F1-FC96D5CDE581}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_WindBackground" ID="{9DF8E451-4CF6-4BE6-B627-EFEF4CAE4746}">
+					<ChildrenList>
+						<Action Name="" ID="{8A31FA4A-D228-4BFD-9076-5BC8BD9E1F31}" ShortID="800065951">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wind_BackgroundNoise" ID="{988036FD-B722-4F60-9529-9CCCFC4168B4}" WorkUnitID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_PositiveFeedback" ID="{4338B9CD-183E-4592-839F-1B5A40D60EB0}">
+					<ChildrenList>
+						<Action Name="" ID="{42983870-7EEC-4ECC-B7B8-A7908AA0CE84}" ShortID="416727006">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PositiveFeedback" ID="{AD45CFF4-94C3-4A03-B62A-4F57796EB34A}" WorkUnitID="{77D0055F-4464-4348-A962-E35B552D393F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

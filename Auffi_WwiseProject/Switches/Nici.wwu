@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{FCD82160-B1F9-4FB0-96D5-BE388E07ADEB}" SchemaVersion="133">
+	<Switches>
+		<WorkUnit Name="Nici" ID="{FCD82160-B1F9-4FB0-96D5-BE388E07ADEB}" PersistMode="Standalone">
+			<ChildrenList>
+				<SwitchGroup Name="Item_Switch" ID="{96198570-DC8D-4C8E-8DD4-7C4691FC4E0C}">
+					<PropertyList>
+						<Property Name="UseGameParameter" Type="bool" Value="True"/>
+					</PropertyList>
+				</SwitchGroup>
+			</ChildrenList>
+		</WorkUnit>
+	</Switches>
+</WwiseDocument>
