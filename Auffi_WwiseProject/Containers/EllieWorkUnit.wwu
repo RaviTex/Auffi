@@ -19,22 +19,69 @@
 					<ChildrenList>
 						<SourcePlugin Name="Soundseed Air Wind" ID="{574F3EA7-8500-40DB-A147-BFB0516CFD4D}" ShortID="220860882" PluginName="SoundSeed Air Wind" CompanyID="0" PluginID="119">
 							<PropertyList>
-								<Property Name="AverageVelocity" Type="Real32" Value="-1460"/>
-								<Property Name="AverageVelocityAutomate" Type="bool" Value="True"/>
-								<Property Name="DirectionAutomate" Type="bool" Value="True"/>
-								<Property Name="Duration" Type="Real64" Value="12.9"/>
-								<Property Name="FrequencyScale" Type="Real32" Value="-0.37"/>
-								<Property Name="FrequencyScaleAutomate" Type="bool" Value="True"/>
-								<Property Name="FrequencyScaleRandom" Type="Real32" Value="0.81"/>
-								<Property Name="GainOffset" Type="Real32" Value="5.9"/>
-								<Property Name="Gustiness" Type="Real32" Value="0.59"/>
-								<Property Name="GustinessAutomate" Type="bool" Value="True"/>
-								<Property Name="QFactorScale" Type="Real32" Value="1.17"/>
-								<Property Name="Variability" Type="Real32" Value="0"/>
+								<Property Name="AverageVelocity" Type="Real32">
+									<ValueList>
+										<Value>-1460</Value>
+									</ValueList>
+								</Property>
+								<Property Name="AverageVelocityAutomate" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="DirectionAutomate" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Duration" Type="Real64">
+									<ValueList>
+										<Value>12.9</Value>
+									</ValueList>
+								</Property>
+								<Property Name="FrequencyScale" Type="Real32">
+									<ValueList>
+										<Value>-0.37</Value>
+									</ValueList>
+								</Property>
+								<Property Name="FrequencyScaleAutomate" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="FrequencyScaleRandom" Type="Real32">
+									<ValueList>
+										<Value>0.81</Value>
+									</ValueList>
+								</Property>
+								<Property Name="GainOffset" Type="Real32">
+									<ValueList>
+										<Value>5.9</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Gustiness" Type="Real32">
+									<ValueList>
+										<Value>0.59</Value>
+									</ValueList>
+								</Property>
+								<Property Name="GustinessAutomate" Type="bool">
+									<ValueList>
+										<Value>True</Value>
+									</ValueList>
+								</Property>
+								<Property Name="QFactorScale" Type="Real32">
+									<ValueList>
+										<Value>1.17</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Variability" Type="Real32">
+									<ValueList>
+										<Value>0</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<Language>SFX</Language>
-							<PluginData>
-	<CurveList Version="1">
+							<PluginData><CurveList Version="1">
 		<CurveInfo Name="AverageVelocity">
 			<Curve Name="" ID="{1E1D6935-C9FE-4DDB-95EF-2671194A9BC9}">
 				<PropertyList>
@@ -175,8 +222,7 @@
 				</PointList>
 			</Curve>
 		</CurveInfo>
-	</CurveList>
-</PluginData>
+	</CurveList></PluginData>
 							<PluginInnerObjectList>
 								<List Name="Deflectors">
 									<PluginInnerObject Name="" ID="{E13D1EAB-69EA-4835-9E4F-E520B83324CE}" PluginName="Deflector" CompanyID="0" PluginID="121"/>

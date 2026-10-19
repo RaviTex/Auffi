@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slopeLimit = 50f;
     [SerializeField] private LayerMask groundMask = ~0;
 
+    [Header("Sounds")] 
+    [SerializeField] private AK.Wwise.Event pickUpSound;
+
     private const int MaxInteractablesDetected = 8;
 
     private Rigidbody _rb;
@@ -103,7 +106,10 @@ public class PlayerController : MonoBehaviour
         if (canTakePhoto)
             TakePhoto(animal);
         else if (_focusedInteractable != null)
+        {
             _focusedInteractable.Interact(this);
+            pickUpSound?.Post(_focusedInteractable.gameObject);
+        }
     }
 
     private void FixedUpdate()

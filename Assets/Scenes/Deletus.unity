@@ -473,6 +473,10 @@ PrefabInstance:
       propertyPath: openDirection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6452140314442227619, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: gateOpened.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b5e487e5a6b14229b0219fa58ed6f65, type: 2}
     - target: {fileID: 6765041012649222605, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
@@ -2292,7 +2296,7 @@ MonoBehaviour:
   data:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 7419a79eee2e41dcf9ecd3e41a16939a, type: 2}
   decodeBank: 0
   overrideLoadSetting: 0
   loadAsynchronous: 0
@@ -2590,6 +2594,10 @@ PrefabInstance:
       propertyPath: canTakePhotoFeedbackTxt
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5406369608141442038, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
+      propertyPath: pickUpSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e95d8aedda64e4718b16889e0958d9f, type: 2}
     - target: {fileID: 6875525566347678290, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
       propertyPath: m_Name
       value: Player

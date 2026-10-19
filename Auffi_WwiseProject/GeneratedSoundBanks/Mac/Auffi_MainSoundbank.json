@@ -1,0 +1,266 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "2162464331",
+    "Type": "User",
+    "GUID": "{F8CE760F-79D5-4B65-85AE-800D278E54CB}",
+    "Language": "SFX",
+    "Hash": "{7941AE89-9E1A-390D-13A4-AB98F333493B}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Auffi_MainSoundbank",
+    "ShortName": "Auffi_MainSoundbank",
+    "Path": "Auffi_MainSoundbank.bnk",
+    "Media": [
+     {
+      "Id": "11186554",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Animals, Farm, Cows, Mooing On A Field SND35954 S04.wav",
+      "CachePath": "92/{92BFDD8C-74B6-3A79-97CA-339380B70987}.wem"
+     },
+     {
+      "Id": "179488899",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Animals, Farm, Cows, Mooing On A Field SND35954 S03.wav",
+      "CachePath": "A9/{A92FF4D9-DFAF-EC5A-2991-86CFC538C835}.wem"
+     },
+     {
+      "Id": "181833192",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Ambience_Meadows.wav",
+      "CachePath": "88/{88C123F3-AF7C-2EB6-4CCC-2D7E5ED87287}.wem"
+     },
+     {
+      "Id": "376936524",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00.wav",
+      "CachePath": "ED/{EDC6B8F1-1D1D-BF29-3616-5A6BF8B60411}.wem"
+     },
+     {
+      "Id": "542290487",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Printing2.wav",
+      "CachePath": "A7/{A7C9033F-F066-472E-1B62-3C6ADC490BD0}.wem"
+     },
+     {
+      "Id": "579751899",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Click.wav",
+      "CachePath": "7A/{7AFF1604-CC5F-53A2-55BC-80BF23A1F9C6}.wem"
+     },
+     {
+      "Id": "659180512",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Games, Video, Notifications 19 SND83187 S00 - Pitch 131_0.wav",
+      "CachePath": "AF/{AFB60EE0-B37B-728A-7117-328CB6CFE4EB}.wem"
+     },
+     {
+      "Id": "726661494",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Shutter.wav",
+      "CachePath": "F6/{F6340204-D2F3-6BAF-4BBB-0B3AEFD2967D}.wem"
+     },
+     {
+      "Id": "768976254",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Animals, Farm, Cows, Mooing On A Field SND35954 S04 1.wav",
+      "CachePath": "92/{92BFDD8C-74B6-3A79-97CA-339380B70987}.wem"
+     },
+     {
+      "Id": "808035373",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Sparkle.wav",
+      "CachePath": "57/{577E6DE5-E575-79CC-356A-EBADCDAD7BA6}.wem"
+     },
+     {
+      "Id": "812924666",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Printing3.wav",
+      "CachePath": "98/{989A7BCD-1560-07F8-363C-FD5B1B80CD30}.wem"
+     },
+     {
+      "Id": "904471419",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Printing1.wav",
+      "CachePath": "66/{6686EE7B-0164-0571-F379-8AE09450B52B}.wem"
+     },
+     {
+      "Id": "916751228",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Animals, Farm, Cows, Mooing On A Field SND35954 S02.wav",
+      "CachePath": "8E/{8E0D269E-A015-9227-F89D-327F0B8CB4C6}.wem"
+     },
+     {
+      "Id": "976648513",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Grass Loop Short by Yuval Id-189640 S00.wav",
+      "CachePath": "E6/{E6B7A6F6-27E3-0552-CB69-14F5952CB96A}.wem"
+     }
+    ],
+    "Plugins": {
+     "Custom": [
+      {
+       "Id": "910203671",
+       "Name": "Silence",
+       "ObjectPath": "\\Containers\\Default Work Unit\\TakePhoto\\Shutter\\Break\\Silence",
+       "GUID": "{20005BFE-A99F-456D-ACB2-006B0DA6ACF8}",
+       "Color": "13",
+       "LibName": "Wwise Silence",
+       "LibId": "6619138"
+      }
+     ]
+    },
+    "Events": [
+     {
+      "Id": "4863038",
+      "Name": "Play_CameraShutter",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player_Audio\\Play_CameraShutter",
+      "GUID": "{100B7577-B595-49A6-AC21-58C0D239E9B4}",
+      "Color": "3",
+      "DurationType": "OneShot",
+      "DurationMin": "3.7652085",
+      "DurationMax": "3.7652085",
+      "MediaRefs": [
+       {
+        "Id": "376936524"
+       },
+       {
+        "Id": "542290487"
+       },
+       {
+        "Id": "579751899"
+       },
+       {
+        "Id": "726661494"
+       },
+       {
+        "Id": "808035373"
+       },
+       {
+        "Id": "812924666"
+       },
+       {
+        "Id": "904471419"
+       }
+      ],
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "910203671"
+        }
+       ]
+      }
+     },
+     {
+      "Id": "1349429770",
+      "Name": "Play_CowMoo",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX_Audio\\Play_CowMoo",
+      "GUID": "{5E2F8302-DE45-432F-B455-74FCE749CDE8}",
+      "Color": "2",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1908594",
+      "DurationMax": "1.9828088",
+      "MediaRefs": [
+       {
+        "Id": "11186554"
+       },
+       {
+        "Id": "179488899"
+       },
+       {
+        "Id": "768976254"
+       },
+       {
+        "Id": "916751228"
+       }
+      ]
+     },
+     {
+      "Id": "3666405554",
+      "Name": "Play_MeadowsAtmos",
+      "ObjectPath": "\\Events\\Default Work Unit\\Atmosphere_Audio\\Play_MeadowsAtmos",
+      "GUID": "{61045C9F-75D3-43B7-8D0D-3C1616CD9EC0}",
+      "Color": "4",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "181833192"
+       }
+      ]
+     },
+     {
+      "Id": "672536345",
+      "Name": "Play_PhotoIndicator",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player_Audio\\Play_PhotoIndicator",
+      "GUID": "{37D3EE3F-785D-4ECA-AA02-4E96A925DE2D}",
+      "Color": "3",
+      "DurationType": "OneShot",
+      "DurationMin": "0.759375",
+      "DurationMax": "0.759375",
+      "MediaRefs": [
+       {
+        "Id": "659180512"
+       }
+      ]
+     },
+     {
+      "Id": "2312064978",
+      "Name": "Play_WalkingLoop_Meadows",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player_Audio\\Play_WalkingLoop_Meadows",
+      "GUID": "{98B61C48-52FD-4DDA-AE69-3BCAB46ACD69}",
+      "Color": "3",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "976648513"
+       }
+      ]
+     },
+     {
+      "Id": "2235773436",
+      "Name": "Stop_WalkingLoop_Meadows",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player_Audio\\Stop_WalkingLoop_Meadows",
+      "GUID": "{4063A249-4BA5-4F02-9464-07907EF6660A}",
+      "Color": "3",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{AFD35D99-6DC0-B16A-B028-A98EC1320DC8}"
+ }
+}
