@@ -11,6 +11,34 @@
     "StaticLib": "AkSilenceSource"
    },
    {
+    "LibName": "Wwise Tone Generator",
+    "LibId": "6684674",
+    "Type": "Source",
+    "DLL": "AkToneGen",
+    "StaticLib": "AkToneSource"
+   },
+   {
+    "LibName": "Wwise Compressor",
+    "LibId": "7077891",
+    "Type": "Effect",
+    "DLL": "AkCompressor",
+    "StaticLib": "AkCompressorFX"
+   },
+   {
+    "LibName": "Wwise Flanger",
+    "LibId": "8192003",
+    "Type": "Effect",
+    "DLL": "AkFlanger",
+    "StaticLib": "AkFlangerFX"
+   },
+   {
+    "LibName": "Wwise Guitar Distortion",
+    "LibId": "8257539",
+    "Type": "Effect",
+    "DLL": "AkGuitarDistortion",
+    "StaticLib": "AkGuitarDistortionFX"
+   },
+   {
     "LibName": "Wwise Synth One",
     "LibId": "9699330",
     "Type": "Source",
@@ -28,6 +56,6 @@
     "Type": "AudioDevice"
    }
   ],
-  "FileHash": "{34027D59-8776-C608-2CCC-427C9501487A}"
+  "FileHash": "{CBB650A4-6478-ACB9-EFC9-2A95CB916856}"
  }
 }
