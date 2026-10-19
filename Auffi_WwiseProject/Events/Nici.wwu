@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" SchemaVersion="133">
+	<Events>
+		<WorkUnit Name="Nici" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Pickup" ID="{ADDD1C9F-57FA-48EC-A72F-F75E83614142}">
+					<ChildrenList>
+						<Action Name="" ID="{431C7991-8F53-486D-9B47-6CBD6AD822CD}" ShortID="704641282">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PickUp_Item" ID="{6231871A-1974-4B9C-AB54-4A0B6D835CF1}" WorkUnitID="{64937AD9-8438-4B57-AC94-2E1ED9E22A2B}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
