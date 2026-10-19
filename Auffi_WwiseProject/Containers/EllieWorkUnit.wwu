@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}" SchemaVersion="133">
+	<Containers>
+		<WorkUnit Name="EllieWorkUnit" ID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Wind_BackgroundNoise" ID="{988036FD-B722-4F60-9529-9CCCFC4168B4}" ShortID="522059196">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="LoopCount" Type="int32" Value="7"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<SourcePlugin Name="Soundseed Air Wind" ID="{574F3EA7-8500-40DB-A147-BFB0516CFD4D}" ShortID="220860882" PluginName="SoundSeed Air Wind" CompanyID="0" PluginID="119">
+							<PropertyList>
+								<Property Name="AverageVelocity" Type="Real32" Value="-1460"/>
+								<Property Name="AverageVelocityAutomate" Type="bool" Value="True"/>
+								<Property Name="DirectionAutomate" Type="bool" Value="True"/>
+								<Property Name="Duration" Type="Real64" Value="12.9"/>
+								<Property Name="FrequencyScale" Type="Real32" Value="-0.37"/>
+								<Property Name="FrequencyScaleAutomate" Type="bool" Value="True"/>
+								<Property Name="FrequencyScaleRandom" Type="Real32" Value="0.81"/>
+								<Property Name="GainOffset" Type="Real32" Value="5.9"/>
+								<Property Name="Gustiness" Type="Real32" Value="0.59"/>
+								<Property Name="GustinessAutomate" Type="bool" Value="True"/>
+								<Property Name="QFactorScale" Type="Real32" Value="1.17"/>
+								<Property Name="Variability" Type="Real32" Value="0"/>
+							</PropertyList>
+							<Language>SFX</Language>
+							<PluginData>
+	<CurveList Version="1">
+		<CurveInfo Name="AverageVelocity">
+			<Curve Name="" ID="{1E1D6935-C9FE-4DDB-95EF-2671194A9BC9}">
+				<PropertyList>
+					<Property Name="Flags" Type="int32" Value="1"/>
+				</PropertyList>
+				<PointList>
+					<Point>
+						<XPos>0</XPos>
+						<YPos>0</YPos>
+						<Flags>5</Flags>
+					</Point>
+					<Point>
+						<XPos>1.65754</XPos>
+						<YPos>497.04142</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>4.05977</XPos>
+						<YPos>-298.22485</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>10.42569</XPos>
+						<YPos>440.23669</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>12.9</XPos>
+						<YPos>0</YPos>
+						<Flags>37</Flags>
+					</Point>
+				</PointList>
+			</Curve>
+		</CurveInfo>
+		<CurveInfo Name="Direction">
+			<Curve Name="" ID="{85DADA2F-0866-4DE6-8E39-8C3EBC5D0E69}">
+				<PropertyList>
+					<Property Name="Flags" Type="int32" Value="1"/>
+				</PropertyList>
+				<PointList>
+					<Point>
+						<XPos>0</XPos>
+						<YPos>-38.34319</YPos>
+						<Flags>5</Flags>
+					</Point>
+					<Point>
+						<XPos>8.35406</XPos>
+						<YPos>37.27811</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>12.9</XPos>
+						<YPos>-144.85207</YPos>
+						<Flags>37</Flags>
+					</Point>
+				</PointList>
+			</Curve>
+		</CurveInfo>
+		<CurveInfo Name="FrequencyScale">
+			<Curve Name="" ID="{2F660781-3B15-446F-8DB9-AE1A66B73484}">
+				<PropertyList>
+					<Property Name="Flags" Type="int32" Value="1"/>
+				</PropertyList>
+				<PointList>
+					<Point>
+						<XPos>0</XPos>
+						<YPos>-0.82841</YPos>
+						<Flags>5</Flags>
+					</Point>
+					<Point>
+						<XPos>3.69239</XPos>
+						<YPos>-1.44379</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>5.67881</XPos>
+						<YPos>0.87574</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>10.86685</XPos>
+						<YPos>-1.25444</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>12.9</XPos>
+						<YPos>-0.28402</YPos>
+						<Flags>37</Flags>
+					</Point>
+				</PointList>
+			</Curve>
+		</CurveInfo>
+		<CurveInfo Name="GainOffset">
+			<Curve Name="" ID="{B7D884BA-4688-45B5-B571-5C44FDF71155}">
+				<PropertyList>
+					<Property Name="Flags" Type="int32" Value="1"/>
+				</PropertyList>
+				<PointList>
+					<Point>
+						<XPos>0</XPos>
+						<YPos>0</YPos>
+						<Flags>5</Flags>
+					</Point>
+					<Point>
+						<XPos>12.9</XPos>
+						<YPos>0</YPos>
+						<Flags>37</Flags>
+					</Point>
+				</PointList>
+			</Curve>
+		</CurveInfo>
+		<CurveInfo Name="Gustiness">
+			<Curve Name="" ID="{9FAEB9E5-19CC-49B8-AE41-CBA60B727395}">
+				<PropertyList>
+					<Property Name="Flags" Type="int32" Value="1"/>
+				</PropertyList>
+				<PointList>
+					<Point>
+						<XPos>0</XPos>
+						<YPos>0</YPos>
+						<Flags>5</Flags>
+					</Point>
+					<Point>
+						<XPos>3.50543</XPos>
+						<YPos>0.19231</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>9.95543</XPos>
+						<YPos>-0.09172</YPos>
+						<Flags>0</Flags>
+					</Point>
+					<Point>
+						<XPos>12.9</XPos>
+						<YPos>0</YPos>
+						<Flags>37</Flags>
+					</Point>
+				</PointList>
+			</Curve>
+		</CurveInfo>
+	</CurveList>
+</PluginData>
+							<PluginInnerObjectList>
+								<List Name="Deflectors">
+									<PluginInnerObject Name="" ID="{E13D1EAB-69EA-4835-9E4F-E520B83324CE}" PluginName="Deflector" CompanyID="0" PluginID="121"/>
+								</List>
+							</PluginInnerObjectList>
+						</SourcePlugin>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="Soundseed Air Wind" ID="{574F3EA7-8500-40DB-A147-BFB0516CFD4D}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</Containers>
+</WwiseDocument>
