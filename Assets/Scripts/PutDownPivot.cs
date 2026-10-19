@@ -16,6 +16,9 @@ public class PutDownPivot : Interactable
     [Tooltip("Fired when a matching item is put down on this pivot.")]
     [SerializeField] private ItemPutDownEvent onItemPutDown = new ItemPutDownEvent();
 
+    [Header("Sounds")] 
+    [SerializeField] private AK.Wwise.Event pickUpSound;
+    
     private ItemType _placedItem = ItemType.None;
 
     public override void Interact(PlayerController player)
@@ -45,6 +48,7 @@ public class PutDownPivot : Interactable
 
         player.SetItem(_placedItem);
         SetPlacedItem(ItemType.None);
+        pickUpSound?.Post(gameObject);
     }
 
     private void SetPlacedItem(ItemType item)

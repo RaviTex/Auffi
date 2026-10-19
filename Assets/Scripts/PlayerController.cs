@@ -39,9 +39,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slopeLimit = 50f;
     [SerializeField] private LayerMask groundMask = ~0;
 
-    [Header("Sounds")] 
-    [SerializeField] private AK.Wwise.Event pickUpSound;
-
     private const int MaxInteractablesDetected = 8;
 
     private Rigidbody _rb;
@@ -103,12 +100,12 @@ public class PlayerController : MonoBehaviour
             return;
 
         // One context button: photographing wins over interacting.
+        // Can't we just compute the visible animal after we check if the interaction action was pressed?
         if (canTakePhoto)
             TakePhoto(animal);
         else if (_focusedInteractable != null)
         {
             _focusedInteractable.Interact(this);
-            pickUpSound?.Post(_focusedInteractable.gameObject);
         }
     }
 

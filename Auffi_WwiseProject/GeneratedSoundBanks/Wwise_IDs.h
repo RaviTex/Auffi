@@ -19,6 +19,7 @@ namespace AK
         static const AkUniqueID PLAY_MEADOWSATMOS = 3666405554U;
         static const AkUniqueID PLAY_PHOTOINDICATOR = 672536345U;
         static const AkUniqueID PLAY_PICKUP = 3860455926U;
+        static const AkUniqueID PLAY_POSITIVEFEEDBACK = 2928908110U;
         static const AkUniqueID PLAY_WALKINGLOOP_MEADOWS = 2312064978U;
         static const AkUniqueID PLAY_WINDBACKGROUND = 952778856U;
         static const AkUniqueID STOP_WALKINGLOOP_MEADOWS = 2235773436U;

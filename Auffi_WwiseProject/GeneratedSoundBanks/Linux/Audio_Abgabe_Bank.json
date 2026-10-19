@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{561F0213-F399-4EC7-8A8E-8250945837F2}",
     "Language": "SFX",
-    "Hash": "{FEAFED82-8D93-94EC-A2FA-27D1297CDA64}",
+    "Hash": "{55F2D806-9FCA-2640-947E-2CCAA88B50F6}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Audio_Abgabe_Bank",
     "ShortName": "Audio_Abgabe_Bank",
     "Path": "Audio_Abgabe_Bank.bnk",
@@ -25,36 +25,12 @@
        "LibId": "9699330"
       },
       {
-       "Id": "110653743",
-       "Name": "Flanger (Custom)",
-       "ObjectPath": "\\Containers\\Platzer\\Gate\\[Effect Slot [1]: (Flanger)]\\Flanger (Custom)",
-       "GUID": "{198242F7-F9CC-40A2-B714-F9BB5B0323A2}",
-       "LibName": "Wwise Flanger",
-       "LibId": "8192003"
-      },
-      {
-       "Id": "403649600",
-       "Name": "Guitar Distortion (Custom)",
-       "ObjectPath": "\\Containers\\Platzer\\Gate\\[Effect Slot [0]: (Guitar Distortion)]\\Guitar Distortion (Custom)",
-       "GUID": "{936D35D9-10D5-409B-9E7A-B8D0B0101238}",
-       "LibName": "Wwise Guitar Distortion",
-       "LibId": "8257539"
-      },
-      {
-       "Id": "405633787",
-       "Name": "Compressor (Custom)",
-       "ObjectPath": "\\Containers\\Platzer\\Gate\\[Effect Slot [2]: (Compressor)]\\Compressor (Custom)",
-       "GUID": "{79E9E725-EE15-40D6-9DC7-61308A336EFC}",
-       "LibName": "Wwise Compressor",
-       "LibId": "7077891"
-      },
-      {
-       "Id": "727081375",
-       "Name": "Tone Generator",
-       "ObjectPath": "\\Containers\\Platzer\\Gate\\Tone Generator",
-       "GUID": "{08BDDC55-C808-4251-BED0-925DB561A2BB}",
-       "LibName": "Wwise Tone Generator",
-       "LibId": "6684674"
+       "Id": "307602336",
+       "Name": "Synth One",
+       "ObjectPath": "\\Containers\\Jezz\\PositiveFeedback\\Synth One",
+       "GUID": "{D814FF39-DA3F-4950-9003-0A98BC5BF265}",
+       "LibName": "Wwise Synth One",
+       "LibId": "9699330"
       }
      ]
     },
@@ -64,25 +40,10 @@
       "Name": "Play_GateOpen",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_GateOpen",
       "GUID": "{F64A33ED-372B-4B9A-B59D-77221F271654}",
+      "MaxAttenuation": "0",
       "DurationType": "OneShot",
-      "DurationMin": "1.2",
-      "DurationMax": "1.2",
-      "PluginRefs": {
-       "Custom": [
-        {
-         "Id": "110653743"
-        },
-        {
-         "Id": "403649600"
-        },
-        {
-         "Id": "405633787"
-        },
-        {
-         "Id": "727081375"
-        }
-       ]
-      }
+      "DurationMin": "0",
+      "DurationMax": "0"
      },
      {
       "Id": "3860455926",
@@ -99,6 +60,20 @@
       }
      },
      {
+      "Id": "2928908110",
+      "Name": "Play_PositiveFeedback",
+      "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_PositiveFeedback",
+      "GUID": "{4338B9CD-183E-4592-839F-1B5A40D60EB0}",
+      "DurationType": "Unknown",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "307602336"
+        }
+       ]
+      }
+     },
+     {
       "Id": "952778856",
       "Name": "Play_WindBackground",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_WindBackground",
@@ -108,6 +83,6 @@
     ]
    }
   ],
-  "FileHash": "{C2917106-841D-38C6-4CFB-469343C5E16E}"
+  "FileHash": "{EC61641E-6B43-AAE8-673E-0C7DE66C4C1A}"
  }
 }

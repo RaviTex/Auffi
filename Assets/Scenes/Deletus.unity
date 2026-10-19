@@ -2210,6 +2210,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 154416928}
     - target: {fileID: 4180948899751244344, guid: 5d8a7515014bd6e868a0caafb5cc7ff0, type: 3}
+      propertyPath: rewardAchievedSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 1406bc64caa4a31fa8f3cf5337322007, type: 2}
+    - target: {fileID: 4180948899751244344, guid: 5d8a7515014bd6e868a0caafb5cc7ff0, type: 3}
       propertyPath: onReveal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 154416929}
