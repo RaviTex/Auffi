@@ -12,6 +12,13 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
+				<SoundBank Name="Audio_Abgabe_Bank" ID="{561F0213-F399-4EC7-8A8E-8250945837F2}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Audio_Abgabe_Events" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" WorkUnitID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundBanks>
