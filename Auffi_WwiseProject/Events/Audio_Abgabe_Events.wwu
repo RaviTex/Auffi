@@ -36,6 +36,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_PositiveFeedback" ID="{4338B9CD-183E-4592-839F-1B5A40D60EB0}">
+					<ChildrenList>
+						<Action Name="" ID="{42983870-7EEC-4ECC-B7B8-A7908AA0CE84}" ShortID="416727006">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PositiveFeedback" ID="{AD45CFF4-94C3-4A03-B62A-4F57796EB34A}" WorkUnitID="{77D0055F-4464-4348-A962-E35B552D393F}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
