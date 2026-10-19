@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{04248790-BDFA-45CF-B6F1-FC96D5CDE581}" SchemaVersion="133">
+	<Containers>
+		<WorkUnit Name="Platzer" ID="{04248790-BDFA-45CF-B6F1-FC96D5CDE581}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Gate" ID="{4911A1E3-54DC-4D0E-A65F-3C96FDAA4501}" ShortID="205340456">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Main Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<SourcePlugin Name="Tone Generator" ID="{08BDDC55-C808-4251-BED0-925DB561A2BB}" ShortID="727081375" PluginName="Wwise Tone Generator" CompanyID="0" PluginID="102">
+							<PropertyList>
+								<Property Name="AttackTime" Type="Real32" Value="0.1"/>
+								<Property Name="DecayTime" Type="Real32" Value="1"/>
+								<Property Name="DurMode" Type="int32" Value="1"/>
+								<Property Name="ReleaseTime" Type="Real32" Value="0.1"/>
+								<Property Name="StartFreq" Type="Real32" Value="100"/>
+								<Property Name="SustainTime" Type="Real32" Value="0"/>
+								<Property Name="SweepFreq" Type="bool" Value="True"/>
+								<Property Name="SweepFreqType" Type="int32" Value="1"/>
+								<Property Name="WaveType" Type="int32" Value="1"/>
+							</PropertyList>
+							<Language>SFX</Language>
+						</SourcePlugin>
+					</ChildrenList>
+					<ObjectLists>
+						<ObjectList Name="Effects">
+							<EffectSlot Name="" ID="{754630BC-CDCB-4B3E-808A-525E77FBDF0C}" ShortID="794125455">
+								<ReferenceList>
+									<Reference Name="Effect">
+										<Custom>
+											<Effect Name="Guitar Distortion (Custom)" ID="{936D35D9-10D5-409B-9E7A-B8D0B0101238}" ShortID="403649600" PluginName="Wwise Guitar Distortion" CompanyID="0" PluginID="126" PluginType="3">
+												<PropertyList>
+													<Property Name="DistortionDrive" Type="Real32" Value="88"/>
+													<Property Name="DistortionTone" Type="Real32" Value="27"/>
+													<Property Name="DistortionType" Type="int32" Value="1"/>
+													<Property Name="PostEQBand1Enable" Type="bool" Value="True"/>
+													<Property Name="PostEQBand1FilterType" Type="int32" Value="2"/>
+													<Property Name="PostEQBand1Gain" Type="Real32" Value="-1.5"/>
+													<Property Name="PostEQBand1QFactor" Type="Real32" Value="0.1"/>
+													<Property Name="PostEQBand2Enable" Type="bool" Value="True"/>
+													<Property Name="PostEQBand2FilterType" Type="int32" Value="1"/>
+													<Property Name="PostEQBand2Gain" Type="Real32" Value="-8"/>
+													<Property Name="Rectification" Type="Real32" Value="72"/>
+												</PropertyList>
+											</Effect>
+										</Custom>
+									</Reference>
+								</ReferenceList>
+							</EffectSlot>
+							<EffectSlot Name="" ID="{C93FFF1D-B245-41AA-BE72-B7088B5D1A9F}" ShortID="92344741">
+								<ReferenceList>
+									<Reference Name="Effect">
+										<Custom>
+											<Effect Name="Flanger (Custom)" ID="{198242F7-F9CC-40A2-B714-F9BB5B0323A2}" ShortID="110653743" PluginName="Wwise Flanger" CompanyID="0" PluginID="125" PluginType="3">
+												<PropertyList>
+													<Property Name="DelayTime" Type="Real32" Value="5.6"/>
+													<Property Name="ModDepth" Type="Real32" Value="24"/>
+													<Property Name="ModFrequency" Type="Real32" Value="1.9"/>
+												</PropertyList>
+												<ObjectLists>
+													<ObjectList Name="RTPC">
+														<RTPC Name="" ID="{DFE6DEE9-8A5A-4C20-AABB-99D20E0F1CD8}" ShortID="251521152">
+															<PropertyList>
+																<Property Name="PropertyName" Type="string" Value="ModDepth"/>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="ControlInput">
+																	<Custom>
+																		<ModulatorTime Name="Modulator Time (Custom)" ID="{37B14C1E-9AF4-4C0E-9CB6-6A9989AD58E9}" ShortID="419876934"/>
+																	</Custom>
+																</Reference>
+																<Reference Name="Curve">
+																	<Custom>
+																		<Curve Name="" ID="{CCAD0737-2232-4695-B84A-049A80B19FEE}">
+																			<PropertyList>
+																				<Property Name="Flags" Type="int32" Value="1"/>
+																			</PropertyList>
+																			<PointList>
+																				<Point>
+																					<XPos>0</XPos>
+																					<YPos>66.82185</YPos>
+																					<Flags>5</Flags>
+																					<SegmentShape>Log2</SegmentShape>
+																				</Point>
+																				<Point>
+																					<XPos>1</XPos>
+																					<YPos>4.06581</YPos>
+																					<Flags>37</Flags>
+																				</Point>
+																			</PointList>
+																		</Curve>
+																	</Custom>
+																</Reference>
+															</ReferenceList>
+														</RTPC>
+													</ObjectList>
+												</ObjectLists>
+											</Effect>
+										</Custom>
+									</Reference>
+								</ReferenceList>
+							</EffectSlot>
+							<EffectSlot Name="" ID="{9054A26A-A6C9-43F9-8176-DA1347F05A49}" ShortID="626702480">
+								<ReferenceList>
+									<Reference Name="Effect">
+										<Custom>
+											<Effect Name="Compressor (Custom)" ID="{79E9E725-EE15-40D6-9DC7-61308A336EFC}" ShortID="405633787" PluginName="Wwise Compressor" CompanyID="0" PluginID="108" PluginType="3">
+												<PropertyList>
+													<Property Name="AttackTime" Type="Real32" Value="0.88"/>
+													<Property Name="Ratio" Type="Real32" Value="1"/>
+													<Property Name="ReleaseTime" Type="Real32" Value="0"/>
+													<Property Name="Threshold" Type="Real32" Value="-69.7"/>
+												</PropertyList>
+											</Effect>
+										</Custom>
+									</Reference>
+								</ReferenceList>
+							</EffectSlot>
+						</ObjectList>
+					</ObjectLists>
+					<ActiveSourceList>
+						<ActiveSource Name="Tone Generator" ID="{08BDDC55-C808-4251-BED0-925DB561A2BB}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</Containers>
+</WwiseDocument>
