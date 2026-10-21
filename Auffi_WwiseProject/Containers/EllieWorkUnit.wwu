@@ -4,6 +4,13 @@
 		<WorkUnit Name="EllieWorkUnit" ID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}" PersistMode="Standalone">
 			<ChildrenList>
 				<BlendContainer Name="Wind" ID="{A76CCC3A-0901-44FA-9B84-E65E35799F37}" ShortID="559725065">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>32</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>

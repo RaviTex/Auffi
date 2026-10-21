@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{561F0213-F399-4EC7-8A8E-8250945837F2}",
     "Language": "SFX",
-    "Hash": "{A3197310-F76F-3FCF-2CDF-84BC25B3D1C2}",
+    "Hash": "{21FC08CA-49C4-0EA6-41FB-59BD0F093CFC}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Audio_Abgabe_Bank",
     "ShortName": "Audio_Abgabe_Bank",
     "Path": "Audio_Abgabe_Bank.bnk",
@@ -33,10 +33,26 @@
        "LibId": "8192003"
       },
       {
+       "Id": "280492216",
+       "Name": "Synth One",
+       "ObjectPath": "\\Containers\\EllieWorkUnit\\Wind\\WindLight_01\\Synth One",
+       "GUID": "{AAC7B7C1-9090-4B8F-ACED-3E332959ED67}",
+       "LibName": "Wwise Synth One",
+       "LibId": "9699330"
+      },
+      {
        "Id": "307602336",
        "Name": "Synth One",
        "ObjectPath": "\\Containers\\Jezz\\PositiveFeedback\\Synth One",
        "GUID": "{D814FF39-DA3F-4950-9003-0A98BC5BF265}",
+       "LibName": "Wwise Synth One",
+       "LibId": "9699330"
+      },
+      {
+       "Id": "340333484",
+       "Name": "Synth One",
+       "ObjectPath": "\\Containers\\EllieWorkUnit\\Wind\\WindLight\\Synth One",
+       "GUID": "{25B3142B-985C-42BE-B416-8C952F07BBE2}",
        "LibName": "Wwise Synth One",
        "LibId": "9699330"
       },
@@ -125,11 +141,21 @@
       "Name": "Play_WindBackground",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_WindBackground",
       "GUID": "{9DF8E451-4CF6-4BE6-B627-EFEF4CAE4746}",
-      "DurationType": "Infinite"
+      "DurationType": "Infinite",
+      "PluginRefs": {
+       "Custom": [
+        {
+         "Id": "280492216"
+        },
+        {
+         "Id": "340333484"
+        }
+       ]
+      }
      }
     ]
    }
   ],
-  "FileHash": "{398F01EE-FF6B-E2B1-8D3B-FE7BB5D60694}"
+  "FileHash": "{AA78AD02-5CCC-6E85-028B-E3C75431B25F}"
  }
 }

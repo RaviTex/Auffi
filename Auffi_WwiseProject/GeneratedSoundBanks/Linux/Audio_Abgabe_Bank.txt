@@ -4,6 +4,10 @@ Event	ID	Name			Wwise Object Path	Notes
 	3788303255	Play_GateOpen			\Audio_Abgabe_Events\Play_GateOpen	
 	3860455926	Play_Pickup			\Audio_Abgabe_Events\Play_Pickup	
 
+Modulator LFO	ID	Name			Wwise Object Path	Notes
+	197031948	Modulator LFO (Custom)				
+	240425623	Modulator LFO (Custom)				
+
 Modulator Envelope	ID	Name			Wwise Object Path	Notes
 	736417429	Modulator Envelope (Custom)				
 
@@ -19,6 +23,8 @@ Effect plug-ins	ID	Name	Type				Notes
 
 Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
 	96116930	Synth One	Wwise Synth One		\Containers\Nici\PickUp_Item\Synth One	
+	280492216	Synth One	Wwise Synth One		\Containers\EllieWorkUnit\Wind\WindLight_01\Synth One	
 	307602336	Synth One	Wwise Synth One		\Containers\Jezz\PositiveFeedback\Synth One	
+	340333484	Synth One	Wwise Synth One		\Containers\EllieWorkUnit\Wind\WindLight\Synth One	
 	727081375	Tone Generator	Wwise Tone Generator		\Containers\Platzer\Gate\Tone Generator	
 

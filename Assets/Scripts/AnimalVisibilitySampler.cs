@@ -8,12 +8,16 @@ using UnityEngine.Rendering.Universal;
 
 // Finds which nearby animal is visible to the camera by rendering the scene with the animal
 // drawn in a key color and scanning the result. The scene's depth testing handles occlusion
-// with the real meshes, so a partially occluded animal still counts as visible.
+// with the real meshes. Visible pixels are compared against a silhouette render of the animal
+// to enforce a minimum visible fraction.
 public class AnimalVisibilitySampler : MonoBehaviour
 {
     [Header("Detection")]
     [Tooltip("Radius around the player in which animals are checked.")]
     [SerializeField] private float detectionDistance = 4f;
+    [Tooltip("Minimum percentage of the animal's on-screen silhouette that must be unoccluded to count as visible.")]
+    [Range(0f, 100f)]
+    [SerializeField] private float minimumVisiblePercentage = 20f;
     [Tooltip("How often animal visibility is re-checked, in seconds.")]
     [SerializeField] private float checkInterval = 0.1f;
     [Tooltip("How long an animal stays visible after it was last seen. Prevents flickering between checks.")]
@@ -29,10 +33,12 @@ public class AnimalVisibilitySampler : MonoBehaviour
     private const int MaxAnimalsDetected = 16;
     private const int UiLayer = 5;
     private const int PlayerLayer = 8;
+    private const int SilhouetteLayer = 31;
 
     private Camera _camera;
     private Camera _visibilityCamera;
     private RenderTexture _visibilityTexture;
+    private RenderTexture _silhouetteTexture;
     private Material _keyMaterial;
     private Coroutine _checkLoop;
     private LayerMask _animalMask;
@@ -42,6 +48,11 @@ public class AnimalVisibilitySampler : MonoBehaviour
     private string _lastDebugMessage;
 
     private bool _readbackPending;
+    private bool _readbackError;
+    private bool _silhouetteRequired;
+    private int _readbacksPending;
+    private int _visiblePixelCount;
+    private int _silhouettePixelCount;
     private Animal _pendingAnimal;
     private Vector3 _pendingCenter;
 
@@ -51,6 +62,8 @@ public class AnimalVisibilitySampler : MonoBehaviour
     private readonly List<Renderer> _targetRenderers = new List<Renderer>();
     private readonly List<Renderer> _keyedRenderers = new List<Renderer>();
     private readonly List<Material[]> _originalMaterials = new List<Material[]>();
+    private readonly List<GameObject> _silhouetteObjects = new List<GameObject>();
+    private readonly List<int> _silhouetteOriginalLayers = new List<int>();
 
     // Set while the player holds an item, when sampling would be pointless.
     public bool Paused { get; set; }
@@ -112,7 +125,7 @@ public class AnimalVisibilitySampler : MonoBehaviour
                 if (RenderAnimalForCheck(out _pendingAnimal, out _pendingCenter))
                 {
                     _readbackPending = true;
-                    AsyncGPUReadback.Request(_visibilityTexture, 0, OnReadbackComplete);
+                    StartReadbacks();
                 }
                 else
                 {
@@ -157,13 +170,16 @@ public class AnimalVisibilitySampler : MonoBehaviour
             if (!IsInsideFrustum(out Bounds bounds))
                 continue;
 
-            // The key materials only live for this synchronous render request.
+            // The key materials and silhouette layers only live for this synchronous render request.
             try
             {
                 if (!ApplyKeyMaterials())
                     continue;
 
-                SubmitRender();
+                SubmitRender(_visibilityTexture);
+
+                if (minimumVisiblePercentage > 0f)
+                    SubmitSilhouetteRender();
             }
             finally
             {
@@ -287,25 +303,96 @@ public class AnimalVisibilitySampler : MonoBehaviour
             _keyedRenderers[i].sharedMaterials = _originalMaterials[i];
     }
 
-    private void SubmitRender()
+    private void SubmitRender(RenderTexture destination)
     {
         _visibilityCamera.aspect = _camera.aspect;
         _visibilityCamera.orthographic = _camera.orthographic;
         _visibilityCamera.orthographicSize = _camera.orthographicSize;
         _visibilityCamera.fieldOfView = _camera.fieldOfView;
+        _visibilityCamera.targetTexture = destination;
 
         RenderPipeline.SubmitRenderRequest(_visibilityCamera,
-            new UniversalRenderPipeline.SingleCameraRequest { destination = _visibilityTexture });
+            new UniversalRenderPipeline.SingleCameraRequest { destination = destination });
     }
 
-    private void OnReadbackComplete(AsyncGPUReadbackRequest request)
+    private void SubmitSilhouetteRender()
     {
-        _readbackPending = false;
+        _silhouetteObjects.Clear();
+        _silhouetteOriginalLayers.Clear();
 
-        if (_visibilityTexture == null)
+        foreach (Renderer renderer in _keyedRenderers)
+        {
+            GameObject target = renderer.gameObject;
+            if (_silhouetteObjects.Contains(target))
+                continue;
+
+            _silhouetteObjects.Add(target);
+            _silhouetteOriginalLayers.Add(target.layer);
+            target.layer = SilhouetteLayer;
+        }
+
+        int cullingMask = _visibilityCamera.cullingMask;
+
+        try
+        {
+            _visibilityCamera.cullingMask = 1 << SilhouetteLayer;
+            SubmitRender(_silhouetteTexture);
+        }
+        finally
+        {
+            _visibilityCamera.cullingMask = cullingMask;
+
+            for (int i = 0; i < _silhouetteObjects.Count; i++)
+                _silhouetteObjects[i].layer = _silhouetteOriginalLayers[i];
+        }
+    }
+
+    private void StartReadbacks()
+    {
+        _visiblePixelCount = 0;
+        _silhouettePixelCount = 0;
+        _readbackError = false;
+        _silhouetteRequired = minimumVisiblePercentage > 0f;
+        _readbacksPending = _silhouetteRequired ? 2 : 1;
+
+        AsyncGPUReadback.Request(_visibilityTexture, 0, OnVisibleReadback);
+
+        if (_silhouetteRequired)
+            AsyncGPUReadback.Request(_silhouetteTexture, 0, OnSilhouetteReadback);
+    }
+
+    private void OnVisibleReadback(AsyncGPUReadbackRequest request)
+    {
+        if (request.hasError)
+            _readbackError = true;
+        else
+            _visiblePixelCount = CountKeyPixels(request.GetData<Color32>());
+
+        OnReadbacksFinished();
+    }
+
+    private void OnSilhouetteReadback(AsyncGPUReadbackRequest request)
+    {
+        if (request.hasError)
+            _readbackError = true;
+        else
+            _silhouettePixelCount = CountKeyPixels(request.GetData<Color32>());
+
+        OnReadbacksFinished();
+    }
+
+    private void OnReadbacksFinished()
+    {
+        _readbacksPending--;
+        if (_readbacksPending > 0)
             return;
 
-        if (request.hasError)
+        _readbackPending = false;
+
+        if (_visibilityTexture == null || _silhouetteRequired && _silhouetteTexture == null)
+            return;
+
+        if (_readbackError)
         {
             Debug.LogError("[AnimalVisibilitySampler] GPU readback failed. Animal visibility is disabled.");
             SetVisibleAnimal(null, default);
@@ -313,22 +400,45 @@ public class AnimalVisibilitySampler : MonoBehaviour
             return;
         }
 
-        if (!Paused && ContainsKeyPixel(request.GetData<Color32>()))
-            SetVisibleAnimal(_pendingAnimal, _pendingCenter);
-        else
-            SetVisibleAnimal(null, default);
+        Animal animal = null;
+        Vector3 center = default;
+
+        if (!Paused && _visiblePixelCount > 0)
+        {
+            float visibleFraction = 1f;
+
+            if (_silhouetteRequired)
+            {
+                visibleFraction = _silhouettePixelCount > 0
+                    ? (float)_visiblePixelCount / _silhouettePixelCount
+                    : 0f;
+            }
+
+            if (visibleFraction * 100f >= minimumVisiblePercentage)
+            {
+                animal = _pendingAnimal;
+                center = _pendingCenter;
+            }
+        }
+
+        SetVisibleAnimal(animal, center);
+
+        if (debugVisibility && animal == null)
+            LogVisibilityDebug();
     }
 
-    private static bool ContainsKeyPixel(NativeArray<Color32> pixels)
+    private static int CountKeyPixels(NativeArray<Color32> pixels)
     {
+        int count = 0;
+
         for (int i = 0; i < pixels.Length; i++)
         {
             Color32 pixel = pixels[i];
             if (pixel.r > 128 && pixel.b > 128 && pixel.g < 64)
-                return true;
+                count++;
         }
 
-        return false;
+        return count;
     }
 
     private void SetVisibleAnimal(Animal animal, Vector3 center)
@@ -366,6 +476,15 @@ public class AnimalVisibilitySampler : MonoBehaviour
             useMipMap = false
         };
         _visibilityTexture.Create();
+
+        _silhouetteTexture = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32)
+        {
+            name = "AnimalVisibilitySilhouette",
+            filterMode = FilterMode.Point,
+            antiAliasing = 1,
+            useMipMap = false
+        };
+        _silhouetteTexture.Create();
 
         _keyMaterial = new Material(keyShader)
         {
@@ -438,6 +557,13 @@ public class AnimalVisibilitySampler : MonoBehaviour
             _visibilityTexture = null;
         }
 
+        if (_silhouetteTexture != null)
+        {
+            _silhouetteTexture.Release();
+            Destroy(_silhouetteTexture);
+            _silhouetteTexture = null;
+        }
+
         if (_keyMaterial != null)
         {
             Destroy(_keyMaterial);
@@ -453,7 +579,8 @@ public class AnimalVisibilitySampler : MonoBehaviour
                 ? "Holding an item: camera stays away"
                 : _candidates.Count == 0
                     ? $"No animals within detectionDistance ({detectionDistance})"
-                    : $"{_candidates.Count} animal(s) in range but none produced visible pixels";
+                    : $"{_candidates.Count} animal(s) in range but none reached the " +
+                      $"{minimumVisiblePercentage:0.#}% visibility threshold";
 
         if (message == _lastDebugMessage)
             return;

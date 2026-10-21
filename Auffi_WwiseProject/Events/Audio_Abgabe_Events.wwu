@@ -30,7 +30,7 @@
 						<Action Name="" ID="{8A31FA4A-D228-4BFD-9076-5BC8BD9E1F31}" ShortID="800065951">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Wind_BackgroundNoise" ID="{988036FD-B722-4F60-9529-9CCCFC4168B4}" WorkUnitID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}"/>
+									<ObjectRef Name="Wind" ID="{A76CCC3A-0901-44FA-9B84-E65E35799F37}" WorkUnitID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

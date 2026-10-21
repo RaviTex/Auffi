@@ -48,6 +48,7 @@ MonoBehaviour:
   book: {fileID: 0}
   player: {fileID: 0}
   requiredAnimals:
+  - {fileID: 11400000, guid: 4a44e9dc0f2df600c9dc93d9afd6414f, type: 2}
   - {fileID: 11400000, guid: 93dae43ca14714ed8bfb26f2c7bb42b5, type: 2}
   - {fileID: 11400000, guid: c1750150fa7f2a57083293ac97fa280a, type: 2}
   - {fileID: 11400000, guid: 6e2164621ab7ab2fe9453b272b65f9aa, type: 2}
@@ -69,6 +70,10 @@ MonoBehaviour:
         m_CallState: 2
   rewardAnimal: {fileID: 11400000, guid: 4982a91761e5c1c3e84534568f495c95, type: 2}
   rewardItem: 4
+  rewardAchievedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1406bc64caa4a31fa8f3cf5337322007, type: 2}
 --- !u!114 &2496969326303290310
 MonoBehaviour:
   m_ObjectHideFlags: 0
