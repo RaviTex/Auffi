@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-// Highlights the focused interactable with an inverted hull outline: every mesh of the
-// object is redrawn pushed out along its normals with front faces culled, so the enlarged
-// back faces read as an outline around the object.
+// Highlights the focused interactable, or the animal that can currently be photographed,
+// with an inverted hull outline: every mesh of the object is redrawn pushed out along its
+// normals with front faces culled, so the enlarged back faces read as an outline.
 public class InteractableOutline : MonoBehaviour
 {
     private const string ShaderName = "Auffi/Interactable Outline";
@@ -14,14 +14,17 @@ public class InteractableOutline : MonoBehaviour
 
     [Tooltip("Outline shader. Falls back to Shader.Find when left empty.")]
     [SerializeField] private Shader outlineShader;
-    [Tooltip("Hull thickness in world units, independent of the object's scale.")]
+    [Tooltip("Default hull thickness in world units. Animals can override it per instance.")]
     [Range(0.001f, 0.2f)]
     [SerializeField] private float outlineWidth = 0.03f;
+    [Tooltip("Default outline color. Animals can override it per instance.")]
     [SerializeField] private Color outlineColor = Color.white;
 
     private Material _material;
     private Camera _camera;
-    private Interactable _target;
+    private Transform _targetRoot;
+    private Color _activeOutlineColor;
+    private float _activeOutlineWidth;
 
     private readonly List<MeshRenderer> _renderers = new List<MeshRenderer>();
 
@@ -36,6 +39,8 @@ public class InteractableOutline : MonoBehaviour
         }
 
         _material = new Material(shader) { name = "InteractableOutline (Runtime)" };
+        _activeOutlineColor = outlineColor;
+        _activeOutlineWidth = outlineWidth;
         ApplyProperties();
     }
 
@@ -47,19 +52,44 @@ public class InteractableOutline : MonoBehaviour
 
     public void SetTarget(Interactable target)
     {
-        _target = target;
+        if (target == null)
+            SetTarget(null, outlineColor, outlineWidth);
+        else
+            SetTarget(target.OutlineRoot, outlineColor, outlineWidth);
+    }
+
+    // Animals are photographed rather than triggered, so the player supplies them explicitly
+    // and each animal can override the outline style configured on this component.
+    public void SetTarget(Animal target)
+    {
+        if (target == null)
+            SetTarget(null, outlineColor, outlineWidth);
+        else
+            SetTarget(target.transform, target.OutlineColor, target.OutlineWidth);
+    }
+
+    private void SetTarget(Transform targetRoot, Color color, float width)
+    {
+        if (_targetRoot == targetRoot && _activeOutlineColor == color &&
+            Mathf.Approximately(_activeOutlineWidth, width))
+            return;
+
+        _targetRoot = targetRoot;
+        _activeOutlineColor = color;
+        _activeOutlineWidth = width;
+        ApplyProperties();
     }
 
     private void LateUpdate()
     {
-        if (_material == null || _target == null)
+        if (_material == null || _targetRoot == null)
             return;
 
         if (_camera == null)
             _camera = Camera.main;
 
         _renderers.Clear();
-        _target.OutlineRoot.GetComponentsInChildren(_renderers);
+        _targetRoot.GetComponentsInChildren(_renderers);
 
         foreach (MeshRenderer renderer in _renderers)
         {
@@ -72,7 +102,7 @@ public class InteractableOutline : MonoBehaviour
                 continue;
 
             Bounds bounds = renderer.bounds;
-            bounds.Expand(outlineWidth * 2f);
+            bounds.Expand(_activeOutlineWidth * 2f);
 
             var parameters = new RenderParams(_material)
             {
@@ -94,7 +124,10 @@ public class InteractableOutline : MonoBehaviour
 
     private void ApplyProperties()
     {
-        _material.SetColor(OutlineColorId, outlineColor);
-        _material.SetFloat(OutlineWidthId, outlineWidth);
+        if (_material == null)
+            return;
+
+        _material.SetColor(OutlineColorId, _activeOutlineColor);
+        _material.SetFloat(OutlineWidthId, _activeOutlineWidth);
     }
 }

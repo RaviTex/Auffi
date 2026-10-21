@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour
         bool canTakePhoto = _inventory.CurrentItem == ItemType.None &&
                             _visibility.TryGetVisibleAnimal(out animal, out _);
 
+        UpdateOutlineTarget(canTakePhoto, animal);
+
         if (!interactionAction.action.WasPressedThisFrame())
             return;
 
@@ -291,9 +293,17 @@ public class PlayerController : MonoBehaviour
 
         if (_focusedInteractable != null)
             _focusedInteractable.OnFocus(this);
+    }
 
-        if (_outline != null)
-            _outline.SetTarget(interactable);
+    private void UpdateOutlineTarget(bool canTakePhoto, Animal animal)
+    {
+        if (_outline == null)
+            return;
+
+        if (canTakePhoto)
+            _outline.SetTarget(animal);
+        else
+            _outline.SetTarget(_focusedInteractable);
     }
 
     public void SetItem(ItemType item)
