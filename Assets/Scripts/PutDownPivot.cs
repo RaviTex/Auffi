@@ -11,6 +11,8 @@ public class PutDownPivot : Interactable
 {
     [Tooltip("Items this pivot accepts. Only placeable items (apples) can be put down.")]
     [SerializeField] private List<ItemType> acceptedItems = new List<ItemType>();
+    [Tooltip("Item already sitting on this pivot when the scene starts. Use None for an empty pivot.")]
+    [SerializeField] private ItemType startingItem = ItemType.None;
     [Tooltip("Activated while an item sits on the pivot.")]
     [SerializeField] private GameObject placedVisual;
     [Tooltip("Fired when a matching item is put down on this pivot.")]
@@ -20,6 +22,18 @@ public class PutDownPivot : Interactable
     [SerializeField] private AK.Wwise.Event pickUpSound;
     
     private ItemType _placedItem = ItemType.None;
+
+    private void Awake()
+    {
+        if (startingItem != ItemType.None && !startingItem.CanPickUp())
+        {
+            Debug.LogWarning($"[PutDownPivot] Starting item {startingItem} cannot be picked up. " +
+                             "The pivot starts empty.", this);
+            startingItem = ItemType.None;
+        }
+
+        SetPlacedItem(startingItem);
+    }
 
     public override void Interact(PlayerController player)
     {
