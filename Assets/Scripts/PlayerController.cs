@@ -74,24 +74,25 @@ public class PlayerController : MonoBehaviour
         _right = (transform.forward + transform.right).normalized;
     }
 
-    private void Start()
-    {
-        if (book != null)
-            book.Close();
-    }
-
     private void Update()
     {
+        if (UIManager.Instance != null && UIManager.Instance.IsBlockingGameplay)
+        {
+            _input = Vector2.zero;
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+            return;
+        }
+
         _input = moveAction.action.ReadValue<Vector2>();
         UpdateFocusedInteractable();
-
-        // Prototype shortcut; replace with an InputActionReference if the book needs remapping.
-        if (book != null && Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
-            book.Toggle();
     }
 
     private void LateUpdate()
     {
+        if (HandleUiInput())
+            return;
+
         Animal animal = null;
         bool canTakePhoto = _inventory.CurrentItem == ItemType.None &&
                             _visibility.TryGetVisibleAnimal(out animal, out _);
@@ -110,8 +111,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Modal UI consumes all input. The interaction action closes signs, while the book
+    // toggle only opens or closes the book and never reaches world interaction.
+    private bool HandleUiInput()
+    {
+        UIManager ui = UIManager.Instance;
+        if (ui == null)
+            return false;
+
+        if (ui.IsSignOpen)
+        {
+            if (interactionAction.action.WasPressedThisFrame())
+                ui.CloseSign();
+
+            return true;
+        }
+
+        if (ui.IsBookOpen)
+        {
+            if (IsBookTogglePressed())
+                ui.CloseBook();
+
+            return true;
+        }
+
+        if (ui.IsGameOver)
+            return true;
+
+        if (IsBookTogglePressed())
+        {
+            ui.OpenBook();
+            return true;
+        }
+
+        return false;
+    }
+
+    // Prototype shortcut; replace with an InputActionReference if the book needs remapping.
+    private static bool IsBookTogglePressed()
+    {
+        return Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame;
+    }
+
     private void FixedUpdate()
     {
+        if (UIManager.Instance != null && UIManager.Instance.IsBlockingGameplay)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
+            return;
+        }
+
         Vector3 velocity = GetDesiredHorizontalVelocity();
 
         if (CheckGrounded(out Vector3 groundNormal))
