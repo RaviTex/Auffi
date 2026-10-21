@@ -67,5 +67,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PutDownPivot
   focusPoint: {fileID: 0}
+  outlineRoot: {fileID: 0}
   acceptedItems: 
   placedVisual: {fileID: 0}
+  onItemPutDown:
+    m_PersistentCalls:
+      m_Calls: []
+  pickUpSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3e95d8aedda64e4718b16889e0958d9f, type: 2}

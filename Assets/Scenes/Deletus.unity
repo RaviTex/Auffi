@@ -473,6 +473,10 @@ PrefabInstance:
       propertyPath: openDirection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6452140314442227619, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: gateOpened.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b5e487e5a6b14229b0219fa58ed6f65, type: 2}
     - target: {fileID: 6765041012649222605, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
@@ -2206,6 +2210,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 154416928}
     - target: {fileID: 4180948899751244344, guid: 5d8a7515014bd6e868a0caafb5cc7ff0, type: 3}
+      propertyPath: rewardAchievedSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 1406bc64caa4a31fa8f3cf5337322007, type: 2}
+    - target: {fileID: 4180948899751244344, guid: 5d8a7515014bd6e868a0caafb5cc7ff0, type: 3}
       propertyPath: onReveal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 154416929}
@@ -2258,6 +2266,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d8a7515014bd6e868a0caafb5cc7ff0, type: 3}
+--- !u!1 &1768571433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768571435}
+  - component: {fileID: 1768571434}
+  m_Layer: 0
+  m_Name: Soundbank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1768571434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768571433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5295b35ab26b042aec67aada20bdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkBank
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7419a79eee2e41dcf9ecd3e41a16939a, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!4 &1768571435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768571433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1816133204 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5355483721892240318, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
@@ -2533,6 +2598,10 @@ PrefabInstance:
       propertyPath: canTakePhotoFeedbackTxt
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5406369608141442038, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
+      propertyPath: pickUpSound.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e95d8aedda64e4718b16889e0958d9f, type: 2}
     - target: {fileID: 6875525566347678290, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2563,3 +2632,4 @@ SceneRoots:
   - {fileID: 595994206}
   - {fileID: 1766950522}
   - {fileID: 483344905}
+  - {fileID: 1768571435}

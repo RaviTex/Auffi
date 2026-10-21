@@ -1,0 +1,43 @@
+{
+ "ProjectInfo": {
+  "Project": {
+   "Name": "Auffi_WwiseProject",
+   "GUID": "{761E2F91-135E-488F-87A1-C8BA983D89FE}",
+   "Generator": "2025.1.10.9233"
+  },
+  "CacheRoot": "../.cache",
+  "Platforms": [
+   {
+    "Name": "Linux",
+    "GUID": "{C1920510-7A04-407F-AA08-FF38EB61D4FE}",
+    "BasePlatform": "Linux",
+    "BasePlatformGUID": "{BD0BDF13-3125-454F-8BFD-319537169F81}",
+    "Path": "Linux"
+   },
+   {
+    "Name": "Mac",
+    "GUID": "{D4D1FC4E-2771-4CBE-9E1A-42623742E98C}",
+    "BasePlatform": "Mac",
+    "BasePlatformGUID": "{9C6217D5-DD11-4795-87C1-6CE02853C540}",
+    "Path": "Mac"
+   },
+   {
+    "Name": "Windows",
+    "GUID": "{0555FE64-214D-4ECB-BB36-8E894B38DF06}",
+    "BasePlatform": "Windows",
+    "BasePlatformGUID": "{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}",
+    "Path": "Windows"
+   }
+  ],
+  "Languages": [
+   {
+    "Name": "English(US)",
+    "Id": "684519430",
+    "GUID": "{98F99EC2-DAC2-4C9D-8F57-A973C65CD90C}",
+    "Default": "true",
+    "UseAsStandIn": "true"
+   }
+  ],
+  "FileHash": "{294CAFE7-F809-D7A4-C035-C7BC17F4ECCD}"
+ }
+}

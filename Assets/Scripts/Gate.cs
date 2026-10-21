@@ -11,6 +11,8 @@ public class Gate : Interactable
     [Tooltip("Swing Direction")]
     [SerializeField] private OpenDirection openDirection;
     
+    [SerializeField] private AK.Wwise.Event gateOpened;
+    
     enum OpenDirection
     {
         X,
@@ -42,6 +44,7 @@ public class Gate : Interactable
             return;
 
         _isOpen = true;
+        gateOpened?.Post(gameObject);
     }
 
     private void Update()

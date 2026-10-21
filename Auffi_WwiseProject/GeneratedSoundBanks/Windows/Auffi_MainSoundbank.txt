@@ -1,0 +1,27 @@
+Event	ID	Name			Wwise Object Path	Notes
+	4863038	Play_CameraShutter			\Default Work Unit\Player_Audio\Play_CameraShutter	
+	672536345	Play_PhotoIndicator			\Default Work Unit\Player_Audio\Play_PhotoIndicator	
+	1349429770	Play_CowMoo			\Default Work Unit\SFX_Audio\Play_CowMoo	
+	2235773436	Stop_WalkingLoop_Meadows			\Default Work Unit\Player_Audio\Stop_WalkingLoop_Meadows	
+	2312064978	Play_WalkingLoop_Meadows			\Default Work Unit\Player_Audio\Play_WalkingLoop_Meadows	
+	3666405554	Play_MeadowsAtmos			\Default Work Unit\Atmosphere_Audio\Play_MeadowsAtmos	
+
+Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
+	910203671	Silence	Wwise Silence		\Containers\Default Work Unit\TakePhoto\Shutter\Break\Silence	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	11186554	Animals, Farm, Cows, Mooing On A Field SND35954 S04	.cache\92\{92BFDD8C-74B6-3A79-97CA-339380B70987}.wem		\Containers\Default Work Unit\Cow\Moos\Animals, Farm, Cows, Mooing On A Field SND35954 S04		319244
+	179488899	Animals, Farm, Cows, Mooing On A Field SND35954 S03	.cache\A9\{A92FF4D9-DFAF-EC5A-2991-86CFC538C835}.wem		\Containers\Default Work Unit\Cow\Moos\Animals, Farm, Cows, Mooing On A Field SND35954 S03		334396
+	181833192	Ambience_Meadows	.cache\88\{88C123F3-AF7C-2EB6-4CCC-2D7E5ED87287}.wem		\Containers\Default Work Unit\Ambience\Meadows\Meadow_Ambience\Ambience_Meadows		13341936
+	376936524	Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00	.cache\ED\{EDC6B8F1-1D1D-BF29-3616-5A6BF8B60411}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00		92112
+	542290487	Camera_Printing2	.cache\A7\{A7C9033F-F066-472E-1B62-3C6ADC490BD0}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Printing\Camera_Printing2		437968
+	579751899	Camera_Click	.cache\7A\{7AFF1604-CC5F-53A2-55BC-80BF23A1F9C6}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Camera_Click		8964
+	659180512	Picture_Indicator	.cache\AF\{AFB60EE0-B37B-728A-7117-328CB6CFE4EB}.wem		\Containers\Default Work Unit\TakePhoto\Picture_Indicator		145896
+	726661494	Camera_Shutter	.cache\F6\{F6340204-D2F3-6BAF-4BBB-0B3AEFD2967D}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Camera_Shutter		58792
+	768976254	Animals, Farm, Cows, Mooing On A Field SND35954 S04 1	.cache\92\{92BFDD8C-74B6-3A79-97CA-339380B70987}.wem		\Containers\Default Work Unit\Cow\Moos\Animals, Farm, Cows, Mooing On A Field SND35954 S04 1		319244
+	808035373	Camera_Sparkle	.cache\57\{577E6DE5-E575-79CC-356A-EBADCDAD7BA6}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Camera_Sparkle		106784
+	812924666	Camera_Printing3	.cache\98\{989A7BCD-1560-07F8-363C-FD5B1B80CD30}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Printing\Camera_Printing3		437968
+	904471419	Camera_Printing1	.cache\66\{6686EE7B-0164-0571-F379-8AE09450B52B}.wem		\Containers\Default Work Unit\TakePhoto\Shutter\Printing\Camera_Printing1		437968
+	916751228	Animals, Farm, Cows, Mooing On A Field SND35954 S02	.cache\8E\{8E0D269E-A015-9227-F89D-327F0B8CB4C6}.wem		\Containers\Default Work Unit\Cow\Moos\Animals, Farm, Cows, Mooing On A Field SND35954 S02		268104
+	976648513	Grass Loop Short by Yuval Id-189640 S00	.cache\E6\{E6B7A6F6-27E3-0552-CB69-14F5952CB96A}.wem		\Containers\Default Work Unit\Player\Grass Loop Short by Yuval Id-189640 S00		219166
+

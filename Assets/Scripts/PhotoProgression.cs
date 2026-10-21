@@ -16,6 +16,8 @@ public class PhotoProgression : MonoBehaviour
     [SerializeField] private AnimalDefinition rewardAnimal;
     [SerializeField] private ItemType rewardItem = ItemType.Key;
 
+    [Header("Sounds")] [SerializeField] private AK.Wwise.Event rewardAchievedSound;
+
     private bool _revealed;
 
     private void OnEnable()
@@ -35,7 +37,10 @@ public class PhotoProgression : MonoBehaviour
         if (IsRewardAnimal(definition))
         {
             if (player != null)
+            {
                 player.SetItem(rewardItem);
+                rewardAchievedSound?.Post(gameObject);
+            }
             return;
         }
 

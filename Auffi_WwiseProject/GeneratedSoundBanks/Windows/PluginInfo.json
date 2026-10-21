@@ -1,0 +1,61 @@
+{
+ "PluginInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "PluginLibs": [
+   {
+    "LibName": "Wwise Silence",
+    "LibId": "6619138",
+    "Type": "Source",
+    "DLL": "AkSilenceGenerator",
+    "StaticLib": "AkSilenceSource"
+   },
+   {
+    "LibName": "Wwise Tone Generator",
+    "LibId": "6684674",
+    "Type": "Source",
+    "DLL": "AkToneGen",
+    "StaticLib": "AkToneSource"
+   },
+   {
+    "LibName": "Wwise Compressor",
+    "LibId": "7077891",
+    "Type": "Effect",
+    "DLL": "AkCompressor",
+    "StaticLib": "AkCompressorFX"
+   },
+   {
+    "LibName": "Wwise Flanger",
+    "LibId": "8192003",
+    "Type": "Effect",
+    "DLL": "AkFlanger",
+    "StaticLib": "AkFlangerFX"
+   },
+   {
+    "LibName": "Wwise Guitar Distortion",
+    "LibId": "8257539",
+    "Type": "Effect",
+    "DLL": "AkGuitarDistortion",
+    "StaticLib": "AkGuitarDistortionFX"
+   },
+   {
+    "LibName": "Wwise Synth One",
+    "LibId": "9699330",
+    "Type": "Source",
+    "DLL": "AkSynthOne",
+    "StaticLib": "AkSynthOneSource"
+   },
+   {
+    "LibName": "System",
+    "LibId": "11403271",
+    "Type": "AudioDevice"
+   },
+   {
+    "LibName": "No Output",
+    "LibId": "11862023",
+    "Type": "AudioDevice"
+   }
+  ],
+  "FileHash": "{A7344C62-A8BE-3E19-5AC2-E286F300B5EA}"
+ }
+}

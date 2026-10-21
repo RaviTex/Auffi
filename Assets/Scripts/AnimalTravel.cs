@@ -35,7 +35,6 @@ public class AnimalTravel : MonoBehaviour
             return;
 
         Vector3 toTarget = _target.position - transform.position;
-        toTarget.y = 0f;
 
         float distance = toTarget.magnitude;
         if (distance <= stopDistance)
@@ -48,7 +47,11 @@ public class AnimalTravel : MonoBehaviour
         float travel = Mathf.Min(moveSpeed * Time.deltaTime, distance - stopDistance);
         transform.position += direction * travel;
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationLerpSpeed * Time.deltaTime);
+        Vector3 horizontalDirection = new Vector3(direction.x, 0f, direction.z);
+        if (horizontalDirection.sqrMagnitude > 0.0001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(horizontalDirection.normalized, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationLerpSpeed * Time.deltaTime);
+        }
     }
 }
