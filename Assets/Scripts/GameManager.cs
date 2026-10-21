@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
         bookUI.SetActive(false);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
-        // Realtime: scaled time is frozen above.
         yield return new WaitForSecondsRealtime(3);
 
         Time.timeScale = 1;

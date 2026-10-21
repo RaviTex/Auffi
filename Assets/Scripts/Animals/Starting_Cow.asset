@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalDefinition
   animalId: starting_cow
   displayName: Starting Cow
-  photo: {fileID: 0}
+  photo: {fileID: -1524651093341638257, guid: 58a53cbb8a7441da5aa4f1fe320af890, type: 3}
