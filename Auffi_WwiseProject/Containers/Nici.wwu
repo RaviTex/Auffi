@@ -2,6 +2,10 @@
 <WwiseDocument Type="WorkUnit" ID="{64937AD9-8438-4B57-AC94-2E1ED9E22A2B}" SchemaVersion="133">
 	<Containers>
 		<WorkUnit Name="Nici" ID="{64937AD9-8438-4B57-AC94-2E1ED9E22A2B}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="23"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
 			<ChildrenList>
 				<Sound Name="PickUp_Item" ID="{6231871A-1974-4B9C-AB54-4A0B6D835CF1}" ShortID="1019321222">
 					<ReferenceList>

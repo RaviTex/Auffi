@@ -2,6 +2,10 @@
 <WwiseDocument Type="WorkUnit" ID="{77D0055F-4464-4348-A962-E35B552D393F}" SchemaVersion="133">
 	<Containers>
 		<WorkUnit Name="Jezz" ID="{77D0055F-4464-4348-A962-E35B552D393F}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="23"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
 			<ChildrenList>
 				<Sound Name="PositiveFeedback" ID="{AD45CFF4-94C3-4A03-B62A-4F57796EB34A}" ShortID="763899646">
 					<ReferenceList>

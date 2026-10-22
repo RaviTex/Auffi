@@ -2,6 +2,10 @@
 <WwiseDocument Type="WorkUnit" ID="{04248790-BDFA-45CF-B6F1-FC96D5CDE581}" SchemaVersion="133">
 	<Containers>
 		<WorkUnit Name="Platzer" ID="{04248790-BDFA-45CF-B6F1-FC96D5CDE581}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="23"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
 			<ChildrenList>
 				<Sound Name="Gate" ID="{4911A1E3-54DC-4D0E-A65F-3C96FDAA4501}" ShortID="205340456">
 					<ReferenceList>

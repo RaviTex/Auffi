@@ -2,6 +2,10 @@
 <WwiseDocument Type="WorkUnit" ID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}" SchemaVersion="133">
 	<Containers>
 		<WorkUnit Name="EllieWorkUnit" ID="{F80D7DD8-C5B0-4CF3-9770-FB7F0FE8147B}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="23"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
 			<ChildrenList>
 				<BlendContainer Name="Wind" ID="{A76CCC3A-0901-44FA-9B84-E65E35799F37}" ShortID="559725065">
 					<PropertyList>

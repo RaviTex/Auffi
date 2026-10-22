@@ -75,6 +75,7 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Stop_MeadowsAtmos" ID="{05B2D4BF-5ABB-4D78-B109-97C378B95585}"/>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="SFX_Audio" ID="{64FAF3AB-4F60-4D2F-8A40-B5D9CCCC5865}" ShortID="1067143780">
@@ -94,6 +95,8 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_CowBells" ID="{3263901C-FABF-4689-895E-75FBD2A8DD71}"/>
+						<Event Name="Stop_CowBells" ID="{9E5EE6C5-AB66-4355-8997-C6F9C436E9C2}"/>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
