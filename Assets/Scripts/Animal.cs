@@ -14,4 +14,10 @@ public class Animal : MonoBehaviour
     public AnimalDefinition Definition => definition;
     public Color OutlineColor => outlineColor;
     public float OutlineWidth => outlineWidth;
+    public bool HasBeenPhotographed { get; private set; }
+
+    public void MarkPhotographed()
+    {
+        HasBeenPhotographed = true;
+    }
 }

@@ -95,7 +95,8 @@ public class PlayerController : MonoBehaviour
 
         Animal animal = null;
         bool canTakePhoto = _inventory.CurrentItem == ItemType.None &&
-                            _visibility.TryGetVisibleAnimal(out animal, out _);
+                            _visibility.TryGetVisibleAnimal(out animal, out _) &&
+                            !animal.HasBeenPhotographed;
 
         UpdateOutlineTarget(canTakePhoto, animal);
 
@@ -105,7 +106,7 @@ public class PlayerController : MonoBehaviour
         // One context button: photographing wins over interacting.
         if (canTakePhoto)
             TakePhoto(animal);
-        else if (_focusedInteractable != null)
+        else if (_focusedInteractable != null && _focusedInteractable.IsInteractionAvailable)
         {
             _focusedInteractable.Interact(this);
         }
@@ -298,7 +299,7 @@ public class PlayerController : MonoBehaviour
 
             Interactable interactable = hit.GetComponentInParent<Interactable>();
             if (interactable == null || !interactable.isActiveAndEnabled ||
-                _nearbyInteractables.Contains(interactable))
+                !interactable.IsInteractionAvailable || _nearbyInteractables.Contains(interactable))
                 continue;
 
             _nearbyInteractables.Add(interactable);
@@ -369,7 +370,12 @@ public class PlayerController : MonoBehaviour
 
     private void TakePhoto(Animal animal)
     {
-        if (animal != null && animal.Definition != null && book != null)
+        if (animal == null)
+            return;
+
+        animal.MarkPhotographed();
+
+        if (animal.Definition != null && book != null)
             book.Unlock(animal.Definition);
     }
 }

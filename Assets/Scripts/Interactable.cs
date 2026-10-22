@@ -11,6 +11,8 @@ public abstract class Interactable : MonoBehaviour
     public Vector3 FocusPosition => focusPoint != null ? focusPoint.position : transform.position;
     public Transform OutlineRoot => outlineRoot != null ? outlineRoot : transform;
 
+    public virtual bool IsInteractionAvailable => true;
+
     public virtual void OnFocus(PlayerController player)
     {
     }

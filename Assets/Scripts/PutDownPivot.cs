@@ -17,11 +17,15 @@ public class PutDownPivot : Interactable
     [SerializeField] private GameObject placedVisual;
     [Tooltip("Fired when a matching item is put down on this pivot.")]
     [SerializeField] private ItemPutDownEvent onItemPutDown = new ItemPutDownEvent();
+    [Tooltip("When enabled, only the first successful pick-up or put-down uses this pivot. " +
+             "Failed attempts (empty-handed, wrong item, full hands) do not count.")]
+    [SerializeField] private bool allowSingleInteraction;
 
     [Header("Sounds")] 
     [SerializeField] private AK.Wwise.Event pickUpSound;
     
     private ItemType _placedItem = ItemType.None;
+    private bool _interactionUsed;
 
     private void Awake()
     {
@@ -35,34 +39,41 @@ public class PutDownPivot : Interactable
         SetPlacedItem(startingItem);
     }
 
+    public override bool IsInteractionAvailable => !allowSingleInteraction || !_interactionUsed;
+
     public override void Interact(PlayerController player)
     {
-        if (_placedItem != ItemType.None)
-            TryPickUp(player);
-        else
-            TryPutDown(player);
+        if (!IsInteractionAvailable)
+            return;
+
+        bool succeeded = _placedItem != ItemType.None ? TryPickUp(player) : TryPutDown(player);
+
+        if (succeeded && allowSingleInteraction)
+            _interactionUsed = true;
     }
 
-    private void TryPutDown(PlayerController player)
+    private bool TryPutDown(PlayerController player)
     {
         ItemType item = player.CurrentItem;
         if (!item.CanPutDown() || !acceptedItems.Contains(item))
-            return;
+            return false;
 
         player.SetItem(ItemType.None);
         SetPlacedItem(item);
 
         onItemPutDown.Invoke(item);
+        return true;
     }
 
-    private void TryPickUp(PlayerController player)
+    private bool TryPickUp(PlayerController player)
     {
         if (player.CurrentItem != ItemType.None || !_placedItem.CanPickUp())
-            return;
+            return false;
 
         player.SetItem(_placedItem);
         SetPlacedItem(ItemType.None);
         pickUpSound?.Post(gameObject);
+        return true;
     }
 
     private void SetPlacedItem(ItemType item)
