@@ -39,6 +39,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slopeLimit = 50f;
     [SerializeField] private LayerMask groundMask = ~0;
 
+    [Header("Audio")] 
+    [SerializeField] private AK.Wwise.Event playPlayerCanTakePhoto;
+    [SerializeField] private AK.Wwise.Event playPlayerHasTakenPhoto;
+    [SerializeField] private AK.Wwise.Event playPlayerWalking;
+    [SerializeField] private AK.Wwise.Event stopPlayerWalking;
+    
     private const int MaxInteractablesDetected = 8;
 
     private Rigidbody _rb;
@@ -55,6 +61,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 _input;
     private Vector3 _forward;
     private Vector3 _right;
+
+    private bool _isWalking;
+    private bool _hasAlreadyPlayerCanTakePhoto;
 
     public ItemType CurrentItem => _inventory.CurrentItem;
     public bool HasApples => _inventory.HasApples;
@@ -81,6 +90,11 @@ public class PlayerController : MonoBehaviour
             _input = Vector2.zero;
             _rb.linearVelocity = Vector3.zero;
             _rb.angularVelocity = Vector3.zero;
+            if (_isWalking)
+            {
+                stopPlayerWalking?.Post(gameObject);
+                _isWalking = false;
+            }
             return;
         }
 
@@ -97,13 +111,21 @@ public class PlayerController : MonoBehaviour
         bool canTakePhoto = _inventory.CurrentItem == ItemType.None &&
                             _visibility.TryGetVisibleAnimal(out animal, out _) &&
                             !animal.HasBeenPhotographed;
+        if (canTakePhoto && !_hasAlreadyPlayerCanTakePhoto)
+        {
+            playPlayerCanTakePhoto?.Post(gameObject);
+            _hasAlreadyPlayerCanTakePhoto = true;
+        }
+        else if (!canTakePhoto && _hasAlreadyPlayerCanTakePhoto)
+        {
+            _hasAlreadyPlayerCanTakePhoto = false;
+        }
 
         UpdateOutlineTarget(canTakePhoto, animal);
 
         if (!interactionAction.action.WasPressedThisFrame())
             return;
 
-        // One context button: photographing wins over interacting.
         if (canTakePhoto)
             TakePhoto(animal);
         else if (_focusedInteractable != null && _focusedInteractable.IsInteractionAvailable)
@@ -112,8 +134,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Modal UI consumes all input. The interaction action closes signs, while the book
-    // toggle only opens or closes the book and never reaches world interaction.
     private bool HandleUiInput()
     {
         UIManager ui = UIManager.Instance;
@@ -148,7 +168,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    // Prototype shortcut; replace with an InputActionReference if the book needs remapping.
+    // Prototype shortcut
     private static bool IsBookTogglePressed()
     {
         return Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame;
@@ -167,8 +187,6 @@ public class PlayerController : MonoBehaviour
 
         if (CheckGrounded(out Vector3 groundNormal))
         {
-            // Follow the ground plane so small hills can be climbed, then press down
-            // slightly to stay glued and avoid bouncing down slopes.
             velocity = Vector3.ProjectOnPlane(velocity, groundNormal) - groundNormal * groundStickSpeed;
         }
         else
@@ -229,6 +247,17 @@ public class PlayerController : MonoBehaviour
                 velocity = Vector3.zero;
         }
 
+        if (velocity != Vector3.zero && !_isWalking)
+        {
+            _isWalking = true;
+            playPlayerWalking?.Post(gameObject);
+        }
+        else if (velocity == Vector3.zero && _isWalking)
+        {
+            _isWalking = false;
+            stopPlayerWalking?.Post(gameObject);
+        }
+        
         return velocity;
     }
 
@@ -377,5 +406,6 @@ public class PlayerController : MonoBehaviour
 
         if (animal.Definition != null && book != null)
             book.Unlock(animal.Definition);
+        playPlayerHasTakenPhoto?.Post(gameObject);
     }
 }

@@ -69,11 +69,13 @@ MonoBehaviour:
   focusPoint: {fileID: 5968107404493797042}
   outlineRoot: {fileID: 0}
   acceptedItems: 
+  startingItem: 0
   placedVisual: {fileID: 0}
   onItemPutDown:
     m_PersistentCalls:
       m_Calls: []
+  allowSingleInteraction: 0
   pickUpSound:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3e95d8aedda64e4718b16889e0958d9f, type: 2}
+    WwiseObjectReference: {fileID: 0}

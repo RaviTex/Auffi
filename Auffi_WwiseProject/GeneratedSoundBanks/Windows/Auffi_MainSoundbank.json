@@ -9,8 +9,9 @@
     "Id": "2162464331",
     "Type": "User",
     "GUID": "{F8CE760F-79D5-4B65-85AE-800D278E54CB}",
+    "Color": "13",
     "Language": "SFX",
-    "Hash": "{7941AE89-9E1A-390D-13A4-AB98F333493B}",
+    "Hash": "{D184D96F-3315-2F40-BF0C-6BD7A8BD9FB0}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Auffi_MainSoundbank",
     "ShortName": "Auffi_MainSoundbank",
     "Path": "Auffi_MainSoundbank.bnk",
@@ -40,12 +41,28 @@
       "CachePath": "88/{88C123F3-AF7C-2EB6-4CCC-2D7E5ED87287}.wem"
      },
      {
+      "Id": "229377283",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bells, Animal, Cow Bells, Noisy SND62919 S06.wav",
+      "CachePath": "82/{82908946-4C72-171F-5639-AB7E9DBC9168}.wem"
+     },
+     {
       "Id": "376936524",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00.wav",
       "CachePath": "ED/{EDC6B8F1-1D1D-BF29-3616-5A6BF8B60411}.wem"
+     },
+     {
+      "Id": "481724821",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bells, Animal, Cow Bells SND62918 S01.wav",
+      "CachePath": "48/{48058060-0E83-7418-8C9E-A0C50B313A35}.wem"
      },
      {
       "Id": "542290487",
@@ -62,6 +79,14 @@
       "Location": "Memory",
       "ShortName": "Camera_Click.wav",
       "CachePath": "7A/{7AFF1604-CC5F-53A2-55BC-80BF23A1F9C6}.wem"
+     },
+     {
+      "Id": "612600531",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bells, Animal, Cow Bells, Noisy SND62919 S05.wav",
+      "CachePath": "1D/{1D56FDA0-9FE1-30C3-11CC-0CED79CDA5B8}.wem"
      },
      {
       "Id": "659180512",
@@ -118,6 +143,22 @@
       "Location": "Memory",
       "ShortName": "Animals, Farm, Cows, Mooing On A Field SND35954 S02.wav",
       "CachePath": "8E/{8E0D269E-A015-9227-F89D-327F0B8CB4C6}.wem"
+     },
+     {
+      "Id": "937737313",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bells, Animal, Cow Bells, Noisy SND62919 S03.wav",
+      "CachePath": "0C/{0C3BDE1B-DB5E-DC16-3DA9-42293DE18037}.wem"
+     },
+     {
+      "Id": "945579852",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Bells, Animal, Cow Bells, Noisy SND62919 S01.wav",
+      "CachePath": "47/{4707EB5B-CBBA-BDE6-F37D-4CC4A3FA559C}.wem"
      },
      {
       "Id": "976648513",
@@ -183,11 +224,38 @@
       }
      },
      {
+      "Id": "1719156379",
+      "Name": "Play_CowBells",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX_Audio\\Play_CowBells",
+      "GUID": "{3263901C-FABF-4689-895E-75FBD2A8DD71}",
+      "Color": "2",
+      "MaxAttenuation": "100",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "229377283"
+       },
+       {
+        "Id": "481724821"
+       },
+       {
+        "Id": "612600531"
+       },
+       {
+        "Id": "937737313"
+       },
+       {
+        "Id": "945579852"
+       }
+      ]
+     },
+     {
       "Id": "1349429770",
       "Name": "Play_CowMoo",
       "ObjectPath": "\\Events\\Default Work Unit\\SFX_Audio\\Play_CowMoo",
       "GUID": "{5E2F8302-DE45-432F-B455-74FCE749CDE8}",
       "Color": "2",
+      "MaxAttenuation": "100",
       "DurationType": "OneShot",
       "DurationMin": "1.1908594",
       "DurationMax": "1.9828088",
@@ -248,6 +316,28 @@
       ]
      },
      {
+      "Id": "400483453",
+      "Name": "Stop_CowBells",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX_Audio\\Stop_CowBells",
+      "GUID": "{9E5EE6C5-AB66-4355-8997-C6F9C436E9C2}",
+      "Color": "2",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "3774287820",
+      "Name": "Stop_MeadowsAtmos",
+      "ObjectPath": "\\Events\\Default Work Unit\\Atmosphere_Audio\\Stop_MeadowsAtmos",
+      "GUID": "{05B2D4BF-5ABB-4D78-B109-97C378B95585}",
+      "Color": "4",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
       "Id": "2235773436",
       "Name": "Stop_WalkingLoop_Meadows",
       "ObjectPath": "\\Events\\Default Work Unit\\Player_Audio\\Stop_WalkingLoop_Meadows",
@@ -261,6 +351,6 @@
     ]
    }
   ],
-  "FileHash": "{1C900FAA-5681-DE0D-05B1-AE22E0478932}"
+  "FileHash": "{F473A10D-C381-7266-654F-A7304DC2B3D9}"
  }
 }

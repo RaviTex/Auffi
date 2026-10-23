@@ -14,6 +14,7 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID PLAY_CAMERASHUTTER = 4863038U;
+        static const AkUniqueID PLAY_COWBELLS = 1719156379U;
         static const AkUniqueID PLAY_COWMOO = 1349429770U;
         static const AkUniqueID PLAY_GATEOPEN = 3788303255U;
         static const AkUniqueID PLAY_MEADOWSATMOS = 3666405554U;
@@ -22,19 +23,23 @@ namespace AK
         static const AkUniqueID PLAY_POSITIVEFEEDBACK = 2928908110U;
         static const AkUniqueID PLAY_WALKINGLOOP_MEADOWS = 2312064978U;
         static const AkUniqueID PLAY_WINDBACKGROUND = 952778856U;
+        static const AkUniqueID STOP_COWBELLS = 400483453U;
+        static const AkUniqueID STOP_MEADOWSATMOS = 3774287820U;
         static const AkUniqueID STOP_WALKINGLOOP_MEADOWS = 2235773436U;
     } // namespace EVENTS
 
     namespace SWITCHES
     {
-        namespace ITEM_SWITCH
+        namespace INTERACT_ITEM
         {
-            static const AkUniqueID GROUP = 966461355U;
+            static const AkUniqueID GROUP = 517931375U;
 
             namespace SWITCH
             {
+                static const AkUniqueID REGULAR_ITEM = 4140710163U;
+                static const AkUniqueID SPECIAL_ITEM = 2456312588U;
             } // namespace SWITCH
-        } // namespace ITEM_SWITCH
+        } // namespace INTERACT_ITEM
 
     } // namespace SWITCHES
 

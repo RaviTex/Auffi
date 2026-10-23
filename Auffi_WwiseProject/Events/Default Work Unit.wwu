@@ -85,6 +85,13 @@
 					</PropertyList>
 					<ChildrenList>
 						<Event Name="Play_CowMoo" ID="{5E2F8302-DE45-432F-B455-74FCE749CDE8}">
+							<PropertyList>
+								<Property Name="LimitScope" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ChildrenList>
 								<Action Name="" ID="{B5735E60-0630-4421-8EBD-B93680E151EC}" ShortID="535308928">
 									<ReferenceList>
@@ -95,8 +102,45 @@
 								</Action>
 							</ChildrenList>
 						</Event>
-						<Event Name="Play_CowBells" ID="{3263901C-FABF-4689-895E-75FBD2A8DD71}"/>
-						<Event Name="Stop_CowBells" ID="{9E5EE6C5-AB66-4355-8997-C6F9C436E9C2}"/>
+						<Event Name="Play_CowBells" ID="{3263901C-FABF-4689-895E-75FBD2A8DD71}">
+							<PropertyList>
+								<Property Name="LimitScope" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ChildrenList>
+								<Action Name="" ID="{B612D5EA-4CBE-426E-8FFA-70B30A20E321}" ShortID="427560131">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Cow Bells" ID="{08AC16AC-A7F0-47EE-8A57-0572590CFF70}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_CowBells" ID="{9E5EE6C5-AB66-4355-8997-C6F9C436E9C2}">
+							<PropertyList>
+								<Property Name="LimitScope" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ChildrenList>
+								<Action Name="" ID="{2C56BF78-D2EA-4909-A894-FE11873CC83B}" ShortID="892983948">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Cow Bells" ID="{08AC16AC-A7F0-47EE-8A57-0572590CFF70}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

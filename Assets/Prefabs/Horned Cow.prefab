@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 1404747240895902197}
   - component: {fileID: 4072132037987698508}
   - component: {fileID: 6396882117000922260}
+  - component: {fileID: 8947123294989203354}
   m_Layer: 6
   m_Name: Horned Cow
   m_TagString: Cow
@@ -319,6 +320,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Animal
   definition: {fileID: 11400000, guid: 6e2164621ab7ab2fe9453b272b65f9aa, type: 2}
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0.03
+  playCowMooing:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d22badc859a01a9ae9d3dd1b9becdba0, type: 2}
 --- !u!114 &6396882117000922260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +342,38 @@ MonoBehaviour:
   moveSpeed: 2
   stopDistance: 1.5
   rotationLerpSpeed: 8
+  playCowBells:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ea0297a040a73c111a73ab8328c7b726, type: 2}
+  stopCowBells:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d2c1020915ff671dbbc58ecf3d3149be, type: 2}
+--- !u!114 &8947123294989203354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192776295952308534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f259becd10f4b42b03d0eb4175cf0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1263089156580208220
 GameObject:
   m_ObjectHideFlags: 0

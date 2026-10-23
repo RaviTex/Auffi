@@ -5,6 +5,8 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
+/Linux_Build
+/Windows_Build
 
 *.csproj
 *.unityproj

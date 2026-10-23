@@ -9,8 +9,9 @@
     "Id": "3537662815",
     "Type": "User",
     "GUID": "{561F0213-F399-4EC7-8A8E-8250945837F2}",
+    "Color": "23",
     "Language": "SFX",
-    "Hash": "{21FC08CA-49C4-0EA6-41FB-59BD0F093CFC}",
+    "Hash": "{C47F1560-600E-E02F-C656-C0708A9C7DA7}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Audio_Abgabe_Bank",
     "ShortName": "Audio_Abgabe_Bank",
     "Path": "Audio_Abgabe_Bank.bnk",
@@ -21,6 +22,7 @@
        "Name": "Synth One",
        "ObjectPath": "\\Containers\\Nici\\PickUp_Item\\Synth One",
        "GUID": "{F52EF8D7-C375-49B4-98F2-2FC403622F77}",
+       "Color": "23",
        "LibName": "Wwise Synth One",
        "LibId": "9699330"
       },
@@ -37,6 +39,7 @@
        "Name": "Synth One",
        "ObjectPath": "\\Containers\\EllieWorkUnit\\Wind\\WindLight_01\\Synth One",
        "GUID": "{AAC7B7C1-9090-4B8F-ACED-3E332959ED67}",
+       "Color": "23",
        "LibName": "Wwise Synth One",
        "LibId": "9699330"
       },
@@ -45,6 +48,7 @@
        "Name": "Synth One",
        "ObjectPath": "\\Containers\\Jezz\\PositiveFeedback\\Synth One",
        "GUID": "{D814FF39-DA3F-4950-9003-0A98BC5BF265}",
+       "Color": "23",
        "LibName": "Wwise Synth One",
        "LibId": "9699330"
       },
@@ -53,6 +57,7 @@
        "Name": "Synth One",
        "ObjectPath": "\\Containers\\EllieWorkUnit\\Wind\\WindLight\\Synth One",
        "GUID": "{25B3142B-985C-42BE-B416-8C952F07BBE2}",
+       "Color": "23",
        "LibName": "Wwise Synth One",
        "LibId": "9699330"
       },
@@ -77,6 +82,7 @@
        "Name": "Tone Generator",
        "ObjectPath": "\\Containers\\Platzer\\Gate\\Tone Generator",
        "GUID": "{08BDDC55-C808-4251-BED0-925DB561A2BB}",
+       "Color": "23",
        "LibName": "Wwise Tone Generator",
        "LibId": "6684674"
       }
@@ -88,6 +94,7 @@
       "Name": "Play_GateOpen",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_GateOpen",
       "GUID": "{F64A33ED-372B-4B9A-B59D-77221F271654}",
+      "Color": "23",
       "DurationType": "OneShot",
       "DurationMin": "1.2",
       "DurationMax": "1.2",
@@ -113,6 +120,7 @@
       "Name": "Play_Pickup",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_Pickup",
       "GUID": "{ADDD1C9F-57FA-48EC-A72F-F75E83614142}",
+      "Color": "23",
       "DurationType": "Unknown",
       "PluginRefs": {
        "Custom": [
@@ -127,6 +135,7 @@
       "Name": "Play_PositiveFeedback",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_PositiveFeedback",
       "GUID": "{4338B9CD-183E-4592-839F-1B5A40D60EB0}",
+      "Color": "23",
       "DurationType": "Unknown",
       "PluginRefs": {
        "Custom": [
@@ -141,6 +150,7 @@
       "Name": "Play_WindBackground",
       "ObjectPath": "\\Events\\Audio_Abgabe_Events\\Play_WindBackground",
       "GUID": "{9DF8E451-4CF6-4BE6-B627-EFEF4CAE4746}",
+      "Color": "23",
       "DurationType": "Infinite",
       "PluginRefs": {
        "Custom": [
@@ -156,6 +166,6 @@
     ]
    }
   ],
-  "FileHash": "{B2824E30-FC31-C08A-044A-76E6C5E03EDD}"
+  "FileHash": "{1B606B10-7515-DC2C-884A-220C826EA926}"
  }
 }

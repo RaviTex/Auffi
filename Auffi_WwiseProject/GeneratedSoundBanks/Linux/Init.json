@@ -66,15 +66,28 @@
     ],
     "SwitchGroups": [
      {
-      "Id": "966461355",
-      "Name": "Item_Switch",
-      "ObjectPath": "\\Switches\\Nici\\Item_Switch",
+      "Id": "517931375",
+      "Name": "Interact_Item",
+      "ObjectPath": "\\Switches\\Nici\\Interact_Item",
       "GUID": "{96198570-DC8D-4C8E-8DD4-7C4691FC4E0C}",
-      "Switches": []
+      "Switches": [
+       {
+        "Id": "2456312588",
+        "Name": "Special_Item",
+        "ObjectPath": "\\Switches\\Nici\\Interact_Item\\Special_Item",
+        "GUID": "{383AA73D-8A5A-4CCA-9A21-24DD203D9185}"
+       },
+       {
+        "Id": "4140710163",
+        "Name": "Regular_Item",
+        "ObjectPath": "\\Switches\\Nici\\Interact_Item\\Regular_Item",
+        "GUID": "{5850D345-B082-4273-B030-C82C61EC0983}"
+       }
+      ]
      }
     ]
    }
   ],
-  "FileHash": "{968D3F14-9527-A39E-CFC2-5F971188DE46}"
+  "FileHash": "{3A030E27-AE9D-4888-97C1-5EEAA7CCAD8B}"
  }
 }

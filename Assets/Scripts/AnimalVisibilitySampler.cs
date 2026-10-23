@@ -73,7 +73,8 @@ public class AnimalVisibilitySampler : MonoBehaviour
 
     public bool TryGetVisibleAnimal(out Animal animal, out Vector3 center)
     {
-        bool visible = !Paused && VisibleAnimal != null && Time.time - _lastSeenTime <= graceTime;
+        bool visible = !Paused && VisibleAnimal != null && !VisibleAnimal.HasBeenPhotographed &&
+                       Time.time - _lastSeenTime <= graceTime;
         animal = visible ? VisibleAnimal : null;
         center = visible ? VisibleAnimalCenter : Vector3.zero;
         return visible;
@@ -207,7 +208,7 @@ public class AnimalVisibilitySampler : MonoBehaviour
                 continue;
 
             Animal animal = collider.GetComponentInParent<Animal>();
-            if (animal == null)
+            if (animal == null || animal.HasBeenPhotographed)
                 continue;
 
             Vector3 center = collider.bounds.center;

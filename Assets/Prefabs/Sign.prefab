@@ -130,7 +130,10 @@ MonoBehaviour:
   outlineRoot: {fileID: 4164342803755337576}
   message: 'LMB to interact
 
-    F to open the Book'
+    Important! q/e to peak with the camera!
+
+    F to
+    open the Book'
 --- !u!65 &6260711142414965857
 BoxCollider:
   m_ObjectHideFlags: 0

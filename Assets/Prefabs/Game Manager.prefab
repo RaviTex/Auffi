@@ -73,7 +73,7 @@ MonoBehaviour:
   rewardAchievedSound:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 1406bc64caa4a31fa8f3cf5337322007, type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &2496969326303290310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,5 +86,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d048f0295f96fb480546a7a6504d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gameOverScreen: {fileID: 0}
-  bookUI: {fileID: 0}
+  gameOverDuration: 3
