@@ -2,6 +2,10 @@
 <WwiseDocument Type="WorkUnit" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" SchemaVersion="133">
 	<Events>
 		<WorkUnit Name="Audio_Abgabe_Events" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" PersistMode="Standalone">
+			<PropertyList>
+				<Property Name="Color" Type="int16" Value="23"/>
+				<Property Name="OverrideColor" Type="bool" Value="True"/>
+			</PropertyList>
 			<ChildrenList>
 				<Event Name="Play_Pickup" ID="{ADDD1C9F-57FA-48EC-A72F-F75E83614142}">
 					<ChildrenList>

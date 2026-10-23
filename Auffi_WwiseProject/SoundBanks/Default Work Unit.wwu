@@ -4,6 +4,10 @@
 		<WorkUnit Name="Default Work Unit" ID="{3FBDB884-25A7-4B13-94EB-2D38E1CF1073}" PersistMode="Standalone">
 			<ChildrenList>
 				<SoundBank Name="Auffi_MainSoundbank" ID="{F8CE760F-79D5-4B65-85AE-800D278E54CB}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="13"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ObjectInclusionList>
 						<ObjectRef Name="Atmosphere_Audio" ID="{76F796A8-7D37-43B2-A602-A7649DB0D6C0}" WorkUnitID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Player_Audio" ID="{1918B729-DC93-478C-9246-E679FEAB8164}" WorkUnitID="{7584281E-928B-47C4-A98D-C7C89255DD9A}" Origin="Manual" Filter="7"/>
@@ -13,6 +17,10 @@
 					<GameSyncExclusionList/>
 				</SoundBank>
 				<SoundBank Name="Audio_Abgabe_Bank" ID="{561F0213-F399-4EC7-8A8E-8250945837F2}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="23"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ObjectInclusionList>
 						<ObjectRef Name="Audio_Abgabe_Events" ID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" WorkUnitID="{EDD455ED-A991-4B22-99EA-2185FA0A2F43}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
