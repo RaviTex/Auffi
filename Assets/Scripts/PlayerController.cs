@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("General")]
     [SerializeField] private GameManager gameManager;
     [SerializeField] private AnimalBook book;
-
+    [SerializeField] private CameraController cameraController;
+    
     [Header("Input")]
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference interactionAction;
@@ -78,9 +79,14 @@ public class PlayerController : MonoBehaviour
 
         ConfigurePhysics();
 
-        // Isometric movement axes, cached so turning the player does not feed back into movement.
-        _forward = (transform.forward - transform.right).normalized;
-        _right = (transform.forward + transform.right).normalized;
+        if (cameraController == null)
+
+            cameraController = FindFirstObjectByType<CameraController>();
+        
+        float baseYaw = cameraController != null ? cameraController.BaseYaw : -45f;
+        Quaternion yawRotation = Quaternion.Euler(0f, baseYaw, 0f);
+        _forward = yawRotation * Vector3.forward;
+        _right = yawRotation * Vector3.right;
     }
 
     private void Update()
@@ -206,8 +212,6 @@ public class PlayerController : MonoBehaviour
 
     private void ConfigurePhysics()
     {
-        // Without a frictionless material, the ground stick force creates a normal force
-        // every step and friction cancels the scripted movement before the player can accelerate.
         _capsule.sharedMaterial = new PhysicsMaterial("PlayerFrictionless")
         {
             dynamicFriction = 0f,
@@ -217,8 +221,6 @@ public class PlayerController : MonoBehaviour
             bounceCombine = PhysicsMaterialCombine.Minimum
         };
 
-        // Gravity is applied manually. Only Y rotation is allowed so MoveRotation can
-        // interpolate smoothly and collisions cannot tip the player over.
         _rb.useGravity = false;
         _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }

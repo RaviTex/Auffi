@@ -2734,6 +2734,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 136994875}
     - target: {fileID: 5406369608141442038, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 330585548}
+    - target: {fileID: 5406369608141442038, guid: 917dc2334ca2f64d29bd8f9ad5398f5b, type: 3}
       propertyPath: canTakePhotoFeedbackTxt
       value: 
       objectReference: {fileID: 0}

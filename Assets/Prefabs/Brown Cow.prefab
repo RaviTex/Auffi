@@ -647,6 +647,12 @@ MonoBehaviour:
   moveSpeed: 2
   stopDistance: 1.5
   rotationLerpSpeed: 8
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  groundCheckHeight: 5
+  groundCheckDistance: 10
+  groundOffset: 1
   playCowBells:
     idInternal: 0
     valueGuidInternal: 

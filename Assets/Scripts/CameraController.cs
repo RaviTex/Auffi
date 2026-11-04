@@ -70,6 +70,8 @@ public class CameraController : MonoBehaviour
         set => pitch = Mathf.Clamp(value, MinPitch, MaxPitch);
     }
 
+    public float BaseYaw => baseYaw;
+
     public float Distance
     {
         get => distance;
