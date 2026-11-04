@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Face
+    second: {fileID: 2100000, guid: 5ae51a72b7a0255439361695837c3ca6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Player
     second: {fileID: 2100000, guid: 2d1843a6b3eec075180dc8789a8d5a6d, type: 2}
   materials:
