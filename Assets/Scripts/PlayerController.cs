@@ -296,6 +296,12 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateFacing()
     {
+        if (_input.sqrMagnitude < 0.01f)
+        {
+            _rb.angularVelocity = Vector3.zero;
+            return;
+        }
+
         Vector3 direction;
 
         if (_inventory.CurrentItem == ItemType.None &&
