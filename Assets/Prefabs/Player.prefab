@@ -1272,7 +1272,7 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   interactionAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  openAlbumAction: {fileID: 0}
+  openAlbumAction: {fileID: -7159801043964077268, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   movementMode: 2
   maxSpeed: 8
   acceleration: 32
