@@ -8,8 +8,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject emptySlotVisual;
     [Tooltip("Shown when an animal can be photographed.")]
     [SerializeField] private GameObject cameraSlotVisual;
-    [Tooltip("Shown while the player carries an empty bucket.")]
-    [SerializeField] private GameObject bucketSlotVisual;
     [Tooltip("Shown while the player carries a bucket filled with apples.")]
     [SerializeField] private GameObject applesSlotVisual;
     [Tooltip("Shown while the player carries the gate key.")]
@@ -18,7 +16,6 @@ public class PlayerInventory : MonoBehaviour
     private AnimalVisibilitySampler _visibility;
 
     public ItemType CurrentItem { get; private set; } = ItemType.None;
-    public ItemType PreviewItem { get; private set; } = ItemType.None;
     public bool HasApples => CurrentItem == ItemType.Apples;
     public bool IsHolding =>  CurrentItem != ItemType.None;
 
@@ -31,17 +28,10 @@ public class PlayerInventory : MonoBehaviour
     {
         bool photoAvailable = CurrentItem == ItemType.None && _visibility.TryGetVisibleAnimal(out _, out _);
 
-        ItemType state = CurrentItem != ItemType.None
-            ? CurrentItem
-            : photoAvailable
-                ? ItemType.Camera
-                : PreviewItem != ItemType.None
-                    ? PreviewItem
-                    : ItemType.None;
+        ItemType state = CurrentItem != ItemType.None ? CurrentItem : photoAvailable ? ItemType.Camera : ItemType.None;
 
         SetSlotVisual(emptySlotVisual, state == ItemType.None);
         SetSlotVisual(cameraSlotVisual, state == ItemType.Camera);
-        SetSlotVisual(bucketSlotVisual, state == ItemType.Bucket);
         SetSlotVisual(applesSlotVisual, state == ItemType.Apples);
         SetSlotVisual(keySlotVisual, state == ItemType.Key);
     }
@@ -49,11 +39,6 @@ public class PlayerInventory : MonoBehaviour
     public void SetItem(ItemType item)
     {
         CurrentItem = item;
-    }
-
-    public void SetItemPreview(ItemType item)
-    {
-        PreviewItem = item;
     }
 
     private static void SetSlotVisual(GameObject visual, bool active)
