@@ -52,12 +52,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AK.Wwise.Event playPlayerWalking;
     [SerializeField] private AK.Wwise.Event stopPlayerWalking;
 
+    [HideInInspector] public PlayerInventory inventory;
+    
     private const int MaxInteractablesDetected = 8;
 
     private Rigidbody _rb;
     private CapsuleCollider _capsule;
     private AnimalVisibilitySampler _visibility;
-    private PlayerInventory _inventory;
     private InteractableOutline _outline;
 
     private readonly Collider[] _interactableHits = new Collider[MaxInteractablesDetected];
@@ -72,15 +73,15 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     private bool _hasAlreadyPlayerCanTakePhoto;
 
-    public ItemType CurrentItem => _inventory.CurrentItem;
-    public bool HasApples => _inventory.HasApples;
+    public ItemType CurrentItem => inventory.CurrentItem;
+    public bool HasApples => inventory.HasApples;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _capsule = GetComponent<CapsuleCollider>();
         _visibility = GetComponent<AnimalVisibilitySampler>();
-        _inventory = GetComponent<PlayerInventory>();
+        inventory = GetComponent<PlayerInventory>();
         _outline = GetComponent<InteractableOutline>();
 
         if (cameraController == null)
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         Animal animal = null;
-        bool canTakePhoto = _inventory.CurrentItem == ItemType.None &&
+        bool canTakePhoto = inventory.CurrentItem == ItemType.None &&
                             _visibility.TryGetVisibleAnimal(out animal, out _) &&
                             !animal.HasBeenPhotographed;
         if (canTakePhoto && !_hasAlreadyPlayerCanTakePhoto)
@@ -144,7 +145,7 @@ public class PlayerController : MonoBehaviour
         }
         
         animator.SetBool("IsWalking", _isWalking);
-        animator.SetBool("IsHolding", _inventory.IsHolding);
+        animator.SetBool("IsHolding", inventory.IsHolding);
     }
 
     private bool HandleUiInput()
@@ -290,7 +291,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction;
 
-        if (_inventory.CurrentItem == ItemType.None &&
+        if (inventory.CurrentItem == ItemType.None &&
             _visibility.TryGetVisibleAnimal(out _, out Vector3 animalCenter))
             direction = animalCenter - transform.position;
         else if (_focusedInteractable != null)
@@ -382,13 +383,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetItem(ItemType item)
     {
-        _inventory.SetItem(item);
+        inventory.SetItem(item);
         _visibility.Paused = item != ItemType.None;
-    }
-
-    public void SetItemPreview(ItemType item)
-    {
-        _inventory.SetItemPreview(item);
     }
 
     private void TakePhoto(Animal animal)

@@ -69,7 +69,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   rewardAnimal: {fileID: 11400000, guid: 4982a91761e5c1c3e84534568f495c95, type: 2}
-  rewardItem: 4
+  rewardItem: 3
   rewardAchievedSound:
     idInternal: 0
     valueGuidInternal: 

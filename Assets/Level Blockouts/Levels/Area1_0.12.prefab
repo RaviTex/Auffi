@@ -9561,7 +9561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5197660035005244286, guid: c60785e0b226363ea9f28961e219e210, type: 3}
       propertyPath: 'acceptedItems.Array.data[0]'
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5197660035005244286, guid: c60785e0b226363ea9f28961e219e210, type: 3}
       propertyPath: onItemPutDown.m_PersistentCalls.m_Calls.Array.size
@@ -10270,7 +10270,11 @@ PrefabInstance:
       objectReference: {fileID: 7271830901613664866}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: startingItem
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: allowSingleInteraction
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: acceptedItems.Array.size
@@ -10278,7 +10282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: 'acceptedItems.Array.data[0]'
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
