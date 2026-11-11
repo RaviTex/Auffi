@@ -11,42 +11,47 @@ public class PlayerController : MonoBehaviour
         Accelerate
     }
 
-    [Header("General")]
-    [SerializeField] private GameManager gameManager;
+    [Header("General")] [SerializeField] private GameManager gameManager;
     [SerializeField] private AnimalBook book;
     [SerializeField] private CameraController cameraController;
-    
-    [Header("Input")]
-    [SerializeField] private InputActionReference moveAction;
+
+    [Header("Input")] [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference interactionAction;
     [SerializeField] private InputActionReference openAlbumAction;
 
     [Header("Movement")]
     [Tooltip("Instant: move at max speed right away. RampUp: speed builds up while a direction is held. " +
              "Accelerate: velocity accelerates and decelerates smoothly.")]
-    [SerializeField] private MovementMode movementMode = MovementMode.Accelerate;
+    [SerializeField]
+    private MovementMode movementMode = MovementMode.Accelerate;
+
     [SerializeField] private float maxSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
-    [Tooltip("How quickly the player turns towards its travel direction or focus target.")]
-    [SerializeField] private float rotationLerpSpeed = 8f;
 
-    [Header("Gravity")]
-    [SerializeField] private float gravity = 20f;
+    [Tooltip("How quickly the player turns towards its travel direction or focus target.")] [SerializeField]
+    private float rotationLerpSpeed = 8f;
+
+    [Header("Gravity")] [SerializeField] private float gravity = 20f;
     [SerializeField] private float maxFallSpeed = 30f;
-    [Tooltip("Small downward push that keeps the player glued to the ground.")]
-    [SerializeField] private float groundStickSpeed = 2f;
+
+    [Tooltip("Small downward push that keeps the player glued to the ground.")] [SerializeField]
+    private float groundStickSpeed = 2f;
+
     [SerializeField] private float groundCheckDistance = 0.2f;
-    [Tooltip("Steepest ground the player can walk on.")]
-    [SerializeField] private float slopeLimit = 50f;
+
+    [Tooltip("Steepest ground the player can walk on.")] [SerializeField]
+    private float slopeLimit = 50f;
+
     [SerializeField] private LayerMask groundMask = ~0;
 
-    [Header("Audio")] 
-    [SerializeField] private AK.Wwise.Event playPlayerCanTakePhoto;
+    [Header("Animation")] [SerializeField] private Animator animator;
+
+    [Header("Audio")] [SerializeField] private AK.Wwise.Event playPlayerCanTakePhoto;
     [SerializeField] private AK.Wwise.Event playPlayerHasTakenPhoto;
     [SerializeField] private AK.Wwise.Event playPlayerWalking;
     [SerializeField] private AK.Wwise.Event stopPlayerWalking;
-    
+
     private const int MaxInteractablesDetected = 8;
 
     private Rigidbody _rb;
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
         if (cameraController == null)
             cameraController = FindFirstObjectByType<CameraController>();
-        
+
         float baseYaw = cameraController != null ? cameraController.BaseYaw : -45f;
         Quaternion yawRotation = Quaternion.Euler(0f, baseYaw, 0f);
         _forward = yawRotation * Vector3.forward;
@@ -99,6 +104,7 @@ public class PlayerController : MonoBehaviour
                 stopPlayerWalking?.Post(gameObject);
                 _isWalking = false;
             }
+
             return;
         }
 
@@ -127,15 +133,18 @@ public class PlayerController : MonoBehaviour
 
         UpdateOutlineTarget(canTakePhoto, animal);
 
-        if (!interactionAction.action.WasPressedThisFrame())
-            return;
-
-        if (canTakePhoto)
-            TakePhoto(animal);
-        else if (_focusedInteractable != null && _focusedInteractable.IsInteractionAvailable)
+        if (interactionAction.action.WasPressedThisFrame())
         {
-            _focusedInteractable.Interact(this);
+            if (canTakePhoto)
+                TakePhoto(animal);
+            else if (_focusedInteractable != null && _focusedInteractable.IsInteractionAvailable)
+            {
+                _focusedInteractable.Interact(this);
+            }
         }
+        
+        animator.SetBool("IsWalking", _isWalking);
+        animator.SetBool("IsHolding", _inventory.IsHolding);
     }
 
     private bool HandleUiInput()
@@ -236,7 +245,7 @@ public class PlayerController : MonoBehaviour
             _isWalking = false;
             stopPlayerWalking?.Post(gameObject);
         }
-        
+
         return velocity;
     }
 

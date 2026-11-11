@@ -20,6 +20,7 @@ public class PlayerInventory : MonoBehaviour
     public ItemType CurrentItem { get; private set; } = ItemType.None;
     public ItemType PreviewItem { get; private set; } = ItemType.None;
     public bool HasApples => CurrentItem == ItemType.Apples;
+    public bool IsHolding =>  CurrentItem != ItemType.None;
 
     private void Awake()
     {
