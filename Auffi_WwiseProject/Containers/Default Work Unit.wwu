@@ -271,6 +271,10 @@
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Cow" ID="{A7C35E8D-1390-4B5E-8C0F-8EB3DD586579}" ShortID="818054276">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="18"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ChildrenList>
 						<RandomSequenceContainer Name="Moos" ID="{B218AA37-6717-4E5B-844A-F474F6C1191D}" ShortID="733292391">
 							<PropertyList>
@@ -781,6 +785,10 @@
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Ambience" ID="{5B354B4E-C524-41E4-925C-35C6EB7ADFFA}" ShortID="978271701">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="4"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ChildrenList>
 						<PropertyContainer Name="Meadows" ID="{E4D2FA1A-C114-45E3-BDF7-E8B7C56F9AAE}" ShortID="642490038">
 							<ReferenceList>
@@ -852,6 +860,10 @@
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Player" ID="{B6DEE264-E0C1-4DF8-A48F-30AA0CEDA37B}" ShortID="321744110">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="11"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 					<ChildrenList>
 						<Sound Name="Grass Loop Short by Yuval Id-189640 S00" ID="{8CBDDBA6-49CA-43BC-B2DA-BB39EA4CCA35}" ShortID="26463769">
 							<PropertyList>
