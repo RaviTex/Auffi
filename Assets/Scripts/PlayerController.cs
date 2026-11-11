@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("Input")]
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference interactionAction;
+    [SerializeField] private InputActionReference openAlbumAction;
 
     [Header("Movement")]
     [Tooltip("Instant: move at max speed right away. RampUp: speed builds up while a direction is held. " +
@@ -77,10 +78,7 @@ public class PlayerController : MonoBehaviour
         _inventory = GetComponent<PlayerInventory>();
         _outline = GetComponent<InteractableOutline>();
 
-        ConfigurePhysics();
-
         if (cameraController == null)
-
             cameraController = FindFirstObjectByType<CameraController>();
         
         float baseYaw = cameraController != null ? cameraController.BaseYaw : -45f;
@@ -143,7 +141,7 @@ public class PlayerController : MonoBehaviour
     private bool HandleUiInput()
     {
         UIManager ui = UIManager.Instance;
-        if (ui == null)
+        if (!ui)
             return false;
 
         if (ui.IsSignOpen)
@@ -156,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
         if (ui.IsBookOpen)
         {
-            if (IsBookTogglePressed())
+            if (openAlbumAction.action.WasPressedThisFrame())
                 ui.CloseBook();
 
             return true;
@@ -165,19 +163,13 @@ public class PlayerController : MonoBehaviour
         if (ui.IsGameOver)
             return true;
 
-        if (IsBookTogglePressed())
+        if (openAlbumAction.action.WasPressedThisFrame())
         {
             ui.OpenBook();
             return true;
         }
 
         return false;
-    }
-
-    // Prototype shortcut
-    private static bool IsBookTogglePressed()
-    {
-        return Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame;
     }
 
     private void FixedUpdate()
@@ -208,21 +200,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Game Over"))
             gameManager.GameOver();
-    }
-
-    private void ConfigurePhysics()
-    {
-        _capsule.sharedMaterial = new PhysicsMaterial("PlayerFrictionless")
-        {
-            dynamicFriction = 0f,
-            staticFriction = 0f,
-            bounciness = 0f,
-            frictionCombine = PhysicsMaterialCombine.Minimum,
-            bounceCombine = PhysicsMaterialCombine.Minimum
-        };
-
-        _rb.useGravity = false;
-        _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     private Vector3 GetDesiredHorizontalVelocity()
