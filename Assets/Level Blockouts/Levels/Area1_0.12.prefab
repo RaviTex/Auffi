@@ -11037,6 +11037,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a78254516480c1248b5734ecc3a4029a, type: 2}
+    - target: {fileID: 3421462664210613761, guid: 45508dcf5fad0db958aa02a6fe43ce11, type: 3}
+      propertyPath: heartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b568c3f4a31ee5f88d4e6d455c3acc6, type: 3}
     - target: {fileID: 3609298786394110917, guid: 45508dcf5fad0db958aa02a6fe43ce11, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
