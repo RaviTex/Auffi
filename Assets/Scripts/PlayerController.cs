@@ -67,15 +67,16 @@ public class PlayerController : MonoBehaviour
     private readonly RaycastHit[] _groundHits = new RaycastHit[4];
 
     private Interactable _focusedInteractable;
+    private Animal _visibleAnimal;
     private Vector2 _input;
     private Vector3 _forward;
     private Vector3 _right;
 
     private bool _isWalking;
-    private bool _hasAlreadyPlayerCanTakePhoto;
 
     public ItemType CurrentItem => inventory.CurrentItem;
     public bool HasApples => inventory.HasApples;
+    public bool IsHoldingItem => inventory.IsHoldingItem;
 
     private void Awake()
     {
@@ -85,6 +86,9 @@ public class PlayerController : MonoBehaviour
         inventory = GetComponent<PlayerInventory>();
         _outline = GetComponent<InteractableOutline>();
 
+        if (_visibility != null)
+            _visibility.VisibleAnimalChanged += OnVisibleAnimalChanged;
+
         if (cameraController == null)
             cameraController = FindFirstObjectByType<CameraController>();
 
@@ -92,6 +96,12 @@ public class PlayerController : MonoBehaviour
         Quaternion yawRotation = Quaternion.Euler(0f, baseYaw, 0f);
         _forward = yawRotation * Vector3.forward;
         _right = yawRotation * Vector3.right;
+    }
+
+    private void OnDestroy()
+    {
+        if (_visibility != null)
+            _visibility.VisibleAnimalChanged -= OnVisibleAnimalChanged;
     }
 
     private void Update()
@@ -119,21 +129,8 @@ public class PlayerController : MonoBehaviour
         if (HandleUiInput())
             return;
 
-        Animal animal = null;
-        bool canTakePhoto = inventory.CurrentItem == ItemType.None &&
-                            _visibility.TryGetVisibleAnimal(out animal, out _) &&
-                            !animal.HasBeenPhotographed;
-        if (canTakePhoto && !_hasAlreadyPlayerCanTakePhoto)
-        {
-            playPlayerCanTakePhoto?.Post(gameObject);
-            _hasAlreadyPlayerCanTakePhoto = true;
-            inventory.SetItem(ItemType.Camera);
-        }
-        else if (!canTakePhoto && _hasAlreadyPlayerCanTakePhoto)
-        {
-            _hasAlreadyPlayerCanTakePhoto = false;
-            inventory.SetItem(ItemType.None);
-        }
+        Animal animal = _visibleAnimal;
+        bool canTakePhoto = CanTakePhoto(animal);
 
         UpdateOutlineTarget(canTakePhoto, animal);
 
@@ -147,9 +144,36 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        print(inventory.IsHolding);
         animator.SetBool("IsWalking", _isWalking);
         animator.SetBool("IsHolding", inventory.IsHolding);
+    }
+
+    private void OnVisibleAnimalChanged(Animal animal)
+    {
+        _visibleAnimal = animal;
+        RefreshCameraItem();
+    }
+
+    private bool CanTakePhoto(Animal animal)
+    {
+        return animal != null && !animal.HasBeenPhotographed && !inventory.IsHoldingItem;
+    }
+
+    // Keeps the camera indicator in sync with the sampler instead of polling it every frame.
+    private void RefreshCameraItem()
+    {
+        if (CanTakePhoto(_visibleAnimal))
+        {
+            if (inventory.CurrentItem == ItemType.None)
+            {
+                playPlayerCanTakePhoto?.Post(gameObject);
+                inventory.SetItem(ItemType.Camera);
+            }
+        }
+        else if (inventory.CurrentItem == ItemType.Camera)
+        {
+            inventory.SetItem(ItemType.None);
+        }
     }
 
     private bool HandleUiInput()
@@ -295,9 +319,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction;
 
-        if (inventory.CurrentItem == ItemType.None &&
-            _visibility.TryGetVisibleAnimal(out _, out Vector3 animalCenter))
-            direction = animalCenter - transform.position;
+        if (CanTakePhoto(_visibleAnimal))
+            direction = _visibility.VisibleAnimalCenter - transform.position;
         else if (_focusedInteractable != null)
             direction = _focusedInteractable.FocusPosition - transform.position;
         else
@@ -388,7 +411,8 @@ public class PlayerController : MonoBehaviour
     public void SetItem(ItemType item)
     {
         inventory.SetItem(item);
-        _visibility.Paused = item != ItemType.None;
+        _visibility.Paused = inventory.IsHoldingItem;
+        RefreshCameraItem();
     }
 
     private void TakePhoto(Animal animal)
@@ -401,5 +425,6 @@ public class PlayerController : MonoBehaviour
         if (animal.Definition != null && book != null)
             book.Unlock(animal.Definition);
         playPlayerHasTakenPhoto?.Post(gameObject);
+        RefreshCameraItem();
     }
 }

@@ -13,32 +13,28 @@ public class PlayerInventory : MonoBehaviour
     [Tooltip("Shown while the player carries the gate key.")]
     [SerializeField] private GameObject keySlotVisual;
 
-    private AnimalVisibilitySampler _visibility;
-
     public ItemType CurrentItem { get; private set; } = ItemType.None;
     public bool HasApples => CurrentItem == ItemType.Apples;
-    public bool IsHolding =>  CurrentItem != ItemType.None;
+    public bool IsHolding => CurrentItem != ItemType.None;
+    public bool IsHoldingItem => CurrentItem == ItemType.Apples || CurrentItem == ItemType.Key;
 
     private void Awake()
     {
-        _visibility = GetComponent<AnimalVisibilitySampler>();
-    }
-
-    private void LateUpdate()
-    {
-        bool photoAvailable = CurrentItem == ItemType.None && _visibility.TryGetVisibleAnimal(out _, out _);
-
-        ItemType state = CurrentItem != ItemType.None ? CurrentItem : photoAvailable ? ItemType.Camera : ItemType.None;
-
-        SetSlotVisual(emptySlotVisual, state == ItemType.None);
-        SetSlotVisual(cameraSlotVisual, state == ItemType.Camera);
-        SetSlotVisual(applesSlotVisual, state == ItemType.Apples);
-        SetSlotVisual(keySlotVisual, state == ItemType.Key);
+        RefreshSlotVisuals();
     }
 
     public void SetItem(ItemType item)
     {
         CurrentItem = item;
+        RefreshSlotVisuals();
+    }
+
+    private void RefreshSlotVisuals()
+    {
+        SetSlotVisual(emptySlotVisual, CurrentItem == ItemType.None);
+        SetSlotVisual(cameraSlotVisual, CurrentItem == ItemType.Camera);
+        SetSlotVisual(applesSlotVisual, CurrentItem == ItemType.Apples);
+        SetSlotVisual(keySlotVisual, CurrentItem == ItemType.Key);
     }
 
     private static void SetSlotVisual(GameObject visual, bool active)

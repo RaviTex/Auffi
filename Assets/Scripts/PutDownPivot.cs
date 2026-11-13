@@ -67,7 +67,7 @@ public class PutDownPivot : Interactable
 
     private bool TryPickUp(PlayerController player)
     {
-        if (player.CurrentItem != ItemType.None || !_placedItem.CanPickUp())
+        if (player.IsHoldingItem || !_placedItem.CanPickUp())
             return false;
 
         player.SetItem(_placedItem);
