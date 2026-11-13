@@ -1,6 +1,11 @@
 fileFormatVersion: 2
-guid: ae6cba1a3792c974a94f6d9acd0caaae
+<<<<<<<< Updated upstream:Assets/GameSources/Player/Player.prefab.meta
+guid: 83d9a98e006c034468e84c01f3ac198c
 PrefabImporter:
+========
+guid: 9ce7a8d741c39254f959f0a27832d511
+DefaultImporter:
+>>>>>>>> Stashed changes:Assets/Scenes/Blockout.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
