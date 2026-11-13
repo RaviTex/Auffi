@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask groundMask = ~0;
 
-    [Header("Animation")] [SerializeField] private Animator animator;
+    [Header("Animation")] 
+    [SerializeField] private Animator animator;
 
     [Header("Audio")] [SerializeField] private AK.Wwise.Event playPlayerCanTakePhoto;
     [SerializeField] private AK.Wwise.Event playPlayerHasTakenPhoto;
