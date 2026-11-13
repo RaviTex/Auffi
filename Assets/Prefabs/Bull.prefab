@@ -779,6 +779,21 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: d22badc859a01a9ae9d3dd1b9becdba0, type: 2}
+  hasBeenPhotograph:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3818179319421770312}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   heartSprite: {fileID: 21300000, guid: 5b568c3f4a31ee5f88d4e6d455c3acc6, type: 3}
   heartSpawnHeight: 1
   heartRiseDistance: 1

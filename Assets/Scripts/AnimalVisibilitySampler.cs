@@ -45,6 +45,8 @@ public class AnimalVisibilitySampler : MonoBehaviour
     private Comparison<Candidate> _bestFirst;
     private float _nextCheckTime;
     private float _lastSeenTime = float.NegativeInfinity;
+    private Animal _seenAnimal;
+    private Vector3 _seenCenter;
     private string _lastDebugMessage;
 
     private bool _readbackPending;
@@ -65,19 +67,38 @@ public class AnimalVisibilitySampler : MonoBehaviour
     private readonly List<GameObject> _silhouetteObjects = new List<GameObject>();
     private readonly List<int> _silhouetteOriginalLayers = new List<int>();
 
-    // Set while the player holds an item, when sampling would be pointless.
-    public bool Paused { get; set; }
+    private bool _paused;
+
+    // Set while the player holds a real item, when sampling would be pointless.
+    public bool Paused
+    {
+        get => _paused;
+        set
+        {
+            if (_paused == value)
+                return;
+
+            _paused = value;
+
+            if (value)
+                ResetVisibleAnimal();
+            else
+                RefreshVisibleAnimal();
+        }
+    }
+
+    // Raised when the effective visibility state changes. Called with null when no animal
+    // is visible anymore. The state already accounts for Paused, grace time and photography.
+    public event Action<Animal> VisibleAnimalChanged;
 
     public Animal VisibleAnimal { get; private set; }
     public Vector3 VisibleAnimalCenter { get; private set; }
 
     public bool TryGetVisibleAnimal(out Animal animal, out Vector3 center)
     {
-        bool visible = !Paused && VisibleAnimal != null && !VisibleAnimal.HasBeenPhotographed &&
-                       Time.time - _lastSeenTime <= graceTime;
-        animal = visible ? VisibleAnimal : null;
-        center = visible ? VisibleAnimalCenter : Vector3.zero;
-        return visible;
+        animal = VisibleAnimal;
+        center = animal != null ? VisibleAnimalCenter : Vector3.zero;
+        return animal != null;
     }
 
     private void Start()
@@ -106,10 +127,10 @@ public class AnimalVisibilitySampler : MonoBehaviour
         {
             yield return waitForEndOfFrame;
 
+            RefreshVisibleAnimal();
+
             if (Paused)
             {
-                SetVisibleAnimal(null, default);
-
                 if (debugVisibility)
                     LogVisibilityDebug();
 
@@ -130,8 +151,6 @@ public class AnimalVisibilitySampler : MonoBehaviour
                 }
                 else
                 {
-                    SetVisibleAnimal(null, default);
-
                     if (debugVisibility)
                         LogVisibilityDebug();
                 }
@@ -140,7 +159,7 @@ public class AnimalVisibilitySampler : MonoBehaviour
             {
                 Debug.LogException(exception);
                 Debug.LogError("[AnimalVisibilitySampler] Visibility rendering failed. Animal visibility is disabled.");
-                SetVisibleAnimal(null, default);
+                ResetVisibleAnimal();
                 StopLoopAndDispose();
                 yield break;
             }
@@ -396,7 +415,7 @@ public class AnimalVisibilitySampler : MonoBehaviour
         if (_readbackError)
         {
             Debug.LogError("[AnimalVisibilitySampler] GPU readback failed. Animal visibility is disabled.");
-            SetVisibleAnimal(null, default);
+            ResetVisibleAnimal();
             StopLoopAndDispose();
             return;
         }
@@ -422,7 +441,7 @@ public class AnimalVisibilitySampler : MonoBehaviour
             }
         }
 
-        SetVisibleAnimal(animal, center);
+        SetSeenAnimal(animal, center);
 
         if (debugVisibility && animal == null)
             LogVisibilityDebug();
@@ -442,13 +461,48 @@ public class AnimalVisibilitySampler : MonoBehaviour
         return count;
     }
 
-    private void SetVisibleAnimal(Animal animal, Vector3 center)
+    private void SetSeenAnimal(Animal animal, Vector3 center)
     {
-        VisibleAnimal = animal;
-        VisibleAnimalCenter = center;
-
         if (animal != null)
+        {
+            _seenAnimal = animal;
+            _seenCenter = center;
             _lastSeenTime = Time.time;
+        }
+
+        RefreshVisibleAnimal();
+    }
+
+    // Resolves the animal the player can currently photograph. A failed check keeps the last
+    // sighting alive for graceTime so noise between samples does not flicker the camera.
+    private void RefreshVisibleAnimal()
+    {
+        Animal visible = null;
+        Vector3 center = default;
+
+        if (!Paused && _seenAnimal != null && !_seenAnimal.HasBeenPhotographed &&
+            Time.time - _lastSeenTime <= graceTime)
+        {
+            visible = _seenAnimal;
+            center = _seenCenter;
+        }
+
+        if (visible == VisibleAnimal)
+        {
+            VisibleAnimalCenter = center;
+            return;
+        }
+
+        VisibleAnimal = visible;
+        VisibleAnimalCenter = center;
+        VisibleAnimalChanged?.Invoke(visible);
+    }
+
+    private void ResetVisibleAnimal()
+    {
+        _seenAnimal = null;
+        _lastSeenTime = float.NegativeInfinity;
+        RefreshVisibleAnimal();
     }
 
     private bool CreateVisibilityCamera()

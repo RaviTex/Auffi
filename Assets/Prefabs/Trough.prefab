@@ -184,6 +184,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7279892352182083372}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: highlightHintSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b568c3f4a31ee5f88d4e6d455c3acc6, type: 3}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: failedFeedbackSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 84a1bd2a3ed491c429b2935b4eb8127a, type: 3}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: acceptedFeedbackSprite
+      value: 
+      objectReference: {fileID: -140035102083078581, guid: 3c1563d894eeac44bb771808cdf4abb4, type: 3}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: allowSingleInteraction
       value: 1
       objectReference: {fileID: 0}

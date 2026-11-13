@@ -12,38 +12,82 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject applesSlotVisual;
     [Tooltip("Shown while the player carries the gate key.")]
     [SerializeField] private GameObject keySlotVisual;
-
-    private AnimalVisibilitySampler _visibility;
+    [Tooltip("Parent of the item during holding animation")]
+    [SerializeField] private Transform itemHoldingPivot;
 
     public ItemType CurrentItem { get; private set; } = ItemType.None;
     public bool HasApples => CurrentItem == ItemType.Apples;
-    public bool IsHolding =>  CurrentItem != ItemType.None;
+    public bool IsHolding => CurrentItem != ItemType.None;
+    public bool IsHoldingItem => CurrentItem == ItemType.Apples || CurrentItem == ItemType.Key;
+
+    private Vector3 _cameraRestPosition;
+    private Vector3 _applesRestPosition;
+    private Vector3 _keyRestPosition;
+    private float _pivotRestHeight;
+    private bool _hasHoldingPivot;
 
     private void Awake()
     {
-        _visibility = GetComponent<AnimalVisibilitySampler>();
+        _cameraRestPosition = GetRestPosition(cameraSlotVisual);
+        _applesRestPosition = GetRestPosition(applesSlotVisual);
+        _keyRestPosition = GetRestPosition(keySlotVisual);
+        _hasHoldingPivot = itemHoldingPivot != null;
+
+        if (_hasHoldingPivot)
+            _pivotRestHeight = GetPivotHeight();
+
+        RefreshSlotVisuals();
     }
 
     private void LateUpdate()
     {
-        bool photoAvailable = CurrentItem == ItemType.None && _visibility.TryGetVisibleAnimal(out _, out _);
+        if (!_hasHoldingPivot)
+            return;
 
-        ItemType state = CurrentItem != ItemType.None ? CurrentItem : photoAvailable ? ItemType.Camera : ItemType.None;
+        float verticalOffset = GetPivotHeight() - _pivotRestHeight;
 
-        SetSlotVisual(emptySlotVisual, state == ItemType.None);
-        SetSlotVisual(cameraSlotVisual, state == ItemType.Camera);
-        SetSlotVisual(applesSlotVisual, state == ItemType.Apples);
-        SetSlotVisual(keySlotVisual, state == ItemType.Key);
+        SetHoldingOffset(cameraSlotVisual, _cameraRestPosition, verticalOffset);
+        SetHoldingOffset(applesSlotVisual, _applesRestPosition, verticalOffset);
+        SetHoldingOffset(keySlotVisual, _keyRestPosition, verticalOffset);
     }
 
     public void SetItem(ItemType item)
     {
         CurrentItem = item;
+        RefreshSlotVisuals();
+    }
+
+    private void RefreshSlotVisuals()
+    {
+        SetSlotVisual(emptySlotVisual, CurrentItem == ItemType.None);
+        SetSlotVisual(cameraSlotVisual, CurrentItem == ItemType.Camera);
+        SetSlotVisual(applesSlotVisual, CurrentItem == ItemType.Apples);
+        SetSlotVisual(keySlotVisual, CurrentItem == ItemType.Key);
     }
 
     private static void SetSlotVisual(GameObject visual, bool active)
     {
         if (visual != null && visual.activeSelf != active)
             visual.SetActive(active);
+    }
+
+    private void SetHoldingOffset(GameObject visual, Vector3 restPosition, float verticalOffset)
+    {
+        if (visual == null || visual.transform.parent == null)
+            return;
+
+        Vector3 position = visual.transform.parent.TransformPoint(restPosition);
+        position.y += verticalOffset;
+        visual.transform.position = position;
+    }
+
+    private float GetPivotHeight()
+    {
+        return itemHoldingPivot.position.y - transform.position.y;
+    }
+
+    private static Vector3 GetRestPosition(GameObject visual)
+    {
+        return visual != null ? visual.transform.localPosition : Vector3.zero;
     }
 }
