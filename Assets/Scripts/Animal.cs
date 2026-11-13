@@ -39,10 +39,6 @@ public class Animal : MonoBehaviour
     [Tooltip("Chance that the animal starts grazing instead of idling.")]
     [Range(0f, 1f)]
     [SerializeField] private float grazingChance = 0.5f;
-    [Tooltip("Minimum seconds between grazing and idle switches.")]
-    [SerializeField] private float minGrazingSwitchTime = 10f;
-    [Tooltip("Maximum seconds between grazing and idle switches.")]
-    [SerializeField] private float maxGrazingSwitchTime = 30f;
 
     private static readonly int IsGrazingId = Animator.StringToHash("IsGrazing");
 
@@ -53,10 +49,6 @@ public class Animal : MonoBehaviour
 
     private float _mooingTimer;
     private float _timeToMoo;
-    private Animator _animator;
-    private bool _isGrazing;
-    private float _grazingTimer;
-    private float _timeToSwitchGrazing;
 
     public void MarkPhotographed()
     {
@@ -110,14 +102,9 @@ public class Animal : MonoBehaviour
     {
         _timeToMoo = Random.Range(5, 30);
 
-        _animator = GetComponentInChildren<Animator>();
-        if (_animator != null)
-        {
-            _isGrazing = Random.value < grazingChance;
-            _animator.SetBool(IsGrazingId, _isGrazing);
-        }
-
-        _timeToSwitchGrazing = Random.Range(minGrazingSwitchTime, maxGrazingSwitchTime);
+        Animator animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+            animator.SetBool(IsGrazingId, Random.value < grazingChance);
     }
 
     private void Update()
@@ -129,18 +116,5 @@ public class Animal : MonoBehaviour
             _mooingTimer = 0f;
             _timeToMoo = Random.Range(15, 60);
         }
-
-        if (_animator == null)
-            return;
-
-        _grazingTimer += Time.deltaTime;
-        if (_grazingTimer < _timeToSwitchGrazing)
-            return;
-
-        _isGrazing = !_isGrazing;
-        _animator.SetBool(IsGrazingId, _isGrazing);
-
-        _grazingTimer = 0f;
-        _timeToSwitchGrazing = Random.Range(minGrazingSwitchTime, maxGrazingSwitchTime);
     }
 }

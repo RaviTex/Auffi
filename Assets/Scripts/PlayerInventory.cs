@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
     [Header("Slot Visuals")]
     [Tooltip("Shown when the player holds nothing and no camera is out.")]
     [SerializeField] private GameObject emptySlotVisual;
-    [Tooltip("Shown when an animal can be photographed.")]
+    [Tooltip("Legacy camera indicator. Kept hidden because the player model animates its own camera.")]
     [SerializeField] private GameObject cameraSlotVisual;
     [Tooltip("Shown while the player carries a bucket filled with apples.")]
     [SerializeField] private GameObject applesSlotVisual;
@@ -60,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
     private void RefreshSlotVisuals()
     {
         SetSlotVisual(emptySlotVisual, CurrentItem == ItemType.None);
-        SetSlotVisual(cameraSlotVisual, CurrentItem == ItemType.Camera);
+        SetSlotVisual(cameraSlotVisual, false);
         SetSlotVisual(applesSlotVisual, CurrentItem == ItemType.Apples);
         SetSlotVisual(keySlotVisual, CurrentItem == ItemType.Key);
     }

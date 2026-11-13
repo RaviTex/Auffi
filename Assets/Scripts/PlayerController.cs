@@ -147,7 +147,8 @@ public class PlayerController : MonoBehaviour
         }
         
         animator.SetBool("IsWalking", _isWalking);
-        animator.SetBool("IsHolding", inventory.IsHolding);
+        animator.SetBool("IsHolding", inventory.IsHoldingItem);
+        animator.SetBool("IsCameraOut", inventory.CurrentItem == ItemType.Camera);
     }
 
     private void OnVisibleAnimalChanged(Animal animal)
