@@ -1,7 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
+
+[System.Serializable]
+public class HasBeenPhotograph : UnityEvent
+{
+}
 
 public class Animal : MonoBehaviour
 {
@@ -16,7 +22,10 @@ public class Animal : MonoBehaviour
 
     [Header("Audio")] 
     [SerializeField] private AK.Wwise.Event playCowMooing;
-
+    
+    [Header("Fired when animal gets photographed")]
+    [SerializeField] private HasBeenPhotograph hasBeenPhotograph = new HasBeenPhotograph();
+    
     [Header("Photo Reaction")]
     [Tooltip("Sprite spawned above the animal after it has been photographed.")]
     [SerializeField] private Sprite heartSprite;
@@ -43,6 +52,7 @@ public class Animal : MonoBehaviour
 
         if (heartSprite != null)
             StartCoroutine(PlayHeartReaction());
+        hasBeenPhotograph.Invoke();
     }
 
     private IEnumerator PlayHeartReaction()

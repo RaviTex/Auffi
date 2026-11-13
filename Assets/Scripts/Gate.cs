@@ -44,7 +44,7 @@ public class Gate : Interactable
             return;
 
         _isOpen = true;
-        player.inventory.SetItem(ItemType.None);
+        player.SetItem(ItemType.None);
         gateOpened?.Post(gameObject);
     }
 
