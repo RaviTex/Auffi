@@ -1177,7 +1177,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
-  animator: {fileID: 0}
+  animator: {fileID: 3654354368999341271}
   playPlayerCanTakePhoto:
     idInternal: 0
     valueGuidInternal: 
@@ -2321,6 +2321,11 @@ PrefabInstance:
       addedObject: {fileID: 4010272185961503015}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d9a98e006c034468e84c01f3ac198c, type: 3}
+--- !u!95 &3654354368999341271 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2181916340790584387, guid: 83d9a98e006c034468e84c01f3ac198c, type: 3}
+  m_PrefabInstance: {fileID: 3238482538287290516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5928263065709768070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9129937104499488018, guid: 83d9a98e006c034468e84c01f3ac198c, type: 3}
