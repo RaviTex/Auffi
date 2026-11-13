@@ -2398,6 +2398,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2163054189382900555, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2117588136}
+    - target: {fileID: 2163054189382900555, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163054189382900555, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163054189382900555, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4190133862354242470, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
       propertyPath: m_Name
       value: UI
@@ -2418,6 +2434,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144a4c88afd572797b6c1989ac60a25d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalBook
+--- !u!114 &2117588136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5478729579231943305, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
+  m_PrefabInstance: {fileID: 2117588133}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25702a2c1a9842588657b78b9a8783dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
 --- !u!1 &2127267260
 GameObject:
   m_ObjectHideFlags: 0

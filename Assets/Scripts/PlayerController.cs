@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Input")] [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference interactionAction;
+    [SerializeField] private InputActionReference escAction;
     [SerializeField] private InputActionReference openAlbumAction;
 
     [Header("Movement")]
@@ -126,10 +127,12 @@ public class PlayerController : MonoBehaviour
         {
             playPlayerCanTakePhoto?.Post(gameObject);
             _hasAlreadyPlayerCanTakePhoto = true;
+            inventory.SetItem(ItemType.Camera);
         }
         else if (!canTakePhoto && _hasAlreadyPlayerCanTakePhoto)
         {
             _hasAlreadyPlayerCanTakePhoto = false;
+            inventory.SetItem(ItemType.None);
         }
 
         UpdateOutlineTarget(canTakePhoto, animal);
@@ -144,6 +147,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+        print(inventory.IsHolding);
         animator.SetBool("IsWalking", _isWalking);
         animator.SetBool("IsHolding", inventory.IsHolding);
     }
@@ -164,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
         if (ui.IsBookOpen)
         {
-            if (openAlbumAction.action.WasPressedThisFrame())
+            if (openAlbumAction.action.WasPressedThisFrame() || escAction.action.WasPressedThisFrame())
                 ui.CloseBook();
 
             return true;
