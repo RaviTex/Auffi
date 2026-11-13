@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
 
-    [Tooltip("How quickly the player turns towards its travel direction or focus target.")] [SerializeField]
+    [Tooltip("How quickly the player turns towards its travel direction or focus target.")] 
+    [SerializeField]
     private float rotationLerpSpeed = 8f;
 
     [Header("Gravity")] [SerializeField] private float gravity = 20f;
