@@ -224,7 +224,9 @@ public class PlayerController : MonoBehaviour
 
         if (CheckGrounded(out Vector3 groundNormal))
         {
-            velocity = Vector3.ProjectOnPlane(velocity, groundNormal) - groundNormal * groundStickSpeed;
+            float normalSpeed = Vector3.Dot(velocity, groundNormal);
+            velocity.y -= normalSpeed / Mathf.Max(groundNormal.y, 0.0001f);
+            velocity -= groundNormal * groundStickSpeed;
         }
         else
         {
