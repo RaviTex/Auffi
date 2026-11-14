@@ -326,6 +326,9 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: d22badc859a01a9ae9d3dd1b9becdba0, type: 2}
+  hasBeenPhotograph:
+    m_PersistentCalls:
+      m_Calls: []
   heartSprite: {fileID: 21300000, guid: 5b568c3f4a31ee5f88d4e6d455c3acc6, type: 3}
   heartSpawnHeight: 1
   heartRiseDistance: 1
@@ -353,6 +356,8 @@ MonoBehaviour:
   groundCheckDistance: 10
   groundOffset: 1
   groundRotationLerpSpeed: 8
+  footHeightFraction: 0.1
+  footMergeFraction: 0.05
   playCowBells:
     idInternal: 0
     valueGuidInternal: 
@@ -2159,7 +2164,7 @@ Transform:
   m_GameObject: {fileID: 6553986004323694689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.001177464, y: -7.1884214e-11, z: -0.00075539586}
+  m_LocalPosition: {x: 0.001177464, y: -7.1884214e-11, z: -0.00173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
