@@ -2570,6 +2570,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2105438055444040848, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -36.634033
+      objectReference: {fileID: 0}
     - target: {fileID: 2163054189382900555, guid: d32b32c4caf3a2d27b6bfc7cf2fc50a5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2675,6 +2679,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1816133204}
     - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: timeToMaxPeak
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: timeToPushBack
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: pushBackStrength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: rotationStrength
       value: 120
       objectReference: {fileID: 0}
@@ -2687,20 +2703,64 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1507476970}
     - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: pushBackCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: pushBackCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[1].time
+      value: 0.34022498
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: pushBackCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[1].value
+      value: 0.7624744
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: peakRotationCurve.m_Curve.Array.data[0].inSlope
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: peakRotationCurve.m_Curve.Array.data[1].inSlope
-      value: 0
+      value: 1.1740391
       objectReference: {fileID: 0}
     - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: peakRotationCurve.m_Curve.Array.data[0].outSlope
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[1].outSlope
+      value: 1.1740391
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 7973364747541755187, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.7
+      value: 62.77
       objectReference: {fileID: 0}
     - target: {fileID: 7973364747541755187, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2708,7 +2768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7973364747541755187, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -58.42
+      value: -6.82
       objectReference: {fileID: 0}
     - target: {fileID: 7973364747541755187, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: m_LocalRotation.w
