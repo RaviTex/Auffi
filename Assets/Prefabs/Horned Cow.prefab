@@ -334,6 +334,9 @@ MonoBehaviour:
   heartRiseDistance: 1
   heartDuration: 1.2
   heartScale: 1
+  grazingChance: 0.5
+  minGrazingSwitchTime: 10
+  maxGrazingSwitchTime: 30
 --- !u!114 &6396882117000922260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +601,7 @@ Transform:
   m_GameObject: {fileID: 2089545742292843649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0032453144, y: -8.014047e-10, z: -0.004362238}
+  m_LocalPosition: {x: 0.003245314, y: -8.014047e-10, z: -0.004362238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1816,7 +1819,7 @@ GameObject:
   - component: {fileID: 5533205211928969298}
   - component: {fileID: 5715644176364481922}
   m_Layer: 6
-  m_Name: Cube.020
+  m_Name: Head
   m_TagString: Cow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2164,7 +2167,7 @@ Transform:
   m_GameObject: {fileID: 6553986004323694689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.001177464, y: -7.1884214e-11, z: -0.00173}
+  m_LocalPosition: {x: 0.001177464, y: -7.188421e-11, z: -0.00173}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
