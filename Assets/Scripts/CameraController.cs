@@ -44,8 +44,14 @@ public class CameraController : MonoBehaviour
     [SerializeField] private InputActionReference peakAction;
     [SerializeField] private float minPeak;
     [SerializeField] private float maxPeak;
-    [SerializeField] private float rotationStrength;
-    [SerializeField] private float pushBackStrength;
+    [Tooltip("Seconds of holding the peak input needed to reach the max peak angle.")]
+    [SerializeField] private float timeToMaxPeak = 1f;
+    [Tooltip("Normalized peak angle over normalized hold time. X: 0-1 hold progress, Y: 0-1 peak angle.")]
+    [SerializeField] private AnimationCurve peakRotationCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+    [Tooltip("Seconds needed for the peak to return to center after the input is released.")]
+    [SerializeField] private float timeToPushBack = 1f;
+    [Tooltip("Normalized return amount over normalized push back time. X: 0-1 return progress, Y: 0-1 (0 = full peak angle, 1 = centered).")]
+    [SerializeField] private AnimationCurve pushBackCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private bool isPeakInputInverted;
 
     private const float MinPitch = 5f;
@@ -60,7 +66,10 @@ public class CameraController : MonoBehaviour
     private float _currentPeakAngle;
 
     private float _peakInput;
-    private float _smoothVelocity;
+    private float _peakProgress;
+    private bool _wasPeaking;
+    private float _pushBackTime;
+    private float _pushBackStartAngle;
 
     private Vector3 _pivotPosition;
 
@@ -164,23 +173,79 @@ public class CameraController : MonoBehaviour
     private void UpdatePeak()
     {
         _peakInput = peakAction != null ? peakAction.action.ReadValue<float>() : 0f;
+        float direction = isPeakInputInverted ? -_peakInput : _peakInput;
+        bool isHolding = Mathf.Abs(direction) > 0.01f;
 
-        float currentAngle = Mathf.DeltaAngle(0f, cameraRotationPivot.eulerAngles.y);
-        float peakAngle = Mathf.Clamp(
-            currentAngle + (isPeakInputInverted ? -_peakInput : _peakInput) * rotationStrength * Time.deltaTime,
-            minPeak, maxPeak);
-
-        if (_peakInput == 0)
+        if (isHolding)
         {
-            peakAngle = Mathf.SmoothDamp(peakAngle, 0, ref _smoothVelocity, 1f / pushBackStrength);
+            // If a new hold starts while the peak is still pushing back, derive the progress
+            // from the current angle so the camera continues smoothly instead of jumping.
+            if (!_wasPeaking)
+            {
+                _wasPeaking = true;
+                _peakProgress = GetProgressForAngle(_currentPeakAngle);
+            }
+
+            _pushBackTime = 0f;
+
+            float step = Mathf.Abs(direction) * (timeToMaxPeak > 0f ? Time.deltaTime / timeToMaxPeak : 1f);
+            _peakProgress = Mathf.MoveTowards(_peakProgress, Mathf.Sign(direction), step);
+
+            float normalizedAngle = peakRotationCurve.Evaluate(Mathf.Abs(_peakProgress));
+            float targetAngle = _peakProgress >= 0f ? maxPeak : minPeak;
+            _currentPeakAngle = Mathf.Lerp(0f, targetAngle, normalizedAngle);
         }
         else
         {
-            _smoothVelocity = 0;
+            if (_wasPeaking)
+            {
+                _wasPeaking = false;
+                _pushBackStartAngle = _currentPeakAngle;
+                _pushBackTime = 0f;
+            }
+
+            _pushBackTime += Time.deltaTime;
+            float t = timeToPushBack > 0f ? Mathf.Clamp01(_pushBackTime / timeToPushBack) : 1f;
+            _currentPeakAngle = Mathf.Lerp(_pushBackStartAngle, 0f, pushBackCurve.Evaluate(t));
+
+            if (t >= 1f)
+            {
+                _currentPeakAngle = 0f;
+                _peakProgress = 0f;
+                _pushBackStartAngle = 0f;
+            }
         }
 
-        cameraRotationPivot.rotation = Quaternion.Euler(0, peakAngle, 0);
-        _currentPeakAngle = peakAngle;
+        cameraRotationPivot.rotation = Quaternion.Euler(0, _currentPeakAngle, 0);
+    }
+
+    // Finds the hold progress whose curve value matches the given angle, so a new hold can
+    // resume from the current push back angle without a jump.
+    private float GetProgressForAngle(float angle)
+    {
+        float targetAngle = angle >= 0f ? maxPeak : minPeak;
+        if (Mathf.Approximately(targetAngle, 0f))
+            return 0f;
+
+        float normalizedAngle = Mathf.Clamp01(angle / targetAngle);
+
+        const int samples = 64;
+        float bestProgress = 0f;
+        float bestDiff = float.MaxValue;
+
+        for (int i = 0; i <= samples; i++)
+        {
+            float progress = i / (float)samples;
+            float diff = Mathf.Abs(peakRotationCurve.Evaluate(progress) - normalizedAngle);
+
+            if (diff < bestDiff)
+            {
+                bestDiff = diff;
+                bestProgress = progress;
+            }
+        }
+
+        return bestProgress * Mathf.Sign(angle);
     }
 
     private float GetVelocityPitch()

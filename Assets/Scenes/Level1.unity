@@ -526,6 +526,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3749328844870474934, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749328844870474934, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749328844870474934, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -73.58
+      objectReference: {fileID: 0}
     - target: {fileID: 4511507868932912239, guid: d311170186dd3c64abd684210cfb48b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.422293
@@ -2663,6 +2675,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1816133204}
     - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: rotationStrength
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: cameraRotationPivot
       value: 
       objectReference: {fileID: 1507476969}
@@ -2670,6 +2686,18 @@ PrefabInstance:
       propertyPath: cameraPositionTarget
       value: 
       objectReference: {fileID: 1507476970}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380875587700661824, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
+      propertyPath: peakRotationCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7973364747541755187, guid: a85cd030ff62304d3938d00d6bdeb151, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.7
