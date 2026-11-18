@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class TutorialDirector : MonoBehaviour
@@ -15,16 +14,15 @@ public class TutorialDirector : MonoBehaviour
     [SerializeField] private PutDownPivot troughPivot;
     [SerializeField] private AnimalTravel brownTravel;
     [SerializeField] private AnimalTravel hornedTravel;
-    [SerializeField] private Transform gate;
 
     [Header("Dialogues")]
     [SerializeField] private DialogueSequence introDialogue;
+    [SerializeField] private DialogueSequence introAfterBookDialogue;
     [SerializeField] private DialogueSequence firstCowIntroDialogue;
     [SerializeField] private DialogueSequence firstCowPhotoDialogue;
     [SerializeField] private DialogueSequence troughDialogue;
     [SerializeField] private DialogueSequence hiddenCowDialogue;
     [SerializeField] private DialogueSequence bullDialogue;
-    [SerializeField] private DialogueSequence gateDialogue;
 
     [Header("Tuning")]
     [SerializeField] private float introDelay = 0.75f;
@@ -32,9 +30,7 @@ public class TutorialDirector : MonoBehaviour
     [SerializeField] private float troughRadius = 7f;
     [SerializeField] private float hiddenCowRadius = 9f;
     [SerializeField] private float bullRadius = 9f;
-    [SerializeField] private float gateRadius = 7f;
-    [SerializeField] private bool autoOpenBookAfterIntro = true;
-    [SerializeField] private float bookPreviewDuration = 2.5f;
+    [SerializeField, Range(0.1f, 1f)] private float triggerRadiusScale = 0.85f;
 
     private UIManager _ui;
     private float _startTime;
@@ -47,11 +43,18 @@ public class TutorialDirector : MonoBehaviour
     private bool _troughSolved;
     private bool _hiddenCowComplete;
     private bool _bullComplete;
-    private bool _gateComplete;
-    private bool _bookPreviewRunning;
+    private bool _waitingForBook;
+    private bool _bookWasOpened;
 
     private void Start()
     {
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        if (gameManager != null && !gameManager.TutorialEnabled)
+        {
+            enabled = false;
+            return;
+        }
+
         if (player == null)
             player = FindFirstObjectByType<PlayerController>();
 
@@ -107,7 +110,32 @@ public class TutorialDirector : MonoBehaviour
             return;
         }
 
-        if (_ui.IsBlockingGameplay || _bookPreviewRunning)
+        if (_waitingForBook)
+        {
+            if (_ui.IsBookOpen)
+            {
+                _bookWasOpened = true;
+            }
+            else if (_bookWasOpened)
+            {
+                if (introAfterBookDialogue == null)
+                {
+                    _waitingForBook = false;
+                    _introComplete = true;
+                }
+                else
+                {
+                    Begin("intro_after_book", introAfterBookDialogue);
+
+                    if (_activeDialogue != null)
+                        _waitingForBook = false;
+                }
+            }
+
+            return;
+        }
+
+        if (_ui.IsBlockingGameplay)
             return;
 
         if (!_introComplete)
@@ -167,16 +195,7 @@ public class TutorialDirector : MonoBehaviour
 
         if (!_bullComplete && progression != null && progression.HasRevealed &&
             bull != null && !bull.HasBeenPhotographed && IsNear(bull.transform, bullRadius))
-        {
             Begin("bull", bullDialogue);
-            return;
-        }
-
-        if (!_gateComplete && player != null && player.CurrentItem == ItemType.Key &&
-            gate != null && IsNear(gate, gateRadius))
-        {
-            Begin("gate", gateDialogue);
-        }
     }
 
     private void BeginIntro()
@@ -209,11 +228,11 @@ public class TutorialDirector : MonoBehaviour
         switch (completed)
         {
             case "intro":
+                _waitingForBook = true;
+                _bookWasOpened = false;
+                break;
+            case "intro_after_book":
                 _introComplete = true;
-
-                if (autoOpenBookAfterIntro && !_bookPreviewRunning)
-                    StartCoroutine(PreviewBook());
-
                 break;
             case "first_cow_intro":
                 _firstCowIntroComplete = true;
@@ -230,25 +249,7 @@ public class TutorialDirector : MonoBehaviour
             case "bull":
                 _bullComplete = true;
                 break;
-            case "gate":
-                _gateComplete = true;
-                break;
         }
-    }
-
-    private IEnumerator PreviewBook()
-    {
-        _bookPreviewRunning = true;
-        yield return null;
-
-        if (_ui != null && !_ui.IsBlockingGameplay)
-        {
-            _ui.OpenBook();
-            yield return new WaitForSecondsRealtime(bookPreviewDuration);
-            _ui.CloseBook();
-        }
-
-        _bookPreviewRunning = false;
     }
 
     private void OnAnimalUnlocked(AnimalDefinition definition)
@@ -276,6 +277,7 @@ public class TutorialDirector : MonoBehaviour
         if (target == null || player == null)
             return false;
 
-        return Vector3.SqrMagnitude(target.position - player.transform.position) <= radius * radius;
+        float scaledRadius = radius * triggerRadiusScale;
+        return Vector3.SqrMagnitude(target.position - player.transform.position) <= scaledRadius * scaledRadius;
     }
 }

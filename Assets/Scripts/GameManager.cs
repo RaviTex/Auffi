@@ -7,7 +7,12 @@ public class GameManager : MonoBehaviour
     [Tooltip("How long the Game Over screen stays up before the scene reloads.")]
     [SerializeField] private float gameOverDuration = 3f;
 
+    [Tooltip("Whether the tutorial director should run in this level.")]
+    [SerializeField] private bool tutorialEnabled = true;
+
     private bool _isFinished;
+
+    public bool TutorialEnabled => tutorialEnabled;
 
     public void GameOver()
     {
