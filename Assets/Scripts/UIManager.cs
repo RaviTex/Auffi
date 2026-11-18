@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-// Owns every modal UI overlay (book, sign, game over) and the gameplay freeze that comes
-// with it. Only one modal can be open at a time.
+// Owns every modal UI overlay (book, sign, dialogue, game over) and the gameplay freeze
+// that comes with it. Only one modal can be open at a time.
 public class UIManager : MonoBehaviour
 {
     private enum Mode
@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
         None,
         Book,
         Sign,
+        Dialogue,
         GameOver
     }
 
@@ -22,6 +23,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject signPanel;
     [Tooltip("Text component inside the sign panel.")]
     [SerializeField] private TMP_Text signText;
+    [Tooltip("Dialogue panel controller used for tutorial conversations.")]
+    [SerializeField] private DialogueUI dialogue;
     [Tooltip("Panel shown when the game is over. It is hidden on Awake.")]
     [SerializeField] private GameObject gameOverScreen;
 
@@ -34,6 +37,7 @@ public class UIManager : MonoBehaviour
     public bool IsBlockingGameplay => _mode != Mode.None;
     public bool IsSignOpen => _mode == Mode.Sign;
     public bool IsBookOpen => _mode == Mode.Book;
+    public bool IsDialogueOpen => _mode == Mode.Dialogue;
     public bool IsGameOver => _mode == Mode.GameOver;
 
     private void Awake()
@@ -58,6 +62,9 @@ public class UIManager : MonoBehaviour
 
         if (signPanel != null)
             signPanel.SetActive(false);
+
+        if (dialogue != null)
+            dialogue.Close();
 
         if (gameOverScreen != null)
             gameOverScreen.SetActive(false);
@@ -106,6 +113,39 @@ public class UIManager : MonoBehaviour
             OpenBook();
     }
 
+    public void ShowDialogue(DialogueSequence sequence)
+    {
+        if (_mode != Mode.None || dialogue == null)
+            return;
+
+        dialogue.Show(sequence);
+
+        if (dialogue.IsOpen)
+            SetMode(Mode.Dialogue);
+    }
+
+    public void AdvanceDialogue()
+    {
+        if (_mode != Mode.Dialogue || dialogue == null)
+            return;
+
+        dialogue.Advance();
+
+        if (!dialogue.IsOpen)
+            SetMode(Mode.None);
+    }
+
+    public void CloseDialogue()
+    {
+        if (_mode != Mode.Dialogue)
+            return;
+
+        if (dialogue != null)
+            dialogue.Close();
+
+        SetMode(Mode.None);
+    }
+
     public void ShowSign(string text)
     {
         if (_mode != Mode.None)
@@ -144,12 +184,56 @@ public class UIManager : MonoBehaviour
         if (signPanel != null)
             signPanel.SetActive(false);
 
+        if (dialogue != null)
+            dialogue.Close();
+
+        SetEndScreen(false);
+
         if (gameOverScreen != null)
             gameOverScreen.SetActive(true);
         else
             Debug.LogWarning("[UIManager] No Game Over screen is assigned.", this);
 
         SetMode(Mode.GameOver);
+    }
+
+    public void ShowWin()
+    {
+        if (_mode == Mode.GameOver)
+            return;
+
+        if (book != null)
+            book.Close();
+
+        if (signPanel != null)
+            signPanel.SetActive(false);
+
+        if (dialogue != null)
+            dialogue.Close();
+
+        SetEndScreen(true);
+
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(true);
+        else
+            Debug.LogWarning("[UIManager] No end screen is assigned.", this);
+
+        SetMode(Mode.GameOver);
+    }
+
+    private void SetEndScreen(bool won)
+    {
+        if (gameOverScreen == null)
+            return;
+
+        Transform gameOverLabel = gameOverScreen.transform.Find("Game Over");
+        Transform winLabel = gameOverScreen.transform.Find("You Won");
+
+        if (gameOverLabel != null)
+            gameOverLabel.gameObject.SetActive(!won);
+
+        if (winLabel != null)
+            winLabel.gameObject.SetActive(won);
     }
 
     // Restores the gameplay state saved when the first modal opened. Call this before
@@ -161,6 +245,9 @@ public class UIManager : MonoBehaviour
 
         if (signPanel != null)
             signPanel.SetActive(false);
+
+        if (dialogue != null)
+            dialogue.Close();
 
         if (gameOverScreen != null)
             gameOverScreen.SetActive(false);

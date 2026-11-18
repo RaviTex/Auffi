@@ -549,7 +549,6 @@ GameObject:
   - component: {fileID: 2652854532377864561}
   - component: {fileID: 2030240902617005094}
   - component: {fileID: 6507594365406522062}
-  - component: {fileID: 539472304863565387}
   m_Layer: 0
   m_Name: Big Apple Tree
   m_TagString: Apple Tree
@@ -623,20 +622,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.2270665, y: 6.883562, z: 5.615093}
   m_Center: {x: 3.1212533e-13, y: 2.4335763, z: -0.06449183}
---- !u!114 &539472304863565387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6066467585741926077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 716fbdd4c39f32a339e25823d9c340a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AppleTree
-  focusPoint: {fileID: 0}
-  outlineRoot: {fileID: 1936818782098906880}
 --- !u!1 &7268436875441741508
 GameObject:
   m_ObjectHideFlags: 0

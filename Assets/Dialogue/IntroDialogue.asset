@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5fddda6182631d69281138e27e1e43, type: 3}
+  m_Name: IntroDialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
+  speakerName: Ranger
+  portrait: {fileID: 2800000, guid: 3c1563d894eeac44bb771808cdf4abb4, type: 3}
+  lines:
+  - There you are! I was hoping you'd come by.
+  - Our album is empty - every page is waiting for a picture.
+  - Fill it with the whole herd, and we'll finally have something to remember them
+    by.
+  - Press X whenever you want to look at it. Go on - take a peek.
+  - Take this radio - I'll call you if I spot something.

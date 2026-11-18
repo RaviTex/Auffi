@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,20 @@ public class PutDownPivot : Interactable
     private ItemType _placedItem = ItemType.None;
     private bool _interactionUsed;
     private GameObject _hintObject;
+
+    public event Action<ItemType> ItemPutDown;
+
+    public void ConfigureAcceptedItems(ItemType[] items, GameObject visual, bool singleInteraction)
+    {
+        acceptedItems.Clear();
+
+        if (items != null)
+            acceptedItems.AddRange(items);
+
+        placedVisual = visual;
+        allowSingleInteraction = singleInteraction;
+        SetPlacedItem(_placedItem);
+    }
 
     private void Awake()
     {
@@ -194,6 +209,7 @@ public class PutDownPivot : Interactable
         SetPlacedItem(item);
 
         onItemPutDown.Invoke(item);
+        ItemPutDown?.Invoke(item);
         return true;
     }
 

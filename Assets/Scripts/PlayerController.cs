@@ -185,6 +185,14 @@ public class PlayerController : MonoBehaviour
         if (!ui)
             return false;
 
+        if (ui.IsDialogueOpen)
+        {
+            if (interactionAction.action.WasPressedThisFrame())
+                ui.AdvanceDialogue();
+
+            return true;
+        }
+
         if (ui.IsSignOpen)
         {
             if (interactionAction.action.WasPressedThisFrame())

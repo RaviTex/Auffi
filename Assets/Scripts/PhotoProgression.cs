@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,6 +18,9 @@ public class PhotoProgression : MonoBehaviour
     [SerializeField] private ItemType rewardItem = ItemType.Key;
 
     [Header("Sounds")] [SerializeField] private AK.Wwise.Event rewardAchievedSound;
+
+    public bool HasRevealed => _revealed;
+    public event Action Revealed;
 
     private bool _revealed;
 
@@ -56,6 +60,7 @@ public class PhotoProgression : MonoBehaviour
         _revealed = true;
         revealTarget.SetActive(true);
         onReveal.Invoke();
+        Revealed?.Invoke();
     }
 
     private bool AllRequiredPhotographed()
