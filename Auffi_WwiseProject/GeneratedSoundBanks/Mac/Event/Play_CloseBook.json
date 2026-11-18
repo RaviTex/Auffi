@@ -1,0 +1,49 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "589838253",
+    "Type": "Event",
+    "GUID": "{B789B4AA-C146-4D97-B9E6-B2D2FCA29254}",
+    "Language": "SFX",
+    "Hash": "{FFC6C1A3-24F0-EEF7-0C2B-CABA795D44E9}",
+    "ObjectPath": "Play_CloseBook",
+    "ShortName": "Play_CloseBook",
+    "Path": "Event/Play_CloseBook.bnk",
+    "Media": [
+     {
+      "Id": "481722699",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Ui_BookClosed.wav",
+      "Path": "Media/481722699.wem",
+      "CachePath": "35/{3590527C-5DB6-2A3A-2BF8-D00BE24FB11B}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "589838253",
+      "Name": "Play_CloseBook",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ui_Audio\\Play_CloseBook",
+      "GUID": "{B789B4AA-C146-4D97-B9E6-B2D2FCA29254}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6904167",
+      "DurationMax": "0.6904167",
+      "MediaRefs": [
+       {
+        "Id": "481722699"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{F3B64608-41E6-4B5D-A5AD-BBA5EB5D0E35}"
+ }
+}

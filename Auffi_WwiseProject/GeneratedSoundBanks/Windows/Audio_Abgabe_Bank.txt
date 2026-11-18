@@ -4,14 +4,23 @@ Event	ID	Name			Wwise Object Path	Notes
 	3788303255	Play_GateOpen			\Audio_Abgabe_Events\Play_GateOpen	
 	3860455926	Play_Pickup			\Audio_Abgabe_Events\Play_Pickup	
 
+Switch Group	ID	Name			Wwise Object Path	Notes
+	517931375	Interact_Item			\Nici\Interact_Item	
+
+Switch	ID	Name	Switch Group			Notes
+	2456312588	Special_Item	Interact_Item			
+	4140710163	Regular_Item	Interact_Item			
+
 Modulator LFO	ID	Name			Wwise Object Path	Notes
 	197031948	Modulator LFO (Custom)				
 	240425623	Modulator LFO (Custom)				
 
 Modulator Envelope	ID	Name			Wwise Object Path	Notes
+	393989543	Modulator Envelope (Custom)				
 	736417429	Modulator Envelope (Custom)				
 
 Modulator Time	ID	Name			Wwise Object Path	Notes
+	277328377	Modulator Time (Custom)				
 	419876934	Modulator Time (Custom)				
 	621340628	Modulator Time (Custom)				
 	641984935	Modulator Time (Custom)				
@@ -22,9 +31,13 @@ Effect plug-ins	ID	Name	Type				Notes
 	405633787	Compressor (Custom)	Wwise Compressor			
 
 Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
-	96116930	Synth One	Wwise Synth One		\Containers\Nici\PickUp_Item\Synth One	
+	96116930	Synth One	Wwise Synth One		\Containers\Nici\Interact\PickUp_Item\Synth One	
+	217593797	Synth One	Wwise Synth One		\Containers\Nici\Interact\Pickup_Special_Item\PickUp_Special_Item\Synth One	
 	280492216	Synth One	Wwise Synth One		\Containers\EllieWorkUnit\Wind\WindLight_01\Synth One	
 	307602336	Synth One	Wwise Synth One		\Containers\Jezz\PositiveFeedback\Synth One	
 	340333484	Synth One	Wwise Synth One		\Containers\EllieWorkUnit\Wind\WindLight\Synth One	
 	727081375	Tone Generator	Wwise Tone Generator		\Containers\Platzer\Gate\Tone Generator	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	808035373	Camera_Sparkle	.cache\57\{577E6DE5-E575-79CC-356A-EBADCDAD7BA6}.wem		\Containers\Nici\Interact\Pickup_Special_Item\Camera_Sparkle		106784
 

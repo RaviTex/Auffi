@@ -54,6 +54,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AK.Wwise.Event playPlayerHasTakenPhoto;
     [SerializeField] private AK.Wwise.Event playPlayerWalking;
     [SerializeField] private AK.Wwise.Event stopPlayerWalking;
+    [SerializeField] private AK.Wwise.Event playOpenBook;
+    [SerializeField] private AK.Wwise.Event playCloseBook;
+    [SerializeField] private AK.Wwise.Event pickupSound;
+    [Tooltip("Switch set before the pickup sound when the item is special, like the key.")]
+    [SerializeField] private AK.Wwise.Switch specialItemSwitch;
+    [Tooltip("Switch set before the pickup sound when the item is a regular item.")]
+    [SerializeField] private AK.Wwise.Switch regularItemSwitch;
 
     [HideInInspector] public PlayerInventory inventory;
     
@@ -189,7 +196,10 @@ public class PlayerController : MonoBehaviour
             if (ui.IsAlbumPromptActive)
             {
                 if (openAlbumAction.action.WasPressedThisFrame())
+                {
                     ui.OpenBookFromDialogue();
+                    playOpenBook?.Post(gameObject);
+                }
 
                 return true;
             }
@@ -211,7 +221,10 @@ public class PlayerController : MonoBehaviour
         if (ui.IsBookOpen)
         {
             if (openAlbumAction.action.WasPressedThisFrame() || escAction.action.WasPressedThisFrame())
+            {
                 ui.CloseBook();
+                playCloseBook?.Post(gameObject);
+            }
 
             return true;
         }
@@ -222,6 +235,7 @@ public class PlayerController : MonoBehaviour
         if (openAlbumAction.action.WasPressedThisFrame())
         {
             ui.OpenBook();
+            playOpenBook?.Post(gameObject);
             return true;
         }
 
@@ -444,7 +458,9 @@ public class PlayerController : MonoBehaviour
 
     public void PlayItemPickupSound(ItemType item)
     {
-        inventory.PlayPickupSound(item);
+        AK.Wwise.Switch itemSwitch = item.IsSpecial() ? specialItemSwitch : regularItemSwitch;
+        itemSwitch?.SetValue(gameObject);
+        pickupSound?.Post(gameObject);
     }
 
     private void TakePhoto(Animal animal)

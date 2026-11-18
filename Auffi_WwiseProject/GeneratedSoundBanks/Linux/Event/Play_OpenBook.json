@@ -1,0 +1,49 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Linux",
+  "BasePlatform": "Linux",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "2994691321",
+    "Type": "Event",
+    "GUID": "{16AA11C2-2F45-4F53-8840-42577B00DB49}",
+    "Language": "SFX",
+    "Hash": "{3A157677-69EC-6446-41EC-D0745FDEA68A}",
+    "ObjectPath": "Play_OpenBook",
+    "ShortName": "Play_OpenBook",
+    "Path": "Event/Play_OpenBook.bnk",
+    "Media": [
+     {
+      "Id": "219855558",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Ui_BookOpen.wav",
+      "Path": "Media/219855558.wem",
+      "CachePath": "9C/{9C915885-8106-1B4A-6E49-B7D7CB908533}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2994691321",
+      "Name": "Play_OpenBook",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ui_Audio\\Play_OpenBook",
+      "GUID": "{16AA11C2-2F45-4F53-8840-42577B00DB49}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.84227085",
+      "DurationMax": "0.84227085",
+      "MediaRefs": [
+       {
+        "Id": "219855558"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{B1209A06-F5F5-240D-2F01-EF427F2131D4}"
+ }
+}

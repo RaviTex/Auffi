@@ -1,0 +1,3 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3381182402	Play_FlipPage			\Default Work Unit\Ui_Audio\Play_FlipPage	
+

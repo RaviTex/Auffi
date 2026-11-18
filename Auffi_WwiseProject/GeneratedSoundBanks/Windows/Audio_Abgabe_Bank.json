@@ -11,16 +11,26 @@
     "GUID": "{561F0213-F399-4EC7-8A8E-8250945837F2}",
     "Color": "23",
     "Language": "SFX",
-    "Hash": "{C47F1560-600E-E02F-C656-C0708A9C7DA7}",
+    "Hash": "{27E180A7-50F3-1651-6790-8A0A859B0995}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Audio_Abgabe_Bank",
     "ShortName": "Audio_Abgabe_Bank",
     "Path": "Audio_Abgabe_Bank.bnk",
+    "Media": [
+     {
+      "Id": "808035373",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Camera_Sparkle.wav",
+      "CachePath": "57/{577E6DE5-E575-79CC-356A-EBADCDAD7BA6}.wem"
+     }
+    ],
     "Plugins": {
      "Custom": [
       {
        "Id": "96116930",
        "Name": "Synth One",
-       "ObjectPath": "\\Containers\\Nici\\PickUp_Item\\Synth One",
+       "ObjectPath": "\\Containers\\Nici\\Interact\\PickUp_Item\\Synth One",
        "GUID": "{F52EF8D7-C375-49B4-98F2-2FC403622F77}",
        "Color": "23",
        "LibName": "Wwise Synth One",
@@ -33,6 +43,15 @@
        "GUID": "{198242F7-F9CC-40A2-B714-F9BB5B0323A2}",
        "LibName": "Wwise Flanger",
        "LibId": "8192003"
+      },
+      {
+       "Id": "217593797",
+       "Name": "Synth One",
+       "ObjectPath": "\\Containers\\Nici\\Interact\\Pickup_Special_Item\\PickUp_Special_Item\\Synth One",
+       "GUID": "{9AA0A054-9388-49A6-A9A7-990365CF71D8}",
+       "Color": "23",
+       "LibName": "Wwise Synth One",
+       "LibId": "9699330"
       },
       {
        "Id": "280492216",
@@ -122,13 +141,43 @@
       "GUID": "{ADDD1C9F-57FA-48EC-A72F-F75E83614142}",
       "Color": "23",
       "DurationType": "Unknown",
-      "PluginRefs": {
-       "Custom": [
-        {
-         "Id": "96116930"
+      "SwitchContainers": [
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "517931375",
+         "Id": "2456312588",
+         "GUID": "{383AA73D-8A5A-4CCA-9A21-24DD203D9185}"
+        },
+        "MediaRefs": [
+         {
+          "Id": "808035373"
+         }
+        ],
+        "PluginRefs": {
+         "Custom": [
+          {
+           "Id": "217593797"
+          }
+         ]
         }
-       ]
-      }
+       },
+       {
+        "SwitchValue": {
+         "GroupType": "Switch",
+         "GroupId": "517931375",
+         "Id": "4140710163",
+         "GUID": "{5850D345-B082-4273-B030-C82C61EC0983}"
+        },
+        "PluginRefs": {
+         "Custom": [
+          {
+           "Id": "96116930"
+          }
+         ]
+        }
+       }
+      ]
      },
      {
       "Id": "2928908110",
@@ -163,9 +212,31 @@
        ]
       }
      }
+    ],
+    "SwitchGroups": [
+     {
+      "Id": "517931375",
+      "Name": "Interact_Item",
+      "ObjectPath": "\\Switches\\Nici\\Interact_Item",
+      "GUID": "{96198570-DC8D-4C8E-8DD4-7C4691FC4E0C}",
+      "Switches": [
+       {
+        "Id": "2456312588",
+        "Name": "Special_Item",
+        "ObjectPath": "\\Switches\\Nici\\Interact_Item\\Special_Item",
+        "GUID": "{383AA73D-8A5A-4CCA-9A21-24DD203D9185}"
+       },
+       {
+        "Id": "4140710163",
+        "Name": "Regular_Item",
+        "ObjectPath": "\\Switches\\Nici\\Interact_Item\\Regular_Item",
+        "GUID": "{5850D345-B082-4273-B030-C82C61EC0983}"
+       }
+      ]
+     }
     ]
    }
   ],
-  "FileHash": "{1B606B10-7515-DC2C-884A-220C826EA926}"
+  "FileHash": "{CFD55FBD-56B2-7232-97CF-ADDF97C974D8}"
  }
 }

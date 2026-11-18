@@ -11,7 +11,7 @@
     "GUID": "{F8CE760F-79D5-4B65-85AE-800D278E54CB}",
     "Color": "13",
     "Language": "SFX",
-    "Hash": "{D184D96F-3315-2F40-BF0C-6BD7A8BD9FB0}",
+    "Hash": "{DFCA48C5-0FB2-AA6F-F29E-14D65A3EE249}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Auffi_MainSoundbank",
     "ShortName": "Auffi_MainSoundbank",
     "Path": "Auffi_MainSoundbank.bnk",
@@ -351,6 +351,6 @@
     ]
    }
   ],
-  "FileHash": "{CBD797BA-740A-3E72-888F-94B3C7906C38}"
+  "FileHash": "{22ABE4A6-931E-377B-2FD4-82FB8060DB65}"
  }
 }

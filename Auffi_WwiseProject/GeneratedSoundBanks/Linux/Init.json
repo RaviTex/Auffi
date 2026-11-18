@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{1EBA1DFA-E2EF-0646-3139-2D6FFB44E697}",
+    "Hash": "{ED08913D-11F9-8F68-1A25-3E6BC22AD282}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -36,31 +36,38 @@
     },
     "Busses": [
      {
-      "Id": "393239870",
-      "Name": "SFX",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\SFX",
-      "GUID": "{9F87D5EF-3095-4CCF-B41A-5EE2B5255E26}",
+      "Id": "419548770",
+      "Name": "Backgrounds_MainMix",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Master Audio Bus\\Backgrounds_MainMix",
+      "GUID": "{0F6C6D4B-547C-459C-97F9-A521F95E7BFC}",
       "Color": "10"
      },
      {
-      "Id": "1551306167",
-      "Name": "UI",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\UI",
+      "Id": "465358654",
+      "Name": "UI_PassthroughMix",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Master Audio Bus\\UI_PassthroughMix",
       "GUID": "{F7EDE7B8-4CBE-40D3-84A7-823789F9A3F9}",
       "Color": "10"
      },
      {
-      "Id": "2246998526",
-      "Name": "Main Audio Bus",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus",
-      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}",
+      "Id": "1122116631",
+      "Name": "Enviromental_AuxBusses",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Master Audio Bus\\Enviromental_AuxBusses",
+      "GUID": "{8619AFCD-C040-4C4E-81CF-6E10C357FAAD}",
       "Color": "10"
      },
      {
-      "Id": "3991942870",
-      "Name": "Music",
-      "ObjectPath": "\\Busses\\Default Work Unit\\Main Audio Bus\\Music",
-      "GUID": "{0F6C6D4B-547C-459C-97F9-A521F95E7BFC}",
+      "Id": "2115723104",
+      "Name": "Positional_AudioObjects",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Master Audio Bus\\Positional_AudioObjects",
+      "GUID": "{9F87D5EF-3095-4CCF-B41A-5EE2B5255E26}",
+      "Color": "10"
+     },
+     {
+      "Id": "3803692087",
+      "Name": "Master Audio Bus",
+      "ObjectPath": "\\Busses\\Default Work Unit\\Master Audio Bus",
+      "GUID": "{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}",
       "Color": "10"
      }
     ],
@@ -88,6 +95,6 @@
     ]
    }
   ],
-  "FileHash": "{3A030E27-AE9D-4888-97C1-5EEAA7CCAD8B}"
+  "FileHash": "{FA400949-A087-EA89-BCE7-6D4273799BB3}"
  }
 }

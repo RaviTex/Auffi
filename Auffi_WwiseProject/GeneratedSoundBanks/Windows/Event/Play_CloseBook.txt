@@ -1,0 +1,3 @@
+Event	ID	Name			Wwise Object Path	Notes
+	589838253	Play_CloseBook			\Default Work Unit\Ui_Audio\Play_CloseBook	
+

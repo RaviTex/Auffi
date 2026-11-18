@@ -1,0 +1,49 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Linux",
+  "BasePlatform": "Linux",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "3381182402",
+    "Type": "Event",
+    "GUID": "{23222072-A347-490A-A4BB-0F627B7661B5}",
+    "Language": "SFX",
+    "Hash": "{13394FE5-43C4-6FD8-EB43-E100ACBF7011}",
+    "ObjectPath": "Play_FlipPage",
+    "ShortName": "Play_FlipPage",
+    "Path": "Event/Play_FlipPage.bnk",
+    "Media": [
+     {
+      "Id": "679202128",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Loose",
+      "ShortName": "Ui_PageTurned.wav",
+      "Path": "Media/679202128.wem",
+      "CachePath": "CD/{CDECD4D1-D398-3B7B-1F2F-7FDCC408FA6F}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3381182402",
+      "Name": "Play_FlipPage",
+      "ObjectPath": "\\Events\\Default Work Unit\\Ui_Audio\\Play_FlipPage",
+      "GUID": "{23222072-A347-490A-A4BB-0F627B7661B5}",
+      "Color": "8",
+      "DurationType": "OneShot",
+      "DurationMin": "0.3561875",
+      "DurationMax": "0.3561875",
+      "MediaRefs": [
+       {
+        "Id": "679202128"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{5BA20996-63C7-9CA8-EC09-6D4450658D17}"
+ }
+}

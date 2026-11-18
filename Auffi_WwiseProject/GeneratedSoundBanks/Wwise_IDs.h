@@ -14,10 +14,13 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID PLAY_CAMERASHUTTER = 4863038U;
+        static const AkUniqueID PLAY_CLOSEBOOK = 589838253U;
         static const AkUniqueID PLAY_COWBELLS = 1719156379U;
         static const AkUniqueID PLAY_COWMOO = 1349429770U;
+        static const AkUniqueID PLAY_FLIPPAGE = 3381182402U;
         static const AkUniqueID PLAY_GATEOPEN = 3788303255U;
         static const AkUniqueID PLAY_MEADOWSATMOS = 3666405554U;
+        static const AkUniqueID PLAY_OPENBOOK = 2994691321U;
         static const AkUniqueID PLAY_PHOTOINDICATOR = 672536345U;
         static const AkUniqueID PLAY_PICKUP = 3860455926U;
         static const AkUniqueID PLAY_POSITIVEFEEDBACK = 2928908110U;
@@ -52,10 +55,11 @@ namespace AK
 
     namespace BUSSES
     {
-        static const AkUniqueID MAIN_AUDIO_BUS = 2246998526U;
-        static const AkUniqueID MUSIC = 3991942870U;
-        static const AkUniqueID SFX = 393239870U;
-        static const AkUniqueID UI = 1551306167U;
+        static const AkUniqueID BACKGROUNDS_MAINMIX = 419548770U;
+        static const AkUniqueID ENVIROMENTAL_AUXBUSSES = 1122116631U;
+        static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID POSITIONAL_AUDIOOBJECTS = 2115723104U;
+        static const AkUniqueID UI_PASSTHROUGHMIX = 465358654U;
     } // namespace BUSSES
 
     namespace AUDIO_DEVICES
