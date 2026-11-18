@@ -15,6 +15,14 @@ public class PlayerInventory : MonoBehaviour
     [Tooltip("Parent of the item during holding animation")]
     [SerializeField] private Transform itemHoldingPivot;
 
+    [Header("Item Sounds")]
+    [Tooltip("Played when an item is picked up.")]
+    [SerializeField] private AK.Wwise.Event pickupSound;
+    [Tooltip("Switch set before the pickup sound when the item is special, like the key.")]
+    [SerializeField] private AK.Wwise.Switch specialItemSwitch;
+    [Tooltip("Switch set before the pickup sound when the item is a regular item.")]
+    [SerializeField] private AK.Wwise.Switch regularItemSwitch;
+
     public ItemType CurrentItem { get; private set; } = ItemType.None;
     public bool HasApples => CurrentItem == ItemType.Apples;
     public bool IsHolding => CurrentItem != ItemType.None;
@@ -55,6 +63,13 @@ public class PlayerInventory : MonoBehaviour
     {
         CurrentItem = item;
         RefreshSlotVisuals();
+    }
+
+    public void PlayPickupSound(ItemType item)
+    {
+        AK.Wwise.Switch itemSwitch = item.IsSpecial() ? specialItemSwitch : regularItemSwitch;
+        itemSwitch?.SetValue(gameObject);
+        pickupSound?.Post(gameObject);
     }
 
     private void RefreshSlotVisuals()

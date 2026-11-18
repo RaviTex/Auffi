@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AnimalBook : MonoBehaviour
 {
@@ -9,7 +8,8 @@ public class AnimalBook : MonoBehaviour
     public class BookEntry
     {
         public AnimalDefinition definition;
-        public Image image;
+        [Tooltip("GameObject shown in the book once this animal has been photographed.")]
+        public GameObject entryObject;
     }
 
     public event Action<AnimalDefinition> AnimalUnlocked;
@@ -35,11 +35,11 @@ public class AnimalBook : MonoBehaviour
         // The panel may start inactive, so unlocks can happen before this runs.
         foreach (BookEntry entry in entries)
         {
-            if (entry.image == null)
+            if (entry.entryObject == null)
                 continue;
 
             bool unlocked = entry.definition != null && _unlocked.Contains(entry.definition.AnimalId);
-            entry.image.enabled = unlocked;
+            entry.entryObject.SetActive(unlocked);
         }
     }
 
@@ -70,13 +70,8 @@ public class AnimalBook : MonoBehaviour
 
             bool firstUnlock = _unlocked.Add(definition.AnimalId);
 
-            if (entry.image != null)
-            {
-                if (definition.Photo != null)
-                    entry.image.sprite = definition.Photo;
-
-                entry.image.enabled = true;
-            }
+            if (entry.entryObject != null)
+                entry.entryObject.SetActive(true);
 
             if (firstUnlock)
                 AnimalUnlocked?.Invoke(definition);

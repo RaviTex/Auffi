@@ -798,6 +798,7 @@ MonoBehaviour:
   heartRiseDistance: 1
   heartDuration: 1.2
   heartScale: 1
+  canGraze: 0
   grazingChance: 0.5
   minGrazingSwitchTime: 10
   maxGrazingSwitchTime: 30

@@ -18,4 +18,10 @@ public static class ItemTypeRules
     {
         return item == ItemType.Apples || item == ItemType.Key;
     }
+
+    // The key is a quest item, so pick-up interactions use the special item sound.
+    public static bool IsSpecial(this ItemType item)
+    {
+        return item == ItemType.Key;
+    }
 }

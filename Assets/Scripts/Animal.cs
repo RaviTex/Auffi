@@ -36,6 +36,8 @@ public class Animal : MonoBehaviour
     [SerializeField] private float heartScale = 1f;
 
     [Header("Grazing")]
+    [Tooltip("Whether this animal can graze. When disabled it only walks and idles.")]
+    [SerializeField] private bool canGraze = true;
     [Tooltip("Chance that the animal starts grazing instead of idling.")]
     [Range(0f, 1f)]
     [SerializeField] private float grazingChance = 0.5f;
@@ -67,7 +69,7 @@ public class Animal : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         if (_animator != null)
         {
-            _isGrazing = Random.value < grazingChance;
+            _isGrazing = canGraze && Random.value < grazingChance;
             _animator.SetBool(IsGrazingId, _isGrazing);
         }
 
@@ -88,14 +90,22 @@ public class Animal : MonoBehaviour
         if (_animator == null)
             return;
 
-        _grazingTimer += Time.deltaTime;
-        if (_grazingTimer > _timeToSwitchGrazing)
+        if (!canGraze)
         {
-            _isGrazing = !_isGrazing;
-            _animator.SetBool(IsGrazingId, _isGrazing);
+            _isGrazing = false;
+            _animator.SetBool(IsGrazingId, false);
+        }
+        else
+        {
+            _grazingTimer += Time.deltaTime;
+            if (_grazingTimer > _timeToSwitchGrazing)
+            {
+                _isGrazing = !_isGrazing;
+                _animator.SetBool(IsGrazingId, _isGrazing);
 
-            _grazingTimer = 0f;
-            _timeToSwitchGrazing = Random.Range(minGrazingSwitchTime, maxGrazingSwitchTime);
+                _grazingTimer = 0f;
+                _timeToSwitchGrazing = Random.Range(minGrazingSwitchTime, maxGrazingSwitchTime);
+            }
         }
 
         if (_animalTravel == null)

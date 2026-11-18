@@ -10,9 +10,11 @@ public class Gate : Interactable
     [SerializeField] private float openSpeed = 90f;
     [Tooltip("Swing Direction")]
     [SerializeField] private OpenDirection openDirection;
-    
+    [Tooltip("Optional lock that drops to the ground as soon as the gate is interacted with.")]
+    [SerializeField] private Transform lockObject;
+
     [SerializeField] private AK.Wwise.Event gateOpened;
-    
+
     enum OpenDirection
     {
         X,
@@ -23,6 +25,7 @@ public class Gate : Interactable
     private Quaternion _closedRotation;
     private Quaternion _openRotation;
     private bool _isOpen;
+    private bool _lockDropped;
 
     private void Awake()
     {
@@ -46,6 +49,54 @@ public class Gate : Interactable
         _isOpen = true;
         player.SetItem(ItemType.None);
         gateOpened?.Post(gameObject);
+
+        if (lockObject != null)
+            DropLock();
+    }
+
+    private void DropLock()
+    {
+        if (_lockDropped)
+            return;
+
+        _lockDropped = true;
+
+        if (lockObject == null)
+            return;
+
+        Transform fallingLock = lockObject;
+        Collider[] gateColliders = GetComponentsInChildren<Collider>(true);
+
+        fallingLock.SetParent(null, true);
+
+        Rigidbody body = fallingLock.GetComponent<Rigidbody>();
+        if (body == null)
+            body = fallingLock.gameObject.AddComponent<Rigidbody>();
+
+        body.isKinematic = false;
+        body.useGravity = true;
+
+        foreach (MeshFilter meshFilter in fallingLock.GetComponentsInChildren<MeshFilter>())
+        {
+            Mesh mesh = meshFilter.sharedMesh;
+            if (mesh == null || meshFilter.GetComponent<Collider>() != null)
+                continue;
+
+            BoxCollider box = meshFilter.gameObject.AddComponent<BoxCollider>();
+            box.center = mesh.bounds.center;
+            box.size = mesh.bounds.size;
+        }
+
+        foreach (Collider lockCollider in fallingLock.GetComponentsInChildren<Collider>())
+        {
+            foreach (Collider gateCollider in gateColliders)
+            {
+                if (gateCollider != null)
+                    Physics.IgnoreCollision(lockCollider, gateCollider, true);
+            }
+        }
+
+        body.AddTorque(fallingLock.right * 0.4f, ForceMode.VelocityChange);
     }
 
     private void Update()

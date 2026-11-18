@@ -1361,13 +1361,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalBook
   entries:
   - definition: {fileID: 11400000, guid: 93dae43ca14714ed8bfb26f2c7bb42b5, type: 2}
-    image: {fileID: 1007878065}
+    entryObject: {fileID: 1007878063}
   - definition: {fileID: 11400000, guid: c1750150fa7f2a57083293ac97fa280a, type: 2}
-    image: {fileID: 314359499}
+    entryObject: {fileID: 314359497}
   - definition: {fileID: 11400000, guid: 6e2164621ab7ab2fe9453b272b65f9aa, type: 2}
-    image: {fileID: 1079727025}
+    entryObject: {fileID: 1079727023}
   - definition: {fileID: 11400000, guid: 4982a91761e5c1c3e84534568f495c95, type: 2}
-    image: {fileID: 323995933}
+    entryObject: {fileID: 323995931}
 --- !u!1001 &676377932
 PrefabInstance:
   m_ObjectHideFlags: 0

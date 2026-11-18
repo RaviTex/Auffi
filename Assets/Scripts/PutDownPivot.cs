@@ -23,9 +23,6 @@ public class PutDownPivot : Interactable
              "Failed attempts (empty-handed, wrong item, full hands) do not count.")]
     [SerializeField] private bool allowSingleInteraction;
 
-    [Header("Sounds")] 
-    [SerializeField] private AK.Wwise.Event pickUpSound;
-
     [Header("Accepted Feedback")]
     [Tooltip("Show feedback when an interaction succeeds.")]
     [SerializeField] private bool enableAcceptedFeedback = true;
@@ -218,9 +215,11 @@ public class PutDownPivot : Interactable
         if (player.IsHoldingItem || !_placedItem.CanPickUp())
             return false;
 
-        player.SetItem(_placedItem);
+        ItemType pickedUpItem = _placedItem;
+
+        player.SetItem(pickedUpItem);
         SetPlacedItem(ItemType.None);
-        pickUpSound?.Post(gameObject);
+        player.PlayItemPickupSound(pickedUpItem);
         return true;
     }
 

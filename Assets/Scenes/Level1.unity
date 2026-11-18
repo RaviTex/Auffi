@@ -865,6 +865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234584705}
   - component: {fileID: 234584704}
+  - component: {fileID: 234584706}
   m_Layer: 0
   m_Name: Sounbank
   m_TagString: Untagged
@@ -912,6 +913,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234584706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234584703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5295b35ab26b042aec67aada20bdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkBank
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7419a79eee2e41dcf9ecd3e41a16939a, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!114 &293777873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5082036052773459936, guid: d311170186dd3c64abd684210cfb48b3, type: 3}

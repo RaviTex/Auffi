@@ -75,7 +75,3 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   allowSingleInteraction: 0
-  pickUpSound:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}

@@ -1258,6 +1258,18 @@ MonoBehaviour:
   applesSlotVisual: {fileID: 3104946743386018618}
   keySlotVisual: {fileID: 8997853045638024322}
   itemHoldingPivot: {fileID: 4010272185961503015}
+  pickupSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3e95d8aedda64e4718b16889e0958d9f, type: 2}
+  specialItemSwitch:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: eefb78eff44b99e539e810879bd55632, type: 2}
+  regularItemSwitch:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6d24ee3bdc2d413183620ac512092450, type: 2}
 --- !u!114 &6400000000000000003
 MonoBehaviour:
   m_ObjectHideFlags: 0

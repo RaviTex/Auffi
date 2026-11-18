@@ -7422,6 +7422,8 @@ MonoBehaviour:
   openAngle: -90
   openSpeed: 90
   openDirection: 1
+  lockObject: {fileID: 4898527310021463015}
+  lockDropDelay: 0.1
   gateOpened:
     idInternal: 0
     valueGuidInternal: 

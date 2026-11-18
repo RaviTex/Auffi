@@ -442,6 +442,11 @@ public class PlayerController : MonoBehaviour
         RefreshCameraItem();
     }
 
+    public void PlayItemPickupSound(ItemType item)
+    {
+        inventory.PlayPickupSound(item);
+    }
+
     private void TakePhoto(Animal animal)
     {
         if (animal == null)
