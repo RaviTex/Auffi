@@ -897,6 +897,91 @@
 						</Sound>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Ui" ID="{5CD73023-4A07-4DE8-BD22-011A2154D8DB}" ShortID="472473473">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="8"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Folder Name="Book" ID="{BC3F9C79-1A93-4067-A2DD-2783FDD756A2}" ShortID="324381724">
+							<ChildrenList>
+								<Sound Name="Ui_PageTurned" ID="{3BC86BAD-B5CF-4931-98B9-7B86E1A26576}" ShortID="260291604">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Ui_PageTurned" ID="{6635F570-D776-4430-86A6-7A74DD6C7E63}">
+											<Language>SFX</Language>
+											<AudioFile>Ui_PageTurned.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="679202128"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Ui_PageTurned" ID="{6635F570-D776-4430-86A6-7A74DD6C7E63}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Ui_BookClosed" ID="{3E152A28-00EB-4FA5-9DF6-4AF9E37FE871}" ShortID="290373545">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Ui_BookClosed" ID="{DC62CD92-9B59-46E1-B3B5-AD726AAF6DD3}">
+											<Language>SFX</Language>
+											<AudioFile>Ui_BookClosed.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="481722699"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Ui_BookClosed" ID="{DC62CD92-9B59-46E1-B3B5-AD726AAF6DD3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Ui_BookOpen" ID="{5A6C4EDB-8C22-4A34-A13F-C446E796A5A2}" ShortID="229708610">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>5</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Ui_BookOpen" ID="{2A203275-80EE-43D3-A8BE-7ABDF31075C0}">
+											<Language>SFX</Language>
+											<AudioFile>Ui_BookOpen.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="219855558"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Ui_BookOpen" ID="{2A203275-80EE-43D3-A8BE-7ABDF31075C0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Containers>

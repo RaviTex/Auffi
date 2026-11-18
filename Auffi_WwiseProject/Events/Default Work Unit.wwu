@@ -143,6 +143,47 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Ui_Audio" ID="{6B61C9EA-8754-41D2-8B35-95A6FB3E6176}" ShortID="147194250">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="8"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+					<ChildrenList>
+						<Event Name="Play_OpenBook" ID="{16AA11C2-2F45-4F53-8840-42577B00DB49}">
+							<ChildrenList>
+								<Action Name="" ID="{C7C8554E-9DFF-4BC8-ACAA-62E28849892F}" ShortID="245264832">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ui_BookOpen" ID="{5A6C4EDB-8C22-4A34-A13F-C446E796A5A2}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_CloseBook" ID="{B789B4AA-C146-4D97-B9E6-B2D2FCA29254}">
+							<ChildrenList>
+								<Action Name="" ID="{E15F839B-D5B7-436C-A674-913B5BD04765}" ShortID="998857311">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ui_BookClosed" ID="{3E152A28-00EB-4FA5-9DF6-4AF9E37FE871}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_FlipPage" ID="{23222072-A347-490A-A4BB-0F627B7661B5}">
+							<ChildrenList>
+								<Action Name="" ID="{4AA73663-7D14-48B3-B62C-FB14B392B072}" ShortID="420465574">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ui_PageTurned" ID="{3BC86BAD-B5CF-4931-98B9-7B86E1A26576}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
