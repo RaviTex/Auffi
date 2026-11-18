@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
                 _isWalking = false;
             }
 
+            UpdateAnimator();
             return;
         }
 
@@ -146,9 +147,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        animator.SetBool("IsWalking", _isWalking);
-        animator.SetBool("IsHolding", inventory.IsHoldingItem);
-        animator.SetBool("IsCameraOut", inventory.CurrentItem == ItemType.Camera);
+        UpdateAnimator();
     }
 
     private void OnVisibleAnimalChanged(Animal animal)
@@ -187,6 +186,14 @@ public class PlayerController : MonoBehaviour
 
         if (ui.IsDialogueOpen)
         {
+            if (ui.IsAlbumPromptActive)
+            {
+                if (openAlbumAction.action.WasPressedThisFrame())
+                    ui.OpenBookFromDialogue();
+
+                return true;
+            }
+
             if (interactionAction.action.WasPressedThisFrame())
                 ui.AdvanceDialogue();
 
@@ -419,6 +426,13 @@ public class PlayerController : MonoBehaviour
             _outline.SetTarget(animal);
         else
             _outline.SetTarget(_focusedInteractable);
+    }
+
+    private void UpdateAnimator()
+    {
+        animator.SetBool("IsWalking", _isWalking);
+        animator.SetBool("IsHolding", inventory.IsHoldingItem);
+        animator.SetBool("IsCameraOut", inventory.CurrentItem == ItemType.Camera);
     }
 
     public void SetItem(ItemType item)

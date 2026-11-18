@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
 
     private Mode _mode;
+    private bool _albumPromptActive;
     private bool _hasSavedGameplayState;
     private float _savedTimeScale;
     private bool _savedCursorVisible;
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
     public bool IsBookOpen => _mode == Mode.Book;
     public bool IsDialogueOpen => _mode == Mode.Dialogue;
     public bool IsGameOver => _mode == Mode.GameOver;
+    public bool IsAlbumPromptActive => _mode == Mode.Dialogue && _albumPromptActive;
 
     private void Awake()
     {
@@ -124,6 +126,20 @@ public class UIManager : MonoBehaviour
             SetMode(Mode.Dialogue);
     }
 
+    public void SetAlbumPrompt(bool active)
+    {
+        _albumPromptActive = active && _mode == Mode.Dialogue;
+    }
+
+    public void OpenBookFromDialogue()
+    {
+        if (_mode != Mode.Dialogue || !_albumPromptActive)
+            return;
+
+        CloseDialogue();
+        OpenBook();
+    }
+
     public void AdvanceDialogue()
     {
         if (_mode != Mode.Dialogue || dialogue == null)
@@ -139,6 +155,8 @@ public class UIManager : MonoBehaviour
     {
         if (_mode != Mode.Dialogue)
             return;
+
+        _albumPromptActive = false;
 
         if (dialogue != null)
             dialogue.Close();
@@ -259,10 +277,19 @@ public class UIManager : MonoBehaviour
     {
         _mode = mode;
 
+        if (mode != Mode.Dialogue)
+            _albumPromptActive = false;
+
         if (mode == Mode.None)
+        {
             RestoreGameplayState();
-        else
-            FreezeGameplay();
+            return;
+        }
+
+        FreezeGameplay();
+
+        if (mode == Mode.GameOver)
+            Time.timeScale = 0f;
     }
 
     private void FreezeGameplay()
@@ -275,8 +302,6 @@ public class UIManager : MonoBehaviour
         _savedCursorLock = Cursor.lockState;
         _hasSavedGameplayState = true;
 
-        // Time scale zero stops movement, normal Animator updates and AnimalTravel.
-        Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

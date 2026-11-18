@@ -17,6 +17,7 @@ public class TutorialDirector : MonoBehaviour
 
     [Header("Dialogues")]
     [SerializeField] private DialogueSequence introDialogue;
+    [SerializeField] private DialogueSequence introAlbumPromptDialogue;
     [SerializeField] private DialogueSequence introAfterBookDialogue;
     [SerializeField] private DialogueSequence firstCowIntroDialogue;
     [SerializeField] private DialogueSequence firstCowPhotoDialogue;
@@ -202,11 +203,25 @@ public class TutorialDirector : MonoBehaviour
     {
         if (introDialogue == null)
         {
-            _introComplete = true;
+            BeginAlbumPrompt();
             return;
         }
 
         Begin("intro", introDialogue);
+    }
+
+    private void BeginAlbumPrompt()
+    {
+        if (introAlbumPromptDialogue == null)
+        {
+            _waitingForBook = true;
+            return;
+        }
+
+        Begin("intro_album_prompt", introAlbumPromptDialogue);
+
+        if (_activeDialogue != null)
+            _ui.SetAlbumPrompt(true);
     }
 
     private void Begin(string id, DialogueSequence sequence)
@@ -228,6 +243,9 @@ public class TutorialDirector : MonoBehaviour
         switch (completed)
         {
             case "intro":
+                BeginAlbumPrompt();
+                break;
+            case "intro_album_prompt":
                 _waitingForBook = true;
                 _bookWasOpened = false;
                 break;

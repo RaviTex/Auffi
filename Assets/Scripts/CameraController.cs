@@ -172,7 +172,8 @@ public class CameraController : MonoBehaviour
 
     private void UpdatePeak()
     {
-        _peakInput = peakAction != null ? peakAction.action.ReadValue<float>() : 0f;
+        bool inputBlocked = UIManager.Instance != null && UIManager.Instance.IsBlockingGameplay;
+        _peakInput = !inputBlocked && peakAction != null ? peakAction.action.ReadValue<float>() : 0f;
         float direction = isPeakInputInverted ? -_peakInput : _peakInput;
         bool isHolding = Mathf.Abs(direction) > 0.01f;
 
