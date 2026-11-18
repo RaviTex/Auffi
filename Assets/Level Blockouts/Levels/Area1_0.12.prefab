@@ -11237,8 +11237,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: enableHighlightHint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: enableFailedFeedback
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: allowSingleInteraction
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
+      propertyPath: enableAcceptedFeedback
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: acceptedItems.Array.size
@@ -11246,7 +11258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6024176273587365287, guid: fd9f5765ada930c669f301181b366b9b, type: 3}
       propertyPath: 'acceptedItems.Array.data[0]'
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
