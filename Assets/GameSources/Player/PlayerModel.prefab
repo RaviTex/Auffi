@@ -193,6 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6311083235027720040}
   - component: {fileID: 2181916340790584387}
+  - component: {fileID: 6400000000000000004}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Untagged
@@ -3417,3 +3418,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f35a3308b616a554c86508f15c7d94e1, type: 3}
   m_PrefabInstance: {fileID: 914551829201449360}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6400000000000000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521111503524063409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565b15c212b24dda9f7c39683036f38d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFootstepParticles
+  footstepParticles: {fileID: 0}
+  particlesPerStep: 2
