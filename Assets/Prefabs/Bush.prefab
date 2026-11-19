@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 650890273316063734}
   - component: {fileID: 634065844050386634}
   - component: {fileID: 4653682875074466493}
+  - component: {fileID: 3800892763500392982}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -113,3 +114,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6421927161762930362, guid: a8c4052f94696254dbc31a3ecd175d52, type: 3}
+--- !u!114 &3800892763500392982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100046865540509368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1756a8b7d45c5932f99d9c25dfd6fc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindSway
+  boundsMargin: 1

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9202697078042059084}
   - component: {fileID: 4180948899751244344}
   - component: {fileID: 2496969326303290310}
+  - component: {fileID: 416546611699552773}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -88,3 +89,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   gameOverDuration: 3
   tutorialEnabled: 1
+--- !u!114 &416546611699552773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2235387734579197657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55c6db75a0c24e459d91cd79ea9bb6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindManager
+  windDirection: {x: 1, y: 0, z: 0.35}
+  strength: 1
+  bendAmount: 0.45
+  bendHeight: 2.5
+  swayFrequency: 1.1
+  gustStrength: 0.5
+  gustFrequency: 0.15
