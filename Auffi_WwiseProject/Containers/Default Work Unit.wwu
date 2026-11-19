@@ -215,31 +215,17 @@
 							</ChildrenList>
 							<ObjectLists>
 								<ObjectList Name="Playlist">
-									<PluginInnerObject Name="" ID="{90BA0634-5B50-4FD2-A097-46D582B3D285}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+									<PluginInnerObject Name="" ID="{4B910072-BCCB-4BE6-AAD4-99950CA2E031}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
 										<ReferenceList>
 											<Reference Name="PlaylistObject">
 												<ObjectRef Name="Camera_Shutter" ID="{1943DBEB-5225-4CDC-BAAD-FFA16017F3D1}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
 											</Reference>
 										</ReferenceList>
 									</PluginInnerObject>
-									<PluginInnerObject Name="" ID="{51BF1A9F-913C-4446-91B5-115BFBBF8D3B}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
+									<PluginInnerObject Name="" ID="{9C2A169D-439A-4A0C-84FD-12B0E9989132}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
 										<ReferenceList>
 											<Reference Name="PlaylistObject">
 												<ObjectRef Name="Printing" ID="{BD694E90-488A-4FD9-A22F-861B4D945661}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
-											</Reference>
-										</ReferenceList>
-									</PluginInnerObject>
-									<PluginInnerObject Name="" ID="{B6EEB073-0F39-4529-B70F-D367BB0C07F2}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
-										<ReferenceList>
-											<Reference Name="PlaylistObject">
-												<ObjectRef Name="Break" ID="{DC3F7B66-B62F-4109-8D5B-DC8C21D444FF}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
-											</Reference>
-										</ReferenceList>
-									</PluginInnerObject>
-									<PluginInnerObject Name="" ID="{D5E92E7E-C023-4C79-8FE0-BB8A6C06F927}" PluginName="PlaylistSlot" CompanyID="0" PluginID="86">
-										<ReferenceList>
-											<Reference Name="PlaylistObject">
-												<ObjectRef Name="Games, Video, Retro, Simple Alert, Short, Chirpy, Happy, Positive SND129885 S00" ID="{E8DC822B-C717-4C83-8196-35AD9D33E0D4}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
 											</Reference>
 										</ReferenceList>
 									</PluginInnerObject>
@@ -976,6 +962,28 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="Ui_BookOpen" ID="{2A203275-80EE-43D3-A8BE-7ABDF31075C0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Ui_PhotoGluedIn" ID="{8E753C48-EC6B-430A-B498-7EF61CB8DA18}" ShortID="294031938">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{DFEC2F4D-175F-4255-B24F-1FD7CAAAA6BE}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{E2B4324E-ECAA-465D-8BB3-B7C047AC114C}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Ui_PhotoGluedIn" ID="{6242C680-FD0C-405D-BF25-678C1E52707D}">
+											<Language>SFX</Language>
+											<AudioFile>Ui_PhotoGluedIn.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="187278333"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Ui_PhotoGluedIn" ID="{6242C680-FD0C-405D-BF25-678C1E52707D}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>

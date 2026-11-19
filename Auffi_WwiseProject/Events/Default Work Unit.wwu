@@ -182,6 +182,17 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_PhotoGlued" ID="{160DFAEB-6C3C-4C6F-BFAC-FC1079731E58}">
+							<ChildrenList>
+								<Action Name="" ID="{DF00EDA0-7CB9-470C-85E5-399459D986D2}" ShortID="817105239">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ui_PhotoGluedIn" ID="{8E753C48-EC6B-430A-B498-7EF61CB8DA18}" WorkUnitID="{1FD809F3-69C8-46E2-A870-B4244B40BF3B}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>
